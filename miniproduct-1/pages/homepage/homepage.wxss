@@ -1,0 +1,39 @@
+/* pages/homepage/homepage.wxss */
+
+.root-lay{
+  width: 100vw;
+  height: 100vh;
+  
+}
+
+.item-lay {
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+  width: 100vw;
+  height: 200rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.rightContent{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  margin-left: 20rpx;
+}
+
+.image-lay {
+  width: 30vw;
+  height: 100%;
+  border-radius: 10rpx;
+}
+
+.title {
+  font-size: 32rpx;
+}
+
+.content {
+  font-size: 28rpx;
+}

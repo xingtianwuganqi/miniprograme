@@ -1,0 +1,45 @@
+<!--pages/homepage/homepage.wxml-->
+<view class="root-lay">
+  <view class="item-lay">
+    <image class='image-lay' src='https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1606649849&di=ce95e4e9e80e27140fbd66a5076b625c&src=http://a4.att.hudong.com/27/67/01300000921826141299672233506.jpg'
+    mode="aspectFill"
+    >
+    </image>
+    <view class='rightContent'>
+      <text class='title'>
+        标题
+      </text>
+      <text class='content'>
+        内容内容
+      </text>
+    </view>
+  </view>
+  <view class="item-lay">
+    <image class='image-lay' src='https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1606649849&di=ce95e4e9e80e27140fbd66a5076b625c&src=http://a4.att.hudong.com/27/67/01300000921826141299672233506.jpg'
+    mode="aspectFill"
+    >
+    </image>
+    <view class='rightContent'>
+      <text class='title'>
+        标题
+      </text>
+      <text class='content'>
+        内容内容
+      </text>
+    </view>
+  </view>
+  <view class="item-lay">
+    <image class='image-lay' src='https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1606649849&di=ce95e4e9e80e27140fbd66a5076b625c&src=http://a4.att.hudong.com/27/67/01300000921826141299672233506.jpg'
+    mode="aspectFill"
+    >
+    </image>
+    <view class='rightContent'>
+      <text class='title'>
+        标题
+      </text>
+      <text class='content'>
+        内容内容
+      </text>
+    </view>
+  </view>
+</view>
