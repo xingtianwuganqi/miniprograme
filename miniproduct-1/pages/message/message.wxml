@@ -1,5 +1,5 @@
 <!--pages/message/message.wxml-->
-<view class='container'>
+<!-- <view class='container'> -->
   <view class="content" wx:for="{{list}}" wx:item='item' wx:key='key'>
     <view class='content-item'> 
       <image src='{{item.img}}' class='img-item'>
@@ -10,4 +10,4 @@
     <view class='line-item'>
     </view>
   </view>
-</view>
+<!-- </view> -->
