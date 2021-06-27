@@ -1,0 +1,39 @@
+/* pages/message/message.wxss */
+page{
+  background-color: #ffffff;
+}
+.container{
+  background-color: #eeeeee;
+}
+
+.content{
+  height: 120rpx;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+}
+
+.content-item{
+  padding-left: 60rpx;
+  width: 100vw;
+  height: 118rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.img-item{
+  width: 80rpx;
+  height: 80rpx;
+  left: 30rpx;
+}
+.text-item{
+  text-align: center;
+  padding: 20rpx;
+}
+
+.line-item{
+  background-color: #eee;
+  height: 2rpx;
+  bottom: 0rpx;
+}

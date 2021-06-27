@@ -1,0 +1,13 @@
+<!--pages/message/message.wxml-->
+<view class='container'>
+  <view class="content" wx:for="{{list}}" wx:item='item' wx:key='key'>
+    <view class='content-item'> 
+      <image src='{{item.img}}' class='img-item'>
+      </image>
+      <text class="text-item">{{item.title}}
+      </text>
+    </view>
+    <view class='line-item'>
+    </view>
+  </view>
+</view>
