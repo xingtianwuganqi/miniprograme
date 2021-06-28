@@ -1,6 +1,7 @@
 // pages/homepage/homepage.js
+let page = 1;
+let size = 10
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -12,11 +13,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.listNetworking(page)
   },
 
   listNetworking: function(page) {
-
+    var that = this;
+    wx.request({
+      url: 'https://test.rxswift.cn/api/v1/topiclist/',
+      data:{
+        'page':page,
+        'size': size,
+      },
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success(res) {
+          console.log(res.data)
+          if (res.data['code'] == 200) {
+            that.setData({
+              items: res.data.data,
+            })
+          }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
