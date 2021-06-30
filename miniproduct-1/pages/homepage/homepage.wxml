@@ -9,6 +9,27 @@
         <text>{{item.userInfo.username}}</text>
         <text class='time-item'>{{item.userInfo.create_time}}</text>
       </view>
+      <view class='icon-view'>
+        <mp-icon icon="more" color="#666666" size="{{20}}"></mp-icon>
+      </view>
+    </view>
+    <!-- 文字区 -->
+    <view class='content'>
+      <text class='content-text'> {{item.content}} </text>
+    </view>
+    <!-- 图片区 -->
+    <view>
+      
+    </view>
+    <!-- 地址区 -->
+    <view class='address'>
+      <text>{{item.address_info}}</text>
+    </view>
+    <!-- 评论区 -->
+    <view class='interaction'>
+      <button class="mini-btn" style="width:200rpx;color:#777777;" type="default" >点赞</button>
+      <button class="mini-btn" style="width:200rpx;color:#777777;" type="default" >评论</button>
+      <button class="mini-btn" style="width:200rpx;color:#777777;" type="default" >回复</button>
     </view>
   </view>
 </scroll-view>

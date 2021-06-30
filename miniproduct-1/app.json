@@ -34,6 +34,12 @@
       "selectedIconPath": "icons/icon_tabbar_mi_se.png",
       "text": "我的"
     }]
+  },
+  "useExtendedLib": {
+    "weui": true
+  },
+  "usingComponents": {    
+    "mp-icon": "weui-miniprogram/icon/icon"
   }
 }
 

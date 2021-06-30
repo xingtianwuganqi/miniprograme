@@ -1,2 +1,8 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<scroll-view class='my-page'>
+  <!-- <view class='scroll-cell' wx:for="{{items}}" wx:item='item' wx:key='key'> -->
+  <!-- </view> -->
+  <view class='my-item'>
+    <image class='item-img' src='../../icons/icon_message_com.png'></image>
+  </view>
+</scroll-view>

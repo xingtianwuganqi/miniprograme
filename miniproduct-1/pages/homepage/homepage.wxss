@@ -12,32 +12,74 @@ page{
   background-color: #eeeeee;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .userInfo{
-  background-color: white;
   display: flex;
   flex-direction: row;
-  height: 100rpx;
+  height: 120rpx;
   width: 100%;
+  padding-left: 20rpx;
+  align-items: center;
 }
 
 .head-img{
   width: 60rpx;
   height: 60rpx;
   border-radius: 30rpx;
-  vertical-align: center;
 }
 
 .userName{
-  background-color: white;
   display: flex;
   flex-direction: column;
   color: #333333;
   font-size: 32rpx;
+  padding-left: 20rpx;
+  flex-grow: 1;
+  align-items: flex-start;
 }
 
 .time-item{
   font-size: 24rpx;
   color: #999999;
+}
+
+.icon-view{
+  width: 60rpx;
+  height: 60rpx;
+  padding-right: 30rpx;
+  flex-grow: 0;
+}
+
+.content{
+  font-size: 32rpx;
+  color: #666666;
+  padding-left: 100rpx;
+  padding-right: 20rpx;
+  text-align: left;
+}
+
+.address{
+  font-size: 26.rpx;
+  color: #999999;
+  padding-left: 100rpx;
+  padding-right: 20rpx;
+  text-align: left;
+}
+
+.interaction{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  width: (700 - 100)rpx;
+  padding-left: 100rpx;
+  padding-right: 20rpx;
+}
+
+.mini-btn{
+  color:white;
+  font-size: 26rpx;
 }
