@@ -83,3 +83,49 @@ page{
   color:white;
   font-size: 26rpx;
 }
+
+.img-content {
+  background-color: white;
+  margin-left: 100rpx;
+  width: 600rpx;
+  height: 370.8rpx;
+}
+
+.img-img{
+  display: flex;
+  width: 600rpx;
+  height: 370.8rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10rpx;
+}
+.img-four-back{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.img-four{
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  width: 600rpx;
+  height: 180.4rpx;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.img-row-line{
+  width: 600rpx;
+  height: 6rpx;
+}
+
+.img-coloum-line{
+  height: 180.4rpx;
+  width: 10rpx;
+}
+
+.img-show{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
