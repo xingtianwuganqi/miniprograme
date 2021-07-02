@@ -19,6 +19,7 @@
     </view>
     <!-- 图片区 -->
     <view class='img-content'>
+    <!-- 四张图 -->
       <view class='img-img' wx:if="{{item.imgs.length >= 4}}">
         <view class='img-four-back'>
           <view class='img-four'>
@@ -35,11 +36,31 @@
           </view>
         </view>   
       </view>
+      <!-- 三张图 -->
       <view class='img-img' wx:elif='{{item.imgs.length == 3}}'>
-        
+        <view class='image-three-back'>
+          <view class='image-left'>
+            <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+          </view>
+          <view class='img-thr-coloum-line'></view>
+          <view class='image-right'>
+            <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[1]}}' mode="aspectFill"></image>
+            <view class='img-thr-row-line'></view>
+            <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[2]}}' mode="aspectFill"></image>
+          </view>
+        </view>
       </view>
+      <!-- 两张图 -->
       <view class='img-img' wx:elif='{{item.imgs.length == 2}}'>
-        
+        <view class='image-three-back'>
+          <view class='image-left'>
+            <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+          </view>
+          <view class='img-thr-coloum-line'></view>
+          <view class='image-left'>
+            <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[1]}}' mode="aspectFill"></image>
+          </view>
+        </view>
       </view>
       <view class='img-img' wx:else>
         <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>

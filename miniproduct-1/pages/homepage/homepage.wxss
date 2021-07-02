@@ -48,7 +48,7 @@ page{
 .icon-view{
   width: 60rpx;
   height: 60rpx;
-  padding-right: 30rpx;
+  padding-right: 60rpx;
   flex-grow: 0;
 }
 
@@ -115,12 +115,12 @@ page{
 }
 
 .img-row-line{
-  width: 600rpx;
+  width: 100%;
   height: 6rpx;
 }
 
 .img-coloum-line{
-  height: 180.4rpx;
+  height: 100%;
   width: 10rpx;
 }
 
@@ -128,4 +128,35 @@ page{
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.image-three-back{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.image-left {
+  background-color: white;
+  display: block;
+  width: 297rpx;
+  height: 370.8rpx;
+}
+
+.image-right{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 300rpx;
+  height: 370.8rpx;
+}
+
+.img-thr-coloum-line{
+  width: 6rpx;
+  height: 370.8rpx;
+}
+
+.img-thr-row-line{
+  width: 300rpx;
+  height: 10rpx;
 }

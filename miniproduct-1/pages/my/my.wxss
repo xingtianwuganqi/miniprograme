@@ -13,9 +13,9 @@ page{
   height: 500rpx;
   background-color: red;
   display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  /* align-items: center; */
 }
 
 .item-img{
