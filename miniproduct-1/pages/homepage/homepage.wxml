@@ -2,17 +2,28 @@
 <scroll-view class='scroll-page'>
   <view class='scroll-cell' wx:for="{{items}}" wx:item='item' wx:key='key'>
   <!-- userinfo -->
-    <view class='userInfo'>
-      <image class='head-img' src="http://img.rxswift.cn/{{item.userInfo.avator}}">
-      </image>
+    <view class='userInfo' >
+      <view wx:if="{{item.userInfo.avator.length>0}}">
+        <image class='head-img' src="http://img.rxswift.cn/{{item.userInfo.avator}}"></image>
+      </view>
+      <view class='empty-head' wx:else>
+      </view>
       <view class='userName'> 
-        <text>{{item.userInfo.username}}</text>
+        <text wx:if="{{item.userInfo.username.length>0}}">{{item.userInfo.username}}</text>
+        <text wx:else>佚名</text>
         <text class='time-item'>{{item.userInfo.create_time}}</text>
       </view>
       <view class='icon-view'>
         <mp-icon icon="more" color="#666666" size="{{20}}"></mp-icon>
       </view>
     </view>
+    <!-- 标签 -->
+    <view class='tag-content'> 
+      <view class='tags' wx:for="{{item.tagInfos}}" wx:for-item='tag' wx:key='tagInfo'>
+        {{tag.tag_name}}
+      </view>
+    </view>
+    
     <!-- 文字区 -->
     <view class='content'>
       <text class='content-text'> {{item.content}} </text>
