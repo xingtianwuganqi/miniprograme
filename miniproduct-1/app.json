@@ -4,7 +4,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/message/message",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/TopicDetail/TopicDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,28 +19,31 @@
     "color": "#000000",
     "selectedColor": "#ffa500",
     "backgroundColor": "green",
-    "list": [{
-      "pagePath": "pages/homepage/homepage",
-      "iconPath": "icons/icon_tabbar_cat_un.png",
-      "selectedIconPath": "icons/icon_tabbar_cat_se.png",
-      "text": "首页"
-    }, {
-      "pagePath": "pages/message/message",
-      "iconPath": "icons/icon_tabbar_msg_un.png",
-      "selectedIconPath": "icons/icon_tabbar_msg_se.png",
-      "text": "消息"
-    },{
-      "pagePath": "pages/my/my",
-      "iconPath": "icons/icon_tabbar_mi_un.png",
-      "selectedIconPath": "icons/icon_tabbar_mi_se.png",
-      "text": "我的"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/homepage/homepage",
+        "iconPath": "icons/icon_tabbar_cat_un.png",
+        "selectedIconPath": "icons/icon_tabbar_cat_se.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "iconPath": "icons/icon_tabbar_msg_un.png",
+        "selectedIconPath": "icons/icon_tabbar_msg_se.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "icons/icon_tabbar_mi_un.png",
+        "selectedIconPath": "icons/icon_tabbar_mi_se.png",
+        "text": "我的"
+      }
+    ]
   },
   "useExtendedLib": {
     "weui": true
   },
-  "usingComponents": {    
+  "usingComponents": {
     "mp-icon": "weui-miniprogram/icon/icon"
   }
 }
-

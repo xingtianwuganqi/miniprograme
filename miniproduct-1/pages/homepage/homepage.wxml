@@ -1,6 +1,6 @@
 <!--pages/homepage/homepage.wxml-->
 <scroll-view class='scroll-page'>
-  <view class='scroll-cell' wx:for="{{items}}" wx:item='item' wx:key='key'>
+  <view class='scroll-cell' wx:for="{{items}}" wx:item='item' wx:key='key' bindtap="handleToTopicDetail" data-id="{{item.topic_id}}">
   <!-- userinfo -->
     <view class='userInfo' >
       <view wx:if="{{item.userInfo.avator.length>0}}">
@@ -73,6 +73,7 @@
           </view>
         </view>
       </view>
+      <!-- 一张图 -->
       <view class='img-img' wx:else>
         <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
       </view>
@@ -83,9 +84,11 @@
     </view>
     <!-- 评论区 -->
     <view class='interaction'>
-      <button class="mini-btn" style="width:200rpx;color:#777777;" type="default" >点赞</button>
-      <button class="mini-btn" style="width:200rpx;color:#777777;" type="default" >评论</button>
-      <button class="mini-btn" style="width:200rpx;color:#777777;" type="default" >回复</button>
+      <button class="mini-btn" style="width:200rpx;color:#777777;background-color:#ffffff;" type="default" >点赞</button>
+      <button class="mini-btn" style="width:200rpx;color:#777777;background-color:#ffffff;" type="default" >评论</button>
+      <button class="mini-btn" style="width:200rpx;color:#777777;background-color:#ffffff;" type="default" >回复</button>
     </view>
+    <view class='bottom-line'></view>
   </view>
+  
 </scroll-view>

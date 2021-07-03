@@ -1,0 +1,48 @@
+<view class='back-view'>
+  <scroll-view class='scroll-page'>
+    <!-- userinfo -->
+    <view class='userInfo' >
+      <view wx:if="{{topicInfo.userInfo.avator.length>0}}">
+        <image class='head-img' src="http://img.rxswift.cn/{{topicInfo.userInfo.avator}}"></image>
+      </view>
+      <view class='empty-head' wx:else>
+      </view>
+      <view class='userName'> 
+        <text wx:if="{{topicInfo.userInfo.username.length>0}}">{{topicInfo.userInfo.username}}</text>
+        <text wx:else>佚名</text>
+        <text class='time-item'>{{topicInfo.userInfo.create_time}}</text>
+      </view>
+      <view class='icon-view'>
+        <mp-icon icon="more" color="#666666" size="{{20}}"></mp-icon>
+      </view>
+    </view>
+    <!-- 标签 -->
+    <view class='tag-content'> 
+      <view class='tags' wx:for="{{topicInfo.tagInfos}}" wx:for-item='tag' wx:key='tagInfo'>
+        {{tag.tag_name}}
+      </view>
+    </view>
+    
+    <!-- 文字区 -->
+    <view class='content'>
+      <text class='content-text'> {{topicInfo.content}} </text>
+    </view>
+    <view class='image-content' wx:for="{{topicInfo.imgs}}" wx:for-item="imageItem" wx:key='topicDetail' >
+      <!-- <view class='image-info'> -->
+        <image class='topic-img' src='http://img.rxswift.cn/{{imageItem}}' mode="widthFix"></image>
+      <!-- </view> -->
+    </view>
+  </scroll-view>
+  <view class='bottom-view' style="position:fixed; bottom:0;width: 750rpx;">
+  <!-- 获取联系方式 -->
+    <view class='contact-view'>
+      <button class="mini-btn" style="width:710rpx;color:#ffffff;background-color:#ffa500;" type="default" >点击获取联系方式</button>
+    </view>
+    <!-- 评论区 -->
+    <view class='interaction'>
+      <button class="mini-btn" style="width:236rpx;color:#777777;background-color:#ffffff;" type="default" >点赞</button>
+      <button class="mini-btn" style="width:236rpx;color:#777777;background-color:#ffffff;" type="default" >评论</button>
+      <button class="mini-btn" style="width:236rpx;color:#777777;background-color:#ffffff;" type="default" >回复</button>
+    </view>
+  </view>
+</view>

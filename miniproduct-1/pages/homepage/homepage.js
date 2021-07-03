@@ -17,6 +17,7 @@ Page({
     this.listNetworking(this.data.page);
   },
 
+  /* 网络请求*/
   listNetworking: function(e) {
     this.data.page = e;
     var that = this;
@@ -62,6 +63,15 @@ Page({
             that.data.page += 1
           }
       }
+    })
+  },
+
+  /* 跳转到详情页*/
+  handleToTopicDetail: function(e) {
+    console.log(e.currentTarget.dataset.id);
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../TopicDetail/TopicDetail?topic_id=' + id,
     })
   },
   /**
