@@ -70,8 +70,8 @@ page{
   width: 100vw;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
 }
 
 .tags {
@@ -90,14 +90,14 @@ page{
   margin-top: 10rpx;
   font-size: 32rpx;
   color: #666666;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
   text-align: left;
 }
 
 .image-content{
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
   margin-top: 10rpx;
   margin-bottom: 10rpx;
 }
@@ -117,8 +117,8 @@ page{
   align-items: center;
   justify-content: center;
   height: 80rpx;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
 }
 
 .mini-btn{

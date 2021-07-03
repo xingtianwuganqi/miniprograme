@@ -36,13 +36,13 @@
   <view class='bottom-view' style="position:fixed; bottom:0;width: 750rpx;">
   <!-- 获取联系方式 -->
     <view class='contact-view'>
-      <button class="mini-btn" style="width:710rpx;color:#ffffff;background-color:#ffa500;" type="default" >点击获取联系方式</button>
+      <button class="mini-btn" style="width:690rpx;color:#ffffff;background-color:#ffa500;" type="default" >点击获取联系方式</button>
     </view>
     <!-- 评论区 -->
     <view class='interaction'>
-      <button class="mini-btn" style="width:236rpx;color:#777777;background-color:#ffffff;" type="default" >点赞</button>
-      <button class="mini-btn" style="width:236rpx;color:#777777;background-color:#ffffff;" type="default" >评论</button>
-      <button class="mini-btn" style="width:236rpx;color:#777777;background-color:#ffffff;" type="default" >回复</button>
+      <button class="mini-btn" style="width:230rpx;color:#777777;background-color:#ffffff;" type="default" >点赞</button>
+      <button class="mini-btn" style="width:230rpx;color:#777777;background-color:#ffffff;" type="default" >评论</button>
+      <button class="mini-btn" style="width:230rpx;color:#777777;background-color:#ffffff;" type="default" >回复</button>
     </view>
   </view>
 </view>
