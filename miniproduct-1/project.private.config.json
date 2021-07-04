@@ -35,6 +35,12 @@
           "pathName": "pages/homeinfo/createtopic/createtopic",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/homeinfo/selectedtags/selectedtags",
+          "pathName": "pages/homeinfo/selectedtags/selectedtags",
+          "query": "",
+          "scene": null
         }
       ]
     }

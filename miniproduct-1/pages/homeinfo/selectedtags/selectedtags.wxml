@@ -1,2 +1,11 @@
 <!--pages/HomeInfo/selectedtags/selectedtags.wxml-->
-<text>pages/HomeInfo/selectedtags/selectedtags.wxml</text>
+<view class='tag-content'>
+  <view class='tags' wx:for="{{items}}" wx:for-item='item' wx:key='tagKey'>
+    <view class='tag-unselect' wx:if="{{item.select==false}}" bindtap='unselectClick' data-id='{{item}}'> 
+      {{item.tag_name}}
+    </view>
+    <view class='tag-select' bindtap='selectClick' data-id='{{item}}' wx:else>
+      {{item.tag_name}}
+    </view>
+  </view>
+</view>
