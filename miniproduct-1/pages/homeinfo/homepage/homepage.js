@@ -71,9 +71,17 @@ Page({
     console.log(e.currentTarget.dataset.id);
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '../TopicDetail/TopicDetail?topic_id=' + id,
+      url: '../topicdetail/topicdetail?topic_id=' + id,
     })
   },
+
+  /*点击添加跳转到发布页面*/
+  addButtonClick: function() {
+    wx.navigateTo({
+      url: '../createtopic/createtopic',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

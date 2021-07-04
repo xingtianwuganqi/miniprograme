@@ -1,0 +1,98 @@
+<!--pages/homepage/homepage.wxml-->
+<view class='backview'>
+  <scroll-view class='scroll-page'>
+    <view class='scroll-cell' wx:for="{{items}}" wx:item='item' wx:key='key' bindtap="handleToTopicDetail" data-id="{{item.topic_id}}">
+    <!-- userinfo -->
+      <view class='userInfo' >
+        <view wx:if="{{item.userInfo.avator.length>0}}">
+          <image class='head-img' src="http://img.rxswift.cn/{{item.userInfo.avator}}"></image>
+        </view>
+        <view class='empty-head' wx:else>
+        </view>
+        <view class='userName'> 
+          <text wx:if="{{item.userInfo.username.length>0}}">{{item.userInfo.username}}</text>
+          <text wx:else>佚名</text>
+          <text class='time-item'>{{item.userInfo.create_time}}</text>
+        </view>
+        <view class='icon-view'>
+          <mp-icon icon="more" color="#666666" size="{{20}}"></mp-icon>
+        </view>
+      </view>
+      <!-- 标签 -->
+      <view class='tag-content'> 
+        <view class='tags' wx:for="{{item.tagInfos}}" wx:for-item='tag' wx:key='tagInfo'>
+          {{tag.tag_name}}
+        </view>
+      </view>
+      
+      <!-- 文字区 -->
+      <view class='content'>
+        <text class='content-text'> {{item.content}} </text>
+      </view>
+      <!-- 图片区 -->
+      <view class='img-content'>
+      <!-- 四张图 -->
+        <view class='img-img' wx:if="{{item.imgs.length >= 4}}">
+          <view class='img-four-back'>
+            <view class='img-four'>
+              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+              <view class='img-coloum-line'></view>
+              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[1]}}' mode="aspectFill"></image>
+            </view>
+            <view class='img-row-line'>
+            </view>
+            <view class='img-four'>
+              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[2]}}' mode="aspectFill"></image>
+              <view class='img-coloum-line'></view>
+              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[3]}}' mode="aspectFill"></image>
+            </view>
+          </view>   
+        </view>
+        <!-- 三张图 -->
+        <view class='img-img' wx:elif='{{item.imgs.length == 3}}'>
+          <view class='image-three-back'>
+            <view class='image-left'>
+              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+            </view>
+            <view class='img-thr-coloum-line'></view>
+            <view class='image-right'>
+              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[1]}}' mode="aspectFill"></image>
+              <view class='img-thr-row-line'></view>
+              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[2]}}' mode="aspectFill"></image>
+            </view>
+          </view>
+        </view>
+        <!-- 两张图 -->
+        <view class='img-img' wx:elif='{{item.imgs.length == 2}}'>
+          <view class='image-three-back'>
+            <view class='image-left'>
+              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+            </view>
+            <view class='img-thr-coloum-line'></view>
+            <view class='image-left'>
+              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[1]}}' mode="aspectFill"></image>
+            </view>
+          </view>
+        </view>
+        <!-- 一张图 -->
+        <view class='img-img' wx:else>
+          <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+        </view>
+      </view>
+      <!-- 地址区 -->
+      <view class='address'>
+        <text>{{item.address_info}}</text>
+      </view>
+      <!-- 评论区 -->
+      <view class='interaction'>
+        <button class="mini-btn" style="width:200rpx;color:#777777;background-color:#ffffff;" type="default" >点赞</button>
+        <button class="mini-btn" style="width:200rpx;color:#777777;background-color:#ffffff;" type="default" >评论</button>
+        <button class="mini-btn" style="width:200rpx;color:#777777;background-color:#ffffff;" type="default" >回复</button>
+      </view>
+      <view class='bottom-line'></view>
+    </view>
+  </scroll-view>
+  <view class='add-back' bindtap='addButtonClick'>
+    <image class="add-icon" src="/icons/icon_home_write.png"></image>
+  </view>
+</view>

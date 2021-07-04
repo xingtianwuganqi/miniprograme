@@ -1,0 +1,45 @@
+/* pages/HomeInfo/createtopic/createtopic.wxss */
+page{
+  background-color: white;
+}
+
+.back-view{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.scroll-page{
+  background-color: white;
+  padding-bottom: 200rpx;
+}
+
+.tagInfo{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 30rpx;
+}
+
+.single-tag{
+  background-color: #ffa500;
+  width: max-content;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+  font-size: 26rpx;
+  color:white;
+}
+
+.add-tags {
+  font-size: 32rpx;
+  color: #ffa500;
+  background-color: white;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}

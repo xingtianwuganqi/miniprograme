@@ -1,0 +1,15 @@
+<!--pages/HomeInfo/createtopic/createtopic.wxml-->
+<view class='back-view'>
+  <view class='tagInfo'>
+    <view class='tag-content' wx:if="{{tags.length>0}}" wx:key='tagKey'>
+      <!-- <view class='single-tag'>tag.tag_name</view> -->
+    </view>
+    <view class='add-tags' wx:else bindtap="addTagsClick">
+      <view>添加标签 ></view>
+    </view>
+  </view>
+  <view class='inputview'></view>
+  <view class='imageview'></view>
+  <view class='contact'></view>
+  <view class='addressinfo'></view>
+</view>

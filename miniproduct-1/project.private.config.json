@@ -29,6 +29,12 @@
           "pathName": "pages/my/my",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/homeinfo/createtopic/createtopic",
+          "pathName": "pages/homeinfo/createtopic/createtopic",
+          "query": "",
+          "scene": null
         }
       ]
     }
