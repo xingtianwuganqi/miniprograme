@@ -8,8 +8,32 @@
       <view>添加标签 ></view>
     </view>
   </view>
-  <view class='inputview'></view>
-  <view class='imageview'></view>
-  <view class='contact'></view>
-  <view class='addressinfo'></view>
+  <view class='inputview'>
+    <textarea class='text-area' 
+    placeholder="请简单介绍下宠物，例如：\n名字：xxx\n年龄：xxx\n性别：xxx\n品种：xxx\n健康信息：xxx\n领养要求：xxx"
+    bindblur="bindTextAreaBlur"
+    focus="{{contact-focus}}"
+    >
+    </textarea>
+  </view>
+  <view class='imageview'>
+   <view class='img-item' wx:for="{{photoModels}}" wx:for-item='item' wx:key='photoKey'>
+    <view class='img-back' wx:if='{{item.isAdd==true}}'>
+      <image class='addImg' src='../../../icons/icon_hw_navi_add.png'></image>
+      <text class='up-text'>上传图片</text>
+    </view>
+   </view>
+  </view>
+  <view class='contact'>
+    <input class="input-text" placeholder="请输入联系方式" 
+    bindinput="contactInput"/>
+  </view>
+  <view class='addressinfo'>
+    <view class='address-text'>请选择位置</view>
+  </view>
+  <view class='remind-text'>
+    <text>
+      禁止出现商业广告、低俗、色情、暴力、具有侮辱性语音或与宠物无关等内容，违规者帖子会被删除！
+    </text>
+  </view>
 </view>

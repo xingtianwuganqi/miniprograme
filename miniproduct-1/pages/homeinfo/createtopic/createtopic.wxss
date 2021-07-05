@@ -43,3 +43,96 @@ page{
   margin-top: 20rpx;
   margin-bottom: 20rpx;
 }
+
+.inputview{
+  display: block;
+  bottom: 0rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  flex-grow: 1;
+}
+
+/* .text-area{
+  
+} */
+
+.imageview{
+  margin: 30rpx 30rpx 30rpx 30rpx;
+}
+
+.img-item {
+  margin: 1%;
+  width: 32%;
+  height: 221rpx;
+  float: left;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-back {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addImg{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.up-text{
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: #666666;
+  text-align: center;
+}
+
+.contact{
+  background-color: #f5f5f5;
+  border-radius: 10rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 15rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.addressinfo{
+  background-color: #f5f5f5;
+  border-radius: 10rpx;
+  margin-top: 15rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color:#666666;
+}
+
+.input-text{
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+.address-text{
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+.remind-text{
+  display: block;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  margin-bottom: 30rpx;
+  color: #666666
+}
