@@ -18,9 +18,16 @@
   </view>
   <view class='imageview'>
    <view class='img-item' wx:for="{{photoModels}}" wx:for-item='item' wx:key='photoKey'>
-    <view class='img-back' wx:if='{{item.isAdd==true}}'>
+    <view class='img-add' wx:if='{{item.isAdd==true}}' bindtap="addPhotoClick" data-id='{{item}}'>
       <image class='addImg' src='../../../icons/icon_hw_navi_add.png'></image>
       <text class='up-text'>上传图片</text>
+    </view>
+    <view class='img-back' wx:else>
+      <!-- <view> -->
+        <image class= 'img-show' src='{{item.photoUrl}}' mode="aspectFill">
+        </image>
+        <icon class='clear-icon' type="clear" size="25" color="#999999" bindtap="clearPhotoClick" data-id='{{item}}'></icon>
+      <!-- </view> -->
     </view>
    </view>
   </view>
