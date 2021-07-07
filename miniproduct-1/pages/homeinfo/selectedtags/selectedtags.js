@@ -6,13 +6,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    selItems: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 接收上个页面传递来的数据
+    let eventChannel = this.getOpenerEventChannel()
+    // setAddressEditData和上个页面设置的相同即可
+    eventChannel.on('selData', (items) => {
+      this.setData({  
+      	selItems: items,
+      })
+    })
     this.getTagList();
   },
 
@@ -82,6 +90,18 @@ Page({
             item['select'] = false;
             datas[i] = item
           }
+          if (that.data.selItems.length > 0) {
+            var selDataIds = that.data.selItems.map((item) => {
+              return item.id
+            })
+            datas = datas.map((data) => {
+              var newData = data
+              if (selDataIds.includes(newData.id)) {
+                newData.select = true
+              }
+              return newData
+            })
+          }
           that.setData({
             items: datas
           })
@@ -105,6 +125,8 @@ Page({
     this.setData({
       items: datas
     })
+    this.itemCallBack(datas)
+
   },
 
   /*选中的tag点击 */
@@ -123,6 +145,17 @@ Page({
     this.setData({
       items: datas
     })
+    this.itemCallBack(datas)
+  },
+  /**处理数据，回调 */
+  itemCallBack: function(items) {
+    console.log(items);
+    var selData = items.filter((item) => {
+      return item.select == true
+    })
+    console.log(selData);
+    let eventChannel = this.getOpenerEventChannel()
+    // updateAddressListData 这个方法需要上一个页面的支持, 上一个页面在navigateTo方法中的events数据中定义这个方法来接收数据
+    eventChannel.emit('updateAddressListData', selData)
   }
-
 })

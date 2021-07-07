@@ -84,11 +84,46 @@ Page({
 
   /* 点击添加标签 */
   addTagsClick: function() {
+    var that = this;
     wx.navigateTo({
       url: '../selectedtags/selectedtags',
+      // 回调传值
+      events: {
+        // 这里用来接收后面页面传递回来的数据
+        updateAddressListData: (items) => {
+          console.log(items);
+           // 这里处理数据即可，回调回来的数据
+           that.setData({
+             tags: items
+           })
+        }
+      }
     })
   },
 
+  /**点击标签 */
+  selectTagsClick: function(e) {
+    var that = this;
+    wx.navigateTo({
+      url: '../selectedtags/selectedtags',
+      // 回调传值
+      events: {
+        // 这里用来接收后面页面传递回来的数据
+        updateAddressListData: (items) => {
+          console.log(items);
+           // 这里处理数据即可，回调回来的数据
+           that.setData({
+             tags: items
+           })
+        }
+      },
+      // 回调传值
+      success: res => {
+        // 这里给要打开的页面传递数据.  第一个参数:方法key, 第二个参数:需要传递的数据
+        res.eventChannel.emit('selData', that.data.tags);
+      }
+    })
+  },
   //用户名和密码输入框事件
   contactInput:function(e){
     console.log(e.detail.value);

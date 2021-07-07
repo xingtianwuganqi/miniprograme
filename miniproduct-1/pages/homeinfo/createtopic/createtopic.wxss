@@ -22,7 +22,6 @@ page{
   width: 100vw;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding-left: 30rpx;
 }
 
 .single-tag{
@@ -34,14 +33,6 @@ page{
   margin-right: 20rpx;
   font-size: 26rpx;
   color:white;
-}
-
-.add-tags {
-  font-size: 32rpx;
-  color: #ffa500;
-  background-color: white;
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
 }
 
 .inputview{
@@ -159,4 +150,76 @@ page{
   right: -107rpx;
   z-index: 100;
   position: absolute;
+}
+
+.add-tags {
+  font-size: 32rpx;
+  color: #ffa500;
+  background-color: white;
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+  padding-left: 30rpx;
+}
+.tag-content{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  margin-top: 30rpx;
+}
+
+.tag-unselect{
+  background-color: white;
+  width: max-content;
+  height: 60rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  font-size: 32rpx;
+  border-style: solid;
+  border-width: 2rpx;
+  border-color: #f5f5f5;
+  border-radius: 30rpx;
+  margin-right: 20rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #292929;
+}
+
+.tag-select{
+  background-color: #ffa500;
+  width: max-content;
+  height: 60rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  font-size: 32rpx;
+  margin-right: 20rpx;
+  margin-bottom: 30rpx;
+  color:white;
+  border-radius: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-back{
+  position: fixed;
+  width:100rpx;
+  height:100rpx;
+  bottom: 150rpx;
+  right: 40rpx;
+  background-color: #ffa500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50rpx;
+  color: white;
+  font-size: 28rpx;
 }
