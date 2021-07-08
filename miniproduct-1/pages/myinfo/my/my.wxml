@@ -1,8 +1,52 @@
-<!--pages/my/my.wxml-->
-<scroll-view class='my-page'>
-  <!-- <view class='scroll-cell' wx:for="{{items}}" wx:item='item' wx:key='key'> -->
-  <!-- </view> -->
-  <view class='my-item'>
-    <image class='item-img' src='../../icons/icon_message_com.png'></image>
+<view class="personalContainer">
+  <view class="user-section">
+    <image class="bg" src="/icons/user-bg.jpg"></image>
+    <view class="user-info-box">
+      <view class="portrait-box">
+        <image class="portrait" src='/icons/missing-face.png'></image>
+      </view>
+      <view class="info-box">
+        <text class="username">游客</text>
+      </view>
+    </view>
   </view>
-</scroll-view>
+
+      <view class="cardList">
+        <view class="card-item">
+          <image src='/icons/icon_view_hist.png' class='img-item'>
+          </image>
+          <text class="title">浏览记录</text>
+          <text class="more"> > </text>
+        </view>
+        <view class="card-item">
+          <image src='/icons/icon_mi_publish.png' class='img-item'>
+          </image>
+          <text class="title">我的发布</text>
+          <text class="more"> > </text>
+        </view>
+        <view class="card-item">
+          <image src='/icons/icon_mi_collection.png' class='img-item'>
+          </image>
+          <text class="title">我的收藏</text>
+          <text class="more"> > </text>
+        </view>
+        <view class="card-item">
+          <image src='/icons/icon_mi_xy.png' class='img-item'>
+          </image>
+          <text class="title">用户协议</text>
+          <text class="more"> > </text>
+        </view>
+        <view class="card-item">
+          <image src='/icons/icon_pravicy.png' class='img-item'>
+          </image>
+          <text class="title">隐私政策</text>
+          <text class="more"> > </text>
+        </view>
+        <view class="card-item">
+          <image src='/icons/icon_mi_about.png' class='img-item'>
+          </image>
+          <text class="title">关于我们</text>
+          <text class="more"> > </text>
+        </view>
+      </view>
+    </view>
