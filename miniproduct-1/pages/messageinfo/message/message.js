@@ -15,10 +15,10 @@ Page({
   onLoad: function (options) {
     this.setData({
       list: [
-        {img:'../../icons/icon_message_sys.png',title: '系统消息',num: 0},
-        {img:'../../icons/icon_message_like.png',title: '点赞',num: 0},
-        {img:'../../icons/icon_message_collect.png',title: '收藏',num: 0},
-        {img:'../../icons/icon_message_com.png',title: '评论',num: 0},
+        {img:'../../../icons/icon_message_sys.png',title: '系统消息',num: 0},
+        {img:'../../../icons/icon_message_like.png',title: '点赞',num: 0},
+        {img:'../../../icons/icon_message_collect.png',title: '收藏',num: 0},
+        {img:'../../../icons/icon_message_com.png',title: '评论',num: 0},
       ]
     })
   },
