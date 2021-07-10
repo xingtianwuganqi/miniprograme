@@ -41,6 +41,12 @@
           "pathName": "pages/homeinfo/selectedtags/selectedtags",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
         }
       ]
     }

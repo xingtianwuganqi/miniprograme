@@ -7,7 +7,8 @@
     "pages/myinfo/my/my",
     "pages/homeinfo/topicdetail/topicdetail",
     "pages/homeinfo/createtopic/createtopic",
-    "pages/homeinfo/selectedtags/selectedtags"
+    "pages/homeinfo/selectedtags/selectedtags",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

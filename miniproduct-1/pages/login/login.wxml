@@ -1,0 +1,12 @@
+<!--pages/login/login.wxml-->
+<view class='back-view'>
+  <view class='logo-view'>
+    <image class='logo-image' src='../../icons/icon_logo.jpg' mode="aspectFill"></image>
+  </view>
+  <view class='login-button'>
+    <text>微信快捷登录</text>
+  </view>
+  <view class='agreement-view'>
+    <text>同意《用户协议》与《隐私协议》</text>
+  </view>
+</view>
