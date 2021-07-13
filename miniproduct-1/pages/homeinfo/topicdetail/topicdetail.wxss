@@ -123,4 +123,11 @@ page{
 
 .mini-btn{
   font-size: 26rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  text-align: center;
+  color:#777777;
+  width: 230rpx;
 }

@@ -5,7 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    isAgreen: true,
+    textToast: false,
+    loading: false,
+    hideTextToast: false,
+    hideLoading: false,
+    textInfo: null
   },
 
   /**
@@ -62,5 +67,66 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  /**登录按钮点击 */
+  loginBtnClick: function() {
+    if (this.data.isAgreen==false) {
+      console.log('=========')
+      this.openTextToast('请阅读并勾选用户协议与隐私协议');
+      return 
+    }
+    wx.login({
+      timeout: 50000,
+      success(res){
+        console.log(res);
+        wx.getUserInfo({
+          success (userinfo) {
+            console.log(userinfo);
+          }
+        })
+      }
+    })
+  },
+  /*
+  icon 点击
+  */
+ iconClick: function() {
+  this.setData({
+    isAgreen: false
+  })
+ },
+ /**未选中点击 */
+ iconUnselectClick: function() {
+   this.setData(
+     {
+       isAgreen: true
+     }
+   )
+ },
+ /**用户协议点击 */
+ useragreenClick: function() {
+
+ },
+ /**隐私协议点击 */
+ privacyClick: function() {
+  
+ },
+ /**文字提示 */
+ openTextToast: function(textcontent) {
+  this.setData({
+      textInfo: textcontent,
+      textToast: true
+  });
+  setTimeout(() => {
+      this.setData({
+          hideTextToast: true
+      });
+      setTimeout(() => {
+          this.setData({
+              textToast: false,
+              hideTextToast: false,
+          });
+      }, 300);
+  }, 3000);
+},
 })
