@@ -3,9 +3,10 @@
   <view class='logo-view'>
     <image class='logo-image' src='../../icons/icon_logo.jpg' mode="aspectFill"></image>
   </view>
-  <view class='login-button' bindtap='loginBtnClick'>
+  <!-- <view class='login-button' bindtap='loginBtnClick'>
     <text>微信快捷登录</text>
-  </view>
+  </view> -->
+  <button class='login-button' size="defalut" bindgetuserinfo="getUserInfo" open-type="getUserInfo">微信快捷登录</button>
   <view class='agreement-view'>
     <view bindtap='iconClick' wx:if='{{isAgreen==true}}'>
       <i class="weui-icon-success" style="color:#ffa500;width:40rpx;height:40rpx;"></i>

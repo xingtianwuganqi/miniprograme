@@ -28,8 +28,8 @@ page{
 }
 
 .login-button{
-  margin-left: 30rpx;
-  margin-right: 30rpx;
+  /* margin-left: 30rpx;
+  margin-right: 30rpx; */
   height: 100rpx;
   display: flex;
   flex-direction: column;
