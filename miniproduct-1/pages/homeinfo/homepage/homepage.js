@@ -1,4 +1,7 @@
 // pages/homepage/homepage.js
+// const network = require('../../../config/network.js');
+import network from '../../../config/network.js'
+const api = require('../../../config/api.js')
 const app = getApp().globalData;
 Page({
   /**
@@ -68,6 +71,19 @@ Page({
             that.data.page += 1
           }
       }
+    })
+    console.log(typeof(network))
+    console.log(network)
+    network({
+      url: api.TopicList,
+      data:{
+        'page':that.data.page,
+        'size': that.data.size,
+        'token': token
+      }
+    }).then(res=>{
+      console.log('===----------=====')
+      console.log(res.data)
     })
   },
 
