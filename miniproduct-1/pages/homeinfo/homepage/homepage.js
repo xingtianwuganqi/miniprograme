@@ -1,5 +1,5 @@
 // pages/homepage/homepage.js
-
+const app = getApp().globalData;
 Page({
   /**
    * 页面的初始数据
@@ -20,16 +20,21 @@ Page({
   /* 网络请求*/
   listNetworking: function(e) {
     this.data.page = e;
+    
     var that = this;
     if (this.data.page == 1) {
       //在当前页面显示导航条加载动画
       wx.showNavigationBarLoading(); 
     }
+    var token = wx.getStorageSync('token')
+    console.log('------------------')
+    console.log(token)
     wx.request({
-      url: 'https://test.rxswift.cn/api/v1/topiclist/',
+      url: app.baseUrl + '/api/v1/topiclist/',
       data:{
         'page':that.data.page,
         'size': that.data.size,
+        'token': token
       },
       method: "POST",
       header: {
@@ -144,4 +149,123 @@ Page({
     this.listNetworking(this.data.page);
   },
 
+  /**点赞按钮点击 */
+  likeButtonClick:function(event) {
+    var topic_id = event.currentTarget.dataset.id
+    var mark = event.currentTarget.dataset.mark
+    var token = wx.getStorageSync('token')
+    console.log('topicid',topic_id,'likeMark:',mark,'token:',token)
+    if (token.length > 0) {
+      this.likeNetworking(topic_id,mark,token);
+    }else{
+      wx.navigateTo({
+        url: '../../login/login',
+      })
+    }
+  },
+  likeNetworking:function(id,likeMark,token) {
+    var that = this;
+    var mark = 0
+    if (likeMark == true) {
+      mark = 1
+    }
+    console.log('topicid',id,'likeMark:',mark,'token:',token)
+    wx.request({
+      url: app.baseUrl + '/api/v1/likeaction/',
+      data: {
+        'token': token,
+        'like_mark': mark,
+        'topic_id': id
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success(response) {
+        console.log(response)
+        if (response.data.code==200) {
+          var items = that.data.items.map((item) =>{
+            if (item.topic_id == id) {
+              var newItem = item
+              if (mark == 1) {
+                newItem.liked = true
+                newItem.likes_num = newItem.likes_num + 1
+              }else{
+                newItem.liked = false
+                if (newItem.likes_num > 0) {
+                  newItem.likes_num = newItem.likes_num - 1
+                }
+              }
+              return newItem
+            }else{
+              return item
+            }
+          })
+          that.setData({
+            items: items
+          })
+        }
+      }
+
+    })
+  },
+  /** 收藏按钮点击 */
+  collectButtonClick: function(event) {
+    var topic_id = event.currentTarget.dataset.id
+    var mark = event.currentTarget.dataset.mark
+    var token = wx.getStorageSync('token')
+    if (token.length > 0) {
+      this.collectNetworking(topic_id,mark,token);
+    }else{
+      wx.navigateTo({
+        url: '../../login/login',
+      })
+    }
+  },
+  /**收藏网络请求 */
+  collectNetworking:function(id,collect_mark,token) {
+    var that = this;
+    var mark = 0
+    if (collect_mark == true) {
+      mark = 1
+    }
+    wx.request({
+      url: app.baseUrl + '/api/v1/collection/',
+      data: {
+        'token': token,
+        'collect_mark': mark,
+        'topic_id': id
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success(response) {
+        console.log(response)
+        if (response.data.code==200) {
+          var items = that.data.items.map((item) =>{
+            if (item.topic_id == id) {
+              var newItem = item
+              if (mark == 1) {
+                newItem.collectioned = true
+                newItem.collection_num = newItem.collection_num + 1
+              }else{
+                newItem.collectioned = false
+                if (newItem.collection_num > 0) {
+                  newItem.collection_num = newItem.collection_num - 1
+                }
+              }
+              return newItem
+            }else{
+              return item
+            }
+          })
+          that.setData({
+            items: items
+          })
+        }
+      }
+
+    })
+  }
 })

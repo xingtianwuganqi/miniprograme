@@ -128,6 +128,10 @@ Page({
                     },
                     success(userRes) {
                       console.log(userRes);
+                      if (userRes.data.code==200) { // 登录成功，保存用户信息
+                        wx.setStorageSync('userInfo', userRes.data.data)
+                        wx.setStorageSync('token', userRes.data.data.token)
+                      }
                     },fail(error){
                       console.log(error);
                     }
