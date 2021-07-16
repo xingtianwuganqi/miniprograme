@@ -131,6 +131,13 @@ Page({
                       if (userRes.data.code==200) { // 登录成功，保存用户信息
                         wx.setStorageSync('userInfo', userRes.data.data)
                         wx.setStorageSync('token', userRes.data.data.token)
+                        wx.navigateBack({
+                          delta: 0,
+                        })
+                        wx.showToast({
+                          title: '登录成功',
+                          icon:'none'
+                        })
                       }
                     },fail(error){
                       console.log(error);
