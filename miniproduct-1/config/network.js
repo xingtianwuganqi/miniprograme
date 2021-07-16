@@ -7,7 +7,22 @@ export default function(options) {
       },
       method: options.method || 'POST',
       data: options.data || {},
-      success: resolve,
+      success: (res) => {
+        if (res.data.code == 401) {
+          console.log('认证有误')
+          wx.removeStorageSync('token')
+          wx.removeStorageSync('userInfo')
+          wx.navigateTo({
+            url: '../../login/login',
+          })
+          wx.showToast({
+            title: '认证有误',
+            icon: "none"
+          })
+          return 
+        }
+        resolve(res)
+      },
       fail: reject
     })
   })

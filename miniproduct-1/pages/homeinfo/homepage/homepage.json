@@ -4,6 +4,8 @@
   "navigationBarTitleText": "首页",
   "navigationBarTextStyle": "black",
   "enablePullDownRefresh": true,
-  "onReachBottomDistance":100
-
+  "onReachBottomDistance":100,
+  "usingComponents": {
+    "custom-topicitem": "../../../components/topicitem/topicitem"
+  }
 }

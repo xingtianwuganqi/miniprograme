@@ -8,7 +8,8 @@
     "pages/homeinfo/topicdetail/topicdetail",
     "pages/homeinfo/createtopic/createtopic",
     "pages/homeinfo/selectedtags/selectedtags",
-    "pages/login/login"
+    "pages/login/login",
+    "components/topicitem/topicitem"
   ],
   "window": {
     "backgroundTextStyle": "light",
