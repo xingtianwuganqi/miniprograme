@@ -19,7 +19,7 @@
   left: 0;
   bottom: 0;
   width: 750rpx;
-  height: 700rpx;
+  height: 1000rpx;
   background: #fff;
   z-index: 20;
   overflow: hidden;
@@ -66,7 +66,7 @@
 .goodsdetail-top-c-o {
   height: 100rpx;
   padding: 0 20rpx 0 20rpx;
-  line-height: 100rpx;
+  line-height: rpx;
   box-sizing: border-box;
   /* border: 1rpx solid #000; */
   font-size: 32rpx;
@@ -109,14 +109,14 @@
  
 .swiper-box {
   width: 750rpx;
-  height: 620rpx;
+  height: 900rpx;
   box-sizing: border-box;
   /* border: 1rpx solid #000; */
 }
  
 .swiper-box-scr {
   width: 750rpx;
-  height: 620rpx;
+  height: 900rpx;
   box-sizing: border-box;
   /* border: 1rpx solid #000; */
   padding: 0 40rpx 0 40rpx;
