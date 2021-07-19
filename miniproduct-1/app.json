@@ -9,7 +9,9 @@
     "pages/homeinfo/createtopic/createtopic",
     "pages/homeinfo/selectedtags/selectedtags",
     "pages/login/login",
-    "components/topicitem/topicitem"
+    "components/topicitem/topicitem",
+    "components/citypicker/citypicker",
+    "pages/homeinfo/location/location"
   ],
   "window": {
     "backgroundTextStyle": "light",

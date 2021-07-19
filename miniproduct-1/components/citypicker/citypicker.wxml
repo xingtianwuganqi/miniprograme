@@ -1,0 +1,37 @@
+<view class="goods-detail" hidden="{{isShowToast}}">
+  <view class="mask" bindtap="hideGoodsDetail"></view>
+  <view class="goodsdetail">
+    <!-- <view class='goodsdetail-title'></view> -->
+    <view class='goodsdetail-top'>
+      <view wx:for='{{nameArr}}' wx:key='nameInfos' class='{{currentTab == index ? "goodsdetail-top-l-o":"goodsdetail-top-l"}}' style='{{item == "" ? "display: none;":""}}' bindtap="navbarTap" data-index='{{index}}'>{{item}}</view>
+      <view class='goodsdetail-top-cancel' bindtap='hideGoodsDetail'>取消</view>
+    </view>
+ 
+    <swiper class="swiper-box">
+      <swiper-item wx:if='{{currentTab == 0}}' catchtouchmove='catchTouchMove'>
+        <scroll-view scroll-y class="swiper-box-scr">
+          <view class='swiper-box-item' wx:for='{{provinceArr}}' wx:key='provinceInfo' data-item='{{item}}' data-index='{{index}}' bindtap='provinceChange' style='{{nameArr[0] == item ? "color: #e60012;":""}}'>{{item}}
+            <view class='icon-cheveron-right font-size'></view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+ 
+      <swiper-item wx:if='{{currentTab == 1}}' catchtouchmove='catchTouchMove'>
+        <scroll-view scroll-y class="swiper-box-scr">
+          <view class='swiper-box-item' wx:for='{{cityArr}}' wx:key='cityInfo' data-item='{{item}}' data-index='{{index}}' bindtap='cityChange' style='{{nameArr[1] == item ? "color: #e60012;":""}}'>{{item}}
+            <view class='icon-cheveron-right font-size'></view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+ 
+      <swiper-item wx:if='{{currentTab == 2}}' catchtouchmove='catchTouchMove'>
+        <scroll-view scroll-y class="swiper-box-scr">
+          <view class='swiper-box-item' wx:for='{{countryArr}}' wx:key='countryInfo' data-item='{{item}}' data-index='{{index}}' bindtap='districtChange' style='{{nameArr[2] == item ? "color: #e60012;":""}}'>{{item}}
+            <view class='icon-cheveron-right font-size'></view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+ 
+  </view>
+</view>

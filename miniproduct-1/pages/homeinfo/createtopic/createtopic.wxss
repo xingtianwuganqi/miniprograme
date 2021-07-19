@@ -115,6 +115,9 @@ page{
   justify-content: flex-start;
   align-items: center;
   color:#666666;
+  /* display: block; */
+  /* border: 1rpx solid #000; */
+  /* box-sizing: border-box; */
 }
 
 .input-text{
@@ -222,4 +225,14 @@ page{
   border-radius: 50rpx;
   color: white;
   font-size: 28rpx;
+}
+
+.choose_address{
+  height: 90rpx;
+  width: 750rpx;
+  box-sizing: border-box;
+  padding: 0 40rpx 0 40rpx;
+  font-size: 32rpx;
+  line-height: 90rpx;
+  border-bottom: 1rpx solid #aaa;
 }

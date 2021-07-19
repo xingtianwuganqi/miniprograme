@@ -1,0 +1,6 @@
+<scroll-view scroll-y style="height: {{windowHeight}}px;width: 100%;" class='body'>
+  <getAddress id='getAddress' locationArr="{{locationArr}}" bind:resultEvent="resultEvent">
+  </getAddress>
+  <view class='choose_address' bindtap='chooseAddress'>选择地址</view>
+  <view>{{locationArr[0] + locationArr[1] + locationArr[2]}}</view>
+</scroll-view>

@@ -21,7 +21,10 @@ Page({
    */
   data: {
     tags: null,
-    photoModels:[emptyData]
+    photoModels:[emptyData],
+    locationArr: ['', '', ''],
+    showAddress: false,
+    address: ""
   },
 
   /**
@@ -31,6 +34,9 @@ Page({
     this.setData({
       photoModels:[{isAdd: true,progress: 0,complete: 0,photoKey: "",photoUrl: ""}]
     })
+
+    //获得dialog组件
+    this.getAddress = this.selectComponent("#getAddress");
   },
 
   /**
@@ -195,5 +201,31 @@ Page({
       photoModels: totalPhotos
     })
 
+  },
+  locationClick: function() {
+    wx.navigateTo({
+      url: '../../homeinfo/location/location',
+    })
+  },
+  //选择地址
+  chooseAddress: function(e) {
+  
+    this.getAddress.showsGoodsDetail();
+  },
+ 
+  //组件回调
+  resultEvent: function(e) {
+    var addressInfos = e.detail.nameArr
+    var address = ''
+    if (e.detail.nameArr[2].length > 0) {
+      address = e.detail.nameArr[0] + '.' + e.detail.nameArr[1] + '.' + e.detail.nameArr[2]
+    }else{
+      address = e.detail.nameArr[0] + '.' + e.detail.nameArr[1]
+    }
+    this.setData({
+      showAddress: true,
+      locationArr: e.detail.nameArr,
+      address: address
+    })
   }
 })

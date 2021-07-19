@@ -40,8 +40,9 @@
     <input class="input-text" placeholder="请输入联系方式" 
     bindinput="contactInput"/>
   </view>
-  <view class='addressinfo'>
-    <view class='address-text'>请选择位置</view>
+  <view class='addressinfo' bindtap='chooseAddress'>
+    <view class='address-text' wx:if='{{showAddress==true}}'>{{address}}</view>
+    <view class='address-text' wx:else >请选择位置</view>
   </view>
   <view class='remind-text'>
     <text>
@@ -52,4 +53,7 @@
   <view class='add-back' bindtap='addButtonClick'>
     <text>发布</text>
   </view>
+  
 </view>
+<getAddress id='getAddress' locationArr="{{locationArr}}" bind:resultEvent="resultEvent">
+    </getAddress>
