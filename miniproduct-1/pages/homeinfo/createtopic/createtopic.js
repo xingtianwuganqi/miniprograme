@@ -1,18 +1,9 @@
 // pages/HomeInfo/createtopic/createtopic.js
-/*
-  struct ReleasePhotoModel: HandyJSON, Equatable {
-    var image: UIImage?
-    var isAdd: Bool = false // 是不是添加的图片
-    var progress: Float = 0
-    var complete: Bool = false
-    var photoKey: String = "\(Tool.shared.getTime())/\(String.et.random(ofLength: 8)).jpeg"
-    var photoUrl: String = ""
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.photoKey == rhs.photoKey
-    }
-}
-*/
+import api from '../../../config/api.js';
+import network from '../../../config/network.js'
+const qiniuUploader = require("../../../utils/qiniuUploader");
+const util = require('../../../utils/util.js')
+
 var emptyData = {isAdd: true,progress: 0,complete: 0,photoKey: "",photoUrl: ""};
 Page({
   
@@ -167,7 +158,7 @@ Page({
         //   imglist: _this.data.imglist.concat(tempFilePaths)
         // })
         var temp = tempFilePaths.map((num) => {
-          return {isAdd: false,progress: 0,complete: 0,photoKey: "",photoUrl: num}
+          return {isAdd: false,progress: 0,complete: 0,photoKey: Date.parse(new Date()) + '/' + util.randomString + '.jpeg',photoUrl: num}
         })
         console.log(temp)
         var totalDatas = temp.concat(that.data.photoModels)
@@ -227,5 +218,104 @@ Page({
       locationArr: e.detail.nameArr,
       address: address
     })
+  },
+  /**点击发布按钮 */
+  addButtonClick: function(){
+    var upPhotos = this.data.photoModels.filter((model) => {
+      return model.isAdd == false;
+    })
+    if (upPhotos.length == 0) {
+      wx.showToast({
+        title: '请添加图片',
+        icon:'none'
+      })
+      return 
+    }
+
+    if (this.data.qiniuToken != null && this.data.qiniuToken.length > 0) {
+      qiniuImageNetworking(this.data.qiniuToken);
+    }else{
+      this.getQiNiuToken();
+    }
+  },
+  /** 获取七牛token */
+  getQiNiuToken: function() {
+    var that = this;
+    var token = wx.getStorageSync('token')
+    network({
+      url: api.getQiNiuToken,
+      data:{
+        token: token
+      },
+    }).then((res) =>{
+      if (res.data.code == 200) {
+        // 保存token
+        var qiniuToken = res.data.data.token
+        console.log(qiniuToken)
+        that.setData({
+          qiniuToken: qiniuToken
+        })
+        // 上传图片
+        that.qiniuImageNetworking(qiniuToken);
+      }
+    })
+  },
+  /**上传图片 */
+  qiniuImageNetworking:function(token){
+    var photoModels = this.data.photoModels.filter((model) => {
+      return model.isAdd == false
+    })
+    var that = this;
+    for (var i=0;i<photoModels.length;i++) {
+      var photo = photoModels[i]
+      qiniuUploader.upload(
+        photo.photoUrl,
+        (res) => {
+          console.log('reeees:',res)
+          var allPhotos = that.data.photoModels.map((model) => {
+            var newModel = model
+            if (newModel.photoKey == res.key) {
+              newModel.complete = 1
+            }
+            return newModel
+          })
+          var isCompletion = that.judgePhotoAllPushComplete(allPhotos)
+          console.log('是否完成全部：',isCompletion)
+          if (isCompletion) {
+            // 调用发布接口
+            that.releaseTopicNetworking();
+          }
+        },(error) => {
+          console.log('eeeeeeeeeeee is:',error)
+        },
+        {
+          region: 'NCN',
+          uptoken: token,
+          domain: 'http://img.rxswift.cn',
+          key: photo.photoKey
+        },
+        (res) => {
+          console.log('上传进度', res.progress)
+          console.log('已经上传的数据长度', res.totalBytesSent)
+          console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+        }
+      )
+    }
+  },
+  /**判断图片是否全部上传 */
+  judgePhotoAllPushComplete(photoModles) {
+    var photos = photoModles.filter((model) => {
+      return model.isAdd == false
+    }).filter((model) => {
+      return model.complete == 0
+    })
+    if (photos.length == 0) {
+      return true
+    }else{
+      return false
+    }
+  },
+  releaseTopicNetworking() {
+    console.log('上传完成，开始发布')
   }
 })

@@ -10,8 +10,7 @@
     "pages/homeinfo/selectedtags/selectedtags",
     "pages/login/login",
     "components/topicitem/topicitem",
-    "components/citypicker/citypicker",
-    "pages/homeinfo/location/location"
+    "components/citypicker/citypicker"
   ],
   "window": {
     "backgroundTextStyle": "light",
