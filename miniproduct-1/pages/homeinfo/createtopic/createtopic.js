@@ -317,10 +317,12 @@ Page({
   },
   releaseTopicNetworking() {
     console.log('上传完成，开始发布')
+    var token = wx.getStorageSync('token')
+    var that = this;
     network({
       url:api.releaseTopic,
       data:{
-
+        token: token
       }
     }).then((res) => {
       if (res.data.code == 200) {
