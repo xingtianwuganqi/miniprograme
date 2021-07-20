@@ -317,5 +317,21 @@ Page({
   },
   releaseTopicNetworking() {
     console.log('上传完成，开始发布')
+    network({
+      url:api.releaseTopic,
+      data:{
+
+      }
+    }).then((res) => {
+      if (res.data.code == 200) {
+        wx.showToast({
+          title: '发布成功',
+          icon: 'none'
+        })
+        wx.navigateBack({
+          delta: 1.5,
+        })
+      }
+    })
   }
 })

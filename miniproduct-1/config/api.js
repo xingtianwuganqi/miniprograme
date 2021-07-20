@@ -5,5 +5,5 @@ module.exports = {
   LikeAction: baseUrl + '/api/v1/likeaction/', //首页数据接口
   collectionAction:  baseUrl + '/api/v1/collection/', // 点赞
   getQiNiuToken: baseUrl + '/api/v1/qiniu/', // 获取七牛token
-  
+  releaseTopic: baseUrl + '/api/v1/releasetopic/', // 发布帖子
 };
