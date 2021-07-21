@@ -30,7 +30,7 @@
     <view class='img-back' wx:else>
       <!-- <view> -->
         <image class= 'img-show' src='{{item.photoUrl}}' mode="aspectFill">
-          <icon class='clear-icon' type="clear" size="25" color="#111111" bindtap="clearPhotoClick" data-id='{{item}}'></icon>
+          <icon class='clear-icon' type="clear" size="25" color="#999999" bindtap="clearPhotoClick" data-id='{{item}}'></icon>
         </image>
         
       <!-- </view> -->

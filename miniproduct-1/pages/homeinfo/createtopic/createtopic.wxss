@@ -141,22 +141,14 @@ page{
 .img-show{
   width: 215rpx;
   height: 215rpx;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; */
-  /* z-index: 1; */
-  position: fixed;
-
+  position: relative;
 }
 
 .clear-icon{
-  /* position:relative; */
-  /* top: -107rpx;
-  right: -107rpx; */
-  /* z-index: 50; */
-  position: absolute;
-  /* position: */
+  position:absolute;
+  top: 0rpx;
+  right: 0rpx;
+
 }
 
 .add-tags {
