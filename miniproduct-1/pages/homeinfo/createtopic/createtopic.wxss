@@ -141,18 +141,22 @@ page{
 .img-show{
   width: 215rpx;
   height: 215rpx;
-  display: block;  
-  z-index: 1;
-  position: absolute;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; */
+  /* z-index: 1; */
+  position: fixed;
 
 }
 
 .clear-icon{
   /* position:relative; */
-  top: -107rpx;
-  right: -107rpx;
-  z-index: 100;
+  /* top: -107rpx;
+  right: -107rpx; */
+  /* z-index: 50; */
   position: absolute;
+  /* position: */
 }
 
 .add-tags {
@@ -235,4 +239,6 @@ page{
   font-size: 32rpx;
   line-height: 90rpx;
   border-bottom: 1rpx solid #aaa;
+  /* z-index: 100;
+  position: absolute; */
 }

@@ -221,6 +221,13 @@ Page({
   },
   /**点击发布按钮 */
   addButtonClick: function(){
+    if (this.data.content == null || this.data.content.length == 0) {
+      wx.showToast({
+        title: '请输入宠物简介',
+        icon: 'none'
+      })
+      return 
+    }
     var upPhotos = this.data.photoModels.filter((model) => {
       return model.isAdd == false;
     })
@@ -232,8 +239,24 @@ Page({
       return 
     }
 
+    if (this.data.contact == null || this.data.contact.length == 0) {
+      wx.showToast({
+        title: '请输入联系方式',
+        icon:'none'
+      })
+      return 
+    }
+
+    if (this.data.address == null || this.data.address.length == 0) {
+      wx.showToast({
+        title: '请选择地址',
+        icon:'none'
+      })
+      return 
+    }
+
     if (this.data.qiniuToken != null && this.data.qiniuToken.length > 0) {
-      qiniuImageNetworking(this.data.qiniuToken);
+      this.qiniuImageNetworking(this.data.qiniuToken);
     }else{
       this.getQiNiuToken();
     }
@@ -242,6 +265,9 @@ Page({
   getQiNiuToken: function() {
     var that = this;
     var token = wx.getStorageSync('token')
+    wx.showLoading({
+      title: '正在加载',
+    })
     network({
       url: api.getQiNiuToken,
       data:{
@@ -257,11 +283,22 @@ Page({
         })
         // 上传图片
         that.qiniuImageNetworking(qiniuToken);
+      }else{
+        wx.hideLoading({
+          success: (res) => {},
+        })
       }
+    }).catch((res)=>{
+      wx.hideLoading({
+        success: (res) => {},
+      })
     })
   },
   /**上传图片 */
   qiniuImageNetworking:function(token){
+    wx.showLoading({
+      title: '上传图片',
+    })
     var photoModels = this.data.photoModels.filter((model) => {
       return model.isAdd == false
     })
@@ -279,14 +316,23 @@ Page({
             }
             return newModel
           })
+          that.setData({
+            photoModels: allPhotos
+          })
           var isCompletion = that.judgePhotoAllPushComplete(allPhotos)
           console.log('是否完成全部：',isCompletion)
           if (isCompletion) {
             // 调用发布接口
+            that.setData({
+              photoModels: allPhotos
+            })
             that.releaseTopicNetworking();
           }
         },(error) => {
           console.log('eeeeeeeeeeee is:',error)
+          wx.hideLoading({
+            success: (res) => {},
+          })
         },
         {
           region: 'NCN',
@@ -316,24 +362,90 @@ Page({
     }
   },
   releaseTopicNetworking() {
-    console.log('上传完成，开始发布')
+    wx.showLoading({
+      title: '正在加载',
+    })
     var token = wx.getStorageSync('token')
+    var imgs = this.imageString(this.data.photoModels);
+    var tags = this.tagsString(this.data.tags);
+
+    var datas = {
+      'token': token,
+      'content': this.data.content,
+      'imgs': imgs,
+      'address_info': this.data.address,
+      'contact': this.data.contact,
+    }
+    if (tags != null && tags.length > 0) {
+      datas = {
+        'token': token,
+        'content': this.data.content,
+        'imgs': imgs,
+        'address_info': this.data.address,
+        'contact': this.data.contact,
+        'tags': tags 
+      }
+    }
+    console.log(datas);
     var that = this;
     network({
-      url:api.releaseTopic,
-      data:{
-        token: token
-      }
+      url: api.releaseTopic,
+      data: datas
     }).then((res) => {
       if (res.data.code == 200) {
         wx.showToast({
           title: '发布成功',
           icon: 'none'
         })
-        wx.navigateBack({
-          delta: 1.5,
+        let eventChannel = that.getOpenerEventChannel()
+      // updateAddressListData 这个方法需要上一个页面的支持, 上一个页面在navigateTo方法中的events数据中定义这个方法来接收数据
+        eventChannel.emit('updateTopicList', 1);
+        var timeOut = setTimeout(function () {
+          wx.navigateBack({
+            delta: 1,
+          })
+        }, 1500)
+      }else{
+        wx.hideLoading({
+          success: (res) => {},
+        })
+        wx.showToast({
+          title: '发布失败',
+          icon: 'none'
         })
       }
+    }).catch((res)=>{
+      wx.hideLoading({
+        success: (res) => {},
+      })
+      wx.showToast({
+        title: '发布失败',
+        icon: 'none'
+      })
     })
+  },
+  /**图片字符串 */
+  imageString(photoModels) {
+    var photos = photoModels.filter((model) => {
+      return model.isAdd == false
+    }).filter((model) => {
+      return model.complete == 1
+    })
+    
+    var imgStrs = photos.map((model) => {
+      return model.photoKey
+    })
+    return imgStrs.join(',')
+  },
+  /**标签字符串 */
+  tagsString(tags) {
+    if (tags == null || tags.length == 0) {
+      return null;
+    }else{
+      var tagStrs = tags.map((item) => {
+        return item.id
+      })
+      return tagStrs.join(',');
+    }
   }
 })

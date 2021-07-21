@@ -79,8 +79,17 @@ Page({
 
   /*点击添加跳转到发布页面*/
   addButtonClick: function() {
+    var that = this
     wx.navigateTo({
       url: '../createtopic/createtopic',
+      // 回调传值
+      events: {
+        // 这里用来接收后面页面传递回来的数据
+        updateTopicList: (items) => {
+           // 这里处理数据即可，回调回来的数据
+           that.listNetworking(1);
+        }
+      }
     })
   },
 
