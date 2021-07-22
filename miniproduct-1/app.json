@@ -13,7 +13,8 @@
     "components/citypicker/citypicker"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundColor":"#fff",
+    "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "@navBackgroundColor",
     "navigationBarTitleText": "Weixin",
     "navigationBarTextStyle": "@navTextStyle"
