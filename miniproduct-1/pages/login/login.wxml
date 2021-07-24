@@ -6,7 +6,7 @@
   <!-- <view class='login-button' bindtap='loginBtnClick'>
     <text>微信快捷登录</text>
   </view> -->
-  <button class='login-button' style='width:690rpx;height: 100rpx;' bindgetuserinfo="getUserInfo" open-type="getUserInfo">微信快捷登录</button>
+  <button class='login-button' style='width:690rpx;height: 100rpx;' bindgetuserinfo="getUserInfo" open-type="getUserInfo" loading="{{}}">微信快捷登录</button>
   <view class='agreement-view'>
     <view bindtap='iconClick' wx:if='{{isAgreen==true}}'>
       <i class="weui-icon-success" style="color:#ffa500;width:40rpx;height:40rpx;"></i>

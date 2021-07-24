@@ -11,7 +11,8 @@ Page({
     loading: false,
     hideTextToast: false,
     hideLoading: false,
-    textInfo: null
+    textInfo: null,
+    loading: false,
   },
 
   /**
@@ -70,31 +71,48 @@ Page({
 
   },
   /**登录按钮点击 */
-  loginBtnClick: function() {
-    if (this.data.isAgreen==false) {
-      console.log('=========')
-      this.openTextToast('请阅读并勾选用户协议与隐私协议');
-      return 
-    }
-    wx.login({
-      timeout: 50000,
-      success(res){
-        console.log(res);
-        wx.getUserInfo({
-          success (userinfo) {
-            console.log(userinfo);
-          }
-        })
-      }
-    })
-  },
+  // loginBtnClick: function() {
+  //   if (this.data.loading==true) {
+  //     return 
+  //   }
+  //   if (this.data.isAgreen==false) {
+  //     console.log('=========')
+  //     this.openTextToast('请阅读并勾选用户协议与隐私协议');
+  //     return 
+  //   }
+  //   this.setData({
+  //     loading:true
+  //   })
+  //   var that = this
+  //   wx.login({
+  //     timeout: 50000,
+  //     success(res){
+  //       console.log(res);
+  //       wx.getUserInfo({
+  //         success (userinfo) {
+  //           console.log(userinfo);
+  //         },fail(error) {
+  //           that.setData({
+  //             loading: false
+  //           })
+  //         }
+  //       })
+  //     }
+  //   })
+  // },
   /** 登录按钮点击 */
   getUserInfo:function(){
+    if (this.data.loading==true) {
+      return 
+    }
     if (this.data.isAgreen==false) {
       console.log('=========')
       this.openTextToast('请阅读并勾选用户协议与隐私协议');
       return 
     }
+    this.setData({
+      loading: true
+    })
     let that = this
     //首先查看是否得到用户 的授权
     wx.getSetting({
@@ -128,6 +146,9 @@ Page({
                     },
                     success(userRes) {
                       console.log(userRes);
+                      that.setData({
+                        loading: false
+                      })
                       if (userRes.data.code==200) { // 登录成功，保存用户信息
                         wx.setStorageSync('userInfo', userRes.data.data)
                         wx.setStorageSync('token', userRes.data.data.token)
@@ -145,7 +166,9 @@ Page({
                   })
 
                 },fail(error){
-
+                  that.setData({
+                    loading: false
+                  })
                 }
               })
             }
@@ -159,6 +182,10 @@ Page({
             }
           })
         }
+      },fail(error) {
+        that.setData({
+          loading: false
+        })
       }
     })
   },
