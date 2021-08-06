@@ -11,6 +11,7 @@ Page({
     page: 1,
     size: 10,
     items: [],
+    localItems: [],
     currentTab: 0
   },
 
@@ -221,9 +222,7 @@ Page({
   },
   //  tab切换逻辑
   swichNav: function( e ) {
-
     var that = this;
-
     if( this.data.currentTab === e.target.dataset.current ) {
         return false;
     } else {
@@ -234,9 +233,8 @@ Page({
   },
 
   bindChange: function( e ) {
-
     var that = this;
     that.setData( { currentTab: e.detail.current });
-
   },
+  /**获取定位信息 */
 })

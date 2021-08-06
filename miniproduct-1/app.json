@@ -53,5 +53,10 @@
     "mp-icon": "weui-miniprogram/icon/icon"
   },
   "darkmode": true,
-  "themeLocation": "theme.json"
+  "themeLocation": "theme.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于获取同城的宠物信息"
+    }
+}
 }

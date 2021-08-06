@@ -6,4 +6,5 @@ module.exports = {
   collectionAction:  baseUrl + '/api/v1/collection/', // 点赞
   getQiNiuToken: baseUrl + '/api/v1/qiniu/', // 获取七牛token
   releaseTopic: baseUrl + '/api/v1/releasetopic/', // 发布帖子
+  localTopicList: baseUrl + '/api/v2/addresstopiclist/', // 同城接口
 };
