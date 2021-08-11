@@ -2,7 +2,7 @@
   "backgroundColor":"#fff",
   "backgroundTextStyle":"dark",
   "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "首页",
+  "navigationBarTitleText": "真命天喵",
   "navigationBarTextStyle": "black",
   "enablePullDownRefresh": true,
   "onReachBottomDistance":100,
@@ -10,6 +10,6 @@
     "custom-topicitem": "../../../components/topicitem/topicitem",
     "navigation-bar": "../../../components/navigation-bar/navigation-bar"
 
-  },
-  "navigationStyle": "custom"
+  }
+  
 }
