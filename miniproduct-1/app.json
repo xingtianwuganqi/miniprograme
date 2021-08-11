@@ -10,11 +10,12 @@
     "pages/homeinfo/selectedtags/selectedtags",
     "pages/login/login",
     "components/topicitem/topicitem",
-    "components/citypicker/citypicker"
+    "components/citypicker/citypicker",
+    "pages/homeinfo/searchpage/searchpage"
   ],
   "window": {
-    "backgroundColor":"#fff",
-    "backgroundTextStyle":"dark",
+    "backgroundColor": "#fff",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "@navBackgroundColor",
     "navigationBarTitleText": "Weixin",
     "navigationBarTextStyle": "@navTextStyle"
@@ -58,5 +59,5 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于获取同城的宠物信息"
     }
-}
+  }
 }

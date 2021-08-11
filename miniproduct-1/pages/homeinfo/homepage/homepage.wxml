@@ -1,4 +1,5 @@
 <!--pages/homepage/homepage.wxml-->
+<navigation-bar bind:searchBtnClick='seachBtnClick'></navigation-bar>
 <view>
 <view class="swiper-tab">
     <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">推荐</view>

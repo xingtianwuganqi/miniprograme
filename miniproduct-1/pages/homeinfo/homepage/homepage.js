@@ -8,6 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 组件参数设置，传递到组件
+    defaultData: {
+      title: "我的主页", // 导航栏标题
+    },
     page: 1,
     size: 10,
     items: [],
@@ -237,4 +241,10 @@ Page({
     that.setData( { currentTab: e.detail.current });
   },
   /**获取定位信息 */
+
+
+  /**点击搜索 */
+  seachBtnClick: function(e) {
+    console.log('searchBtnClick')
+  }
 })
