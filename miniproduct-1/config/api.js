@@ -7,4 +7,6 @@ module.exports = {
   getQiNiuToken: baseUrl + '/api/v1/qiniu/', // 获取七牛token
   releaseTopic: baseUrl + '/api/v1/releasetopic/', // 发布帖子
   localTopicList: baseUrl + '/api/v2/addresstopiclist/', // 同城接口
+  searchKeyWords: baseUrl + '/api/v1/searchkeywords/', // 搜索关键字
+  searchAction: baseUrl + '/api/v1/search/', // 搜索
 };

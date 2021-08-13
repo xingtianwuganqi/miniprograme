@@ -53,6 +53,12 @@
           "pathName": "pages/homepage/homepage",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/homeinfo/searchpage/searchpage",
+          "pathName": "pages/homeinfo/searchpage/searchpage",
+          "query": "",
+          "scene": null
         }
       ]
     }

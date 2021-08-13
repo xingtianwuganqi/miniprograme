@@ -1,5 +1,8 @@
 // pages/homepage/homepage.js
 // const network = require('../../../config/network.js');
+/*
+// "navigationStyle": "custom"
+*/
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
 const app = getApp().globalData;
@@ -246,5 +249,11 @@ Page({
   /**点击搜索 */
   seachBtnClick: function(e) {
     console.log('searchBtnClick')
+  },
+  /**搜索view点击 */
+  searchViewClick: function(e) {
+    wx.navigateTo({
+      url: '../searchpage/searchpage',
+    })
   }
 })

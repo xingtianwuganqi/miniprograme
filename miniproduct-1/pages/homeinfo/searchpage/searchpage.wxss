@@ -1,1 +1,84 @@
 /* pages/homeinfo/searchpage/searchpage.wxss */
+page{
+  background-color: white;
+}
+.backview{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchback {
+  width: 100%;
+  height: 100rpx;
+  background-color: white;
+  display: flex;
+  flex-grow: 0;
+}
+
+.searchview{
+  background-color: #f5f5f5;
+  margin: auto;
+  height: 80rpx;
+  width: 690rpx;
+  border-radius: 40rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666;
+  text-align: left;
+}
+
+.searchtext {
+  text-align: left;
+  padding-left: 20rpx;
+}
+
+.keywords-view{
+  width: 100%;
+  flex-grow: 1;
+  background-color: white;
+}
+
+.tag-content{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 30rpx;
+  padding-top: 30rpx;
+}
+
+.tags {
+  background-color: #fff;
+  width: max-content;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  border-radius: 20rpx;
+  border-style:solid;
+  border-color:#EDEDED;
+  border-width:2rpx;
+  margin-right: 20rpx;
+  font-size: 32rpx;
+  color:#666666;
+}
+
+.scroll-back{
+  position: relative;
+  background-color: white;
+  flex-grow: 1;
+}
+
+.scroll-page{
+  left: 0rpx;
+  right: 0rpx;
+  top: 0rpx;
+  bottom: 0rpx;
+  background-color: white;
+  position: absolute;
+}
