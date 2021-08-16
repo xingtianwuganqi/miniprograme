@@ -1,0 +1,50 @@
+var loadThumbImg = function (imgUrl) {
+  if (imgUrl.length == 0) {
+    return null
+  }
+  if (imgUrl.indexOf('http') > 0) {
+    return imgUrl
+  }else{
+    return 'http://img.rxswift.cn/' + imgUrl + '?imageView2/0/q/20'
+  }
+}
+
+var loadFourImg = function(imgUrl) {
+  if (imgUrl.length == 0) {
+    return 
+  }
+  if (imgUrl.indexOf('http') > 0) {
+    return imgUrl
+  }else{
+    return 'http://img.rxswift.cn/' + imgUrl + '?imageView2/0/q/40'
+  }
+}
+
+var loadSevenImg = function(imgUrl) {
+  if (imgUrl.length == 0) {
+    return 
+  }
+  if (imgUrl.indexOf('http') > 0) {
+    return imgUrl
+  }else{
+    return 'http://img.rxswift.cn/' + imgUrl + '?imageView2/0/q/75'
+  }
+}
+
+var loadOriginImg = function(imgUrl) {
+  if (imgUrl.length == 0) {
+    return 
+  }
+  if (imgUrl.indexOf('http') > 0) {
+    return imgUrl
+  }else{
+    return 'http://img.rxswift.cn/' + imgUrl
+  }
+}
+
+module.exports = {
+  loadThumbImg: loadThumbImg,
+  loadFourImg: loadFourImg,
+  loadSevenImg: loadSevenImg,
+  loadOriginImg: loadOriginImg
+};

@@ -1,9 +1,10 @@
 <!--components/topicitem/topicitem.wxml-->
+<wxs src="./../../utils/common.wxs" module="common" />
 <view class='scroll-cell' bindtap="handleToTopicDetail" data-id="{{item.topic_id}}">
     <!-- userinfo -->
       <view class='userInfo' >
         <view wx:if="{{item.userInfo.avator.length>0}}">
-          <image class='head-img' src="http://img.rxswift.cn/{{item.userInfo.avator}}"></image>
+          <image class='head-img' src="{{common.loadThumbImg(item.userInfo.avator)}}"></image>
         </view>
         <view class='empty-head' wx:else>
         </view>
@@ -33,16 +34,16 @@
         <view class='img-img' wx:if="{{item.imgs.length >= 4}}">
           <view class='img-four-back'>
             <view class='img-four'>
-              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+              <image class='img-show' src='{{common.loadFourImg(item.imgs[0])}}' mode="aspectFill"></image>
               <view class='img-coloum-line'></view>
-              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[1]}}' mode="aspectFill"></image>
+              <image class='img-show' src='{{common.loadFourImg(item.imgs[1])}}' mode="aspectFill"></image>
             </view>
             <view class='img-row-line'>
             </view>
             <view class='img-four'>
-              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[2]}}' mode="aspectFill"></image>
+              <image class='img-show' src='{{common.loadFourImg(item.imgs[2])}}' mode="aspectFill"></image>
               <view class='img-coloum-line'></view>
-              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[3]}}' mode="aspectFill"></image>
+              <image class='img-show' src='{{common.loadFourImg(item.imgs[3])}}' mode="aspectFill"></image>
             </view>
           </view>   
         </view>
@@ -50,13 +51,13 @@
         <view class='img-img' wx:elif='{{item.imgs.length == 3}}'>
           <view class='image-three-back'>
             <view class='image-left'>
-              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+              <image class='img-show' src='{{common.loadFourImg(item.imgs[0])}}' mode="aspectFill"></image>
             </view>
             <view class='img-thr-coloum-line'></view>
             <view class='image-right'>
-              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[1]}}' mode="aspectFill"></image>
+              <image class='img-show' src='{{common.loadFourImg(item.imgs[1])}}' mode="aspectFill"></image>
               <view class='img-thr-row-line'></view>
-              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[2]}}' mode="aspectFill"></image>
+              <image class='img-show' src='{{common.loadFourImg(item.imgs[2])}}' mode="aspectFill"></image>
             </view>
           </view>
         </view>
@@ -64,17 +65,21 @@
         <view class='img-img' wx:elif='{{item.imgs.length == 2}}'>
           <view class='image-three-back'>
             <view class='image-left'>
-              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+              <image class='img-show' src='{{common.loadFourImg(item.imgs[0])}}' mode="aspectFill"></image>
             </view>
             <view class='img-thr-coloum-line'></view>
             <view class='image-left'>
-              <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[1]}}' mode="aspectFill"></image>
+              <image class='img-show' src='{{common.loadFourImg(item.imgs[1])}}' mode="aspectFill"></image>
             </view>
           </view>
         </view>
         <!-- 一张图 -->
+        <view class='img-img' wx:elif='{{item.imgs.length == 1}}'>
+          <image class='img-show' src='{{common.loadFourImg(item.imgs[0])}}' mode="aspectFill"></image>
+        </view>
+        <!-- 没有图 -->
         <view class='img-img' wx:else>
-          <image class='img-show' src='http://img.rxswift.cn/{{item.imgs[0]}}' mode="aspectFill"></image>
+
         </view>
       </view>
       <!-- 地址区 -->

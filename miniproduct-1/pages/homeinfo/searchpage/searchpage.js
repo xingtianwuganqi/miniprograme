@@ -66,7 +66,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.onBottom()
+    // this.onBottom()
   },
 
   /**
@@ -75,12 +75,12 @@ Page({
   onShareAppMessage: function () {
 
   },
- //触底响应函数
-  onBottom(){
-    if (this.data.isSearching) {
-      this.searchNetworking(this.data.searchKeyword,this.data.page)
-    }
-  },
+//  //触底响应函数
+//   onBottom(){
+//     if (this.data.isSearching) {
+//       this.searchNetworking(this.data.searchKeyword,this.data.page)
+//     }
+//   },
   /**搜索关键字 */
   keywordsNetworking: function() {
     var that = this

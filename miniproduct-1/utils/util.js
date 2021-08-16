@@ -25,6 +25,7 @@ function randomString(len) {
   return pwd;
 }
 
+
 module.exports = {
   formatTime: formatTime,
   randomString: randomString()
