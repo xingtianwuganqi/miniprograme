@@ -3,7 +3,7 @@
   <view class='searchback'>
     <view class='searchview' bindtap="searchViewClick">
       <image src='../../../icons/icon_wx_search.png' style="height:28rpx;width:28rpx; padding-left: 30rpx;"></image>
-      <input class="searchtext"  type="text" confirm-type="search" placeholder="输入关键词！" bindinput='searchInput' bindconfirm='searchBegin' ></input>
+      <input class="searchtext"  type="text" confirm-type="search" placeholder="输入关键词！" bindinput='searchInput' bindconfirm='searchBegin' value="{{searchKeyword.length > 0 ? searchKeyword : null}}" ></input>
     </view>
     
   </view>
@@ -15,7 +15,7 @@
       </view>
   </view>
   <view class='scroll-back' wx:else>
-    <scroll-view scroll-y class='scroll-page'>
+    <scroll-view scroll-y class='scroll-page' bindscrolltolower="loadMore">
       <!-- 使用组件 -->
       <view wx:for="{{items}}" wx:item='item' wx:key='key'>
         <custom-topicitem item="{{item}}" bind:likeChanged='likeMarkAction' bind:collectChanged= 'collectMarkAcion'></custom-topicitem>

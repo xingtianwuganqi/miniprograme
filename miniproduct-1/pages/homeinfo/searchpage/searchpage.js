@@ -15,7 +15,9 @@ Page({
     page: 1,
     size: 10,
     items: null,
-    searchKeyword: ''
+    searchKeyword: '',
+    isLoadEnd: false,
+    isEmpty: false
   },
 
   /**
@@ -97,11 +99,20 @@ Page({
   keywordClick: function(event) {
     var keyword = event.currentTarget.dataset.id
     this.searchNetworking(keyword,1)
+    this.setData({
+      searchKeyword: keyword
+    })
   },
   keywordSearch(text){
     this.searchNetworking(text,1)
+    this.setData({
+      isLoadEnd: false
+    })
   },
   searchNetworking(keyword,page) {
+    if (this.data.isLoadEnd==true) {
+      return 
+    }
     this.data.page = page
     var that = this
     var data = {
@@ -110,18 +121,46 @@ Page({
       'size': that.data.size,
     }
     console.log(keyword,data)
+    wx.showLoading({
+      title: '正在加载',
+    })
     network({
       url: api.searchAction,
       data: data
     }).then(res => {
       console.log(res.data)
+      wx.hideLoading()
       if (res.data.code == 200) {
-        that.setData({
-          isSearching: true,
-          items: res.data.data,
-        })
-        that.data.page += 1
+        if (page == 1) {
+          if (res.data.data.length > 0) {
+            that.setData({
+              isSearching: true,
+              items: res.data.data,
+            })
+            that.data.page += 1
+
+          }else{
+            that.setData({
+              isEmpty: true
+            })
+          }
+        }else{
+          if (res.data.data.length > 0) {
+            var orginData = that.data.items;
+            that.setData({
+              isSearching: true,
+              items: orginData.concat(res.data.data)
+            })
+            that.data.page += 1
+
+          }else{
+            that.setData({
+              isLoadEnd: true
+            })
+          }
+        }
       }
+      
     })
   },
   /**开始输入 */
@@ -129,21 +168,6 @@ Page({
     this.setData({
       isSearching: false
     })
-    var value = e.detail.value
-    var pos = e.detail.cursor
-    var left
-    if (pos !== -1) {
-      // 光标在中间
-      left = e.detail.value.slice(0, pos)
-      // 计算光标的位置
-      pos = left.replace(/11/g, '2').length
-    }
-
-    // 直接返回对象，可以对输入进行过滤处理，同时可以控制光标的位置
-    return {
-      value: value.replace(/11/g, '2'),
-      cursor: pos
-    }
   },
   /**点击搜索 */
   searchBegin: function(event) {
@@ -151,5 +175,14 @@ Page({
     console.log(event.detail.value)
     this.data.searchKeyword = keyword
     this.keywordSearch(keyword)
+    this.setData({
+      isLoadEnd: false
+    })
+  },
+  /**加载更多 */
+  loadMore: function() {
+    if (this.data.isSearching) {
+      this.searchNetworking(this.data.searchKeyword,this.data.page)
+    }
   }
 })

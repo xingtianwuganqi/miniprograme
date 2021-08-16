@@ -7,6 +7,6 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTitleText": "搜索",
   "navigationBarTextStyle": "black",
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "onReachBottomDistance":100
 }
