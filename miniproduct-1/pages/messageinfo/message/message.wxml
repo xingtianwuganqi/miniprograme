@@ -6,6 +6,9 @@
       </image>
       <text class="text-item">{{item.title}}
       </text>
+      <view class='empty-view'>
+      </view>
+      <image class='right-icon' src='../../../icons/icon_center_allin.png'></image>
     </view>
     <view class='line-item'>
     </view>

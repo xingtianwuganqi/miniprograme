@@ -1,0 +1,10 @@
+{
+  "backgroundColor":"#fff",
+  "backgroundTextStyle":"dark",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "评论",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": false,
+  "onReachBottomDistance":100,
+  "usingComponents": {}
+}

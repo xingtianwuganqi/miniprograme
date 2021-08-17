@@ -1,0 +1,11 @@
+<!--pages/comment/commentpage.wxml-->
+<view class='comment-back'>
+  <scroll-view scroll-y class='comment-scroll'>
+    <view wx:for='{{items}}' wx:item='item' wx:key='commentKey'>
+      <text class='comment-item'>{{item.content}}</text>
+    </view>
+  </scroll-view>
+  <view class='input-back'>
+    
+  </view>
+</view>

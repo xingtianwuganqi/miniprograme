@@ -1,0 +1,31 @@
+/* pages/comment/commentpage.wxss */
+page{
+  background-color: white;
+}
+.comment-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment-scroll{
+  width: 100%;
+  flex-grow: 1;
+  background-color: blue;
+}
+
+.comment-item{
+  text-align: center;
+}
+
+.input-back {
+  flex-grow: 0;
+  width: 100%;
+  height: 100rpx;
+  background-color: red;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+

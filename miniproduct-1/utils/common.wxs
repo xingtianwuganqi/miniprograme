@@ -42,6 +42,17 @@ var loadOriginImg = function(imgUrl) {
   }
 }
 
+var timeInfo = function(timeStr) {
+  /**2016-09-09T17:02:37.227 */
+  if (timeStr.length == 0) {
+    return 
+  }
+  var timeArr = timeStr.split("T");
+  var d = timeArr[0].split("-");
+  var t = timeArr[1].split(":");
+  return new Date(d[0], d[1] - 1, d[2], t[0], t[1], t[2]);
+}
+
 module.exports = {
   loadThumbImg: loadThumbImg,
   loadFourImg: loadFourImg,

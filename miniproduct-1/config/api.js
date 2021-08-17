@@ -9,4 +9,8 @@ module.exports = {
   localTopicList: baseUrl + '/api/v2/addresstopiclist/', // 同城接口
   searchKeyWords: baseUrl + '/api/v1/searchkeywords/', // 搜索关键字
   searchAction: baseUrl + '/api/v1/search/', // 搜索
+  commentList: baseUrl + '/api/v1/commentlist/', // 评论列表
+  commentAction: baseUrl + '/api/v1/commentaction/', // 评论
+  replyComment: baseUrl + '/api/v1/replycomment/', // 回复
+  loadMoreReply: baseUrl + '/api/v1/replypageinfo/', // 更多回复 
 };

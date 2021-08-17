@@ -59,6 +59,12 @@
           "pathName": "pages/homeinfo/searchpage/searchpage",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/comment/commentpage",
+          "pathName": "pages/comment/commentpage",
+          "query": "topic_id=11&topic_type=1",
+          "scene": null
         }
       ]
     }

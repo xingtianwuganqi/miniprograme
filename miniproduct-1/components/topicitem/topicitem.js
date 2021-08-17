@@ -116,8 +116,16 @@ Component({
       mark: mark
     }
     this.triggerEvent('collectChanged',event,{})
-  }
-
+  },
+  /**评论点击 */
+  commentButtonClick(event) {
+    var topic_id = event.currentTarget.dataset.id
+    var dic = {
+      topic: topic_id,
+    }
+    console.log(dic)
+    this.triggerEvent('commentClick',dic,{})
+  },
 
   }
 })
