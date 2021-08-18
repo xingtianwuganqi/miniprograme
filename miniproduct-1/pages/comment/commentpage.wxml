@@ -1,11 +1,35 @@
 <!--pages/comment/commentpage.wxml-->
+<wxs src="../../utils/common.wxs" module="common" />
 <view class='comment-back'>
   <scroll-view scroll-y class='comment-scroll'>
     <view wx:for='{{items}}' wx:item='item' wx:key='commentKey'>
-      <text class='comment-item'>{{item.content}}</text>
+      <view class='comment-content'>
+        <view class='user-head'>
+          <image class='head-img' src='{{common.loadThumbImg(item.userInfo.avator)}}'></image>
+        </view>
+        <view class='comment-info'>
+          <view class='user-name'>{{item.userInfo.username}}</view>
+          <view class='comment-text'>{{item.content}}</view>
+          <view class='comment-time'>{{item.create_time}}</view>
+          <view wx:for='{{item.replys}}' wx:for-item="reply" wx:key='replyKey'>
+            <view class='reply-content'>
+              <view class='reply-head'>
+                <image class='reply-img' src='{{common.loadThumbImg(reply.fromInfo.avator)}}'></image>
+              </view>
+              <view class='comment-info'>
+                <view class='user-name'>{{reply.fromInfo.username + " 回复 " + reply.toInfo.username}}</view>
+                <view class='comment-text'>{{reply.content}}</view>
+                <view class='comment-time'>{{reply.create_time}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='bottom-line'></view>
+        </view>
+        
+      </view>
     </view>
   </scroll-view>
   <view class='input-back'>
-    
+    <input class='input-view' placeholder="请输入评论"></input>
   </view>
 </view>
