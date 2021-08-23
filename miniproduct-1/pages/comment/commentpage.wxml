@@ -1,7 +1,7 @@
 <!--pages/comment/commentpage.wxml-->
 <wxs src="../../utils/common.wxs" module="common" />
 <view class='comment-back'>
-  <scroll-view scroll-y class='comment-scroll'>
+  <scroll-view scroll-y class='comment-scroll' style="padding-bottom: {{bottomHeight}}rpx;">
     <view wx:for='{{items}}' wx:item='item' wx:key='commentKey'>
       <view class='comment-content'>
         <view class='user-head'>
@@ -10,7 +10,10 @@
         <view class='comment-info'>
           <view class='user-name'>{{item.userInfo.username}}</view>
           <view class='comment-text'>{{item.content}}</view>
-          <view class='comment-time'>{{item.create_time}}</view>
+          <view class='comment-bottom'>
+            <view class='comment-time'>{{item.create_time}}</view>
+            <view class='reply-btn' bindtap="commentBtnClick" data-id='{{item}}'>回复</view>
+          </view>
           <view wx:for='{{item.replys}}' wx:for-item="reply" wx:key='replyKey'>
             <view class='reply-content'>
               <view class='reply-head'>
@@ -19,9 +22,15 @@
               <view class='comment-info'>
                 <view class='user-name'>{{reply.fromInfo.username + " 回复 " + reply.toInfo.username}}</view>
                 <view class='comment-text'>{{reply.content}}</view>
-                <view class='comment-time'>{{reply.create_time}}</view>
+                <view class='comment-bottom'>
+                  <view class='comment-time'>{{reply.create_time}}</view>
+                  <view class='reply-btn' bindtap="replyBtnClick" data-id='{{reply}}'>回复</view>
+                </view>
               </view>
             </view>
+          </view>
+          <view wx:if="{{item.isOpen==false}}">
+            <view class='more-view' bindtap="loadMoreReply" data-id='{{item}}'>查看更多回复 ></view>
           </view>
           <view class='bottom-line'></view>
         </view>
@@ -29,7 +38,7 @@
       </view>
     </view>
   </scroll-view>
-  <view class='input-back'>
-    <input class='input-view' placeholder="请输入评论"></input>
+  <view class='input-back' style="height: {{bottomHeight}}rpx;">
+    <input class='input-view' placeholder="{{inputPlaceholder}}" type="text" confirm-type="search" bindinput='inputChange' bindconfirm='confirmClick' bindblur	='inputDisappear' focus="{{isFocus}}"></input>
   </view>
 </view>

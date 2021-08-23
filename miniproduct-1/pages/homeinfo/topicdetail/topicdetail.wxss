@@ -19,7 +19,7 @@ page{
 
 .bottom-view{
   background-color: white;
-  height: 200rpx;
+  /* height: 200rpx; */
 }
 
 .userInfo{

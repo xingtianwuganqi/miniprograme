@@ -5,8 +5,8 @@ page{
 .comment-back {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
 }
 
 .comment-scroll{
@@ -22,7 +22,6 @@ page{
 .input-back {
   flex-grow: 0;
   width: 100%;
-  height: 100rpx;
   background-color: #f5f5f5;
   position: fixed;
   left: 0;
@@ -30,7 +29,7 @@ page{
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .input-view {
@@ -38,6 +37,7 @@ page{
   background-color: white;
   height: 80rpx;
   width: 690rpx;
+  margin-top: 10rpx;
 }
 
 .comment-content{
@@ -75,12 +75,27 @@ page{
   color: #333;
   padding-top: 10rpx;
 }
+.comment-bottom{
+  display: flex;
+  flex-direction: row;
+}
 
 .comment-time {
+  padding-top: 10rpx;
+  padding-bottom: 5rpx;
   text-align: start;
   font-size: 24rpx;
   color: #999999;
+}
+
+.reply-btn{
   padding-top: 10rpx;
+  padding-bottom: 5rpx;
+  text-align: start;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  font-size: 24rpx;
+  color: #999;
 }
 
 .reply-content{
@@ -102,4 +117,13 @@ page{
   height: 2rpx;
   width: 620rpx;
   background-color: #f5f5f5;
+}
+
+.more-view {
+  text-align: center;
+  color: #4169E1;
+  width: 100%;
+  height: 60rpx;
+  font-size: 28rpx;
+  padding-top: 20rpx;
 }

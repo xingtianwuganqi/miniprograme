@@ -20,6 +20,15 @@ App({
     that.globalData.menuBotton = menuButtonInfo.top - systemInfo.statusBarHeight;
     that.globalData.menuHeight = menuButtonInfo.height;
 
+    // 根据 屏幕高度 进行判断
+    if (systemInfo.screenHeight - systemInfo.windowHeight - systemInfo.statusBarHeight - 32 > 72) {
+        that.globalData.isFullScreen = true
+    }
+    // 根据手机型号匹配
+    if (systemInfo.model.search('iPhone X') != -1) {
+        that.globalData.isFullScreen = true
+    }
+
     // 登录
     wx.login({
       success: res => {
@@ -65,6 +74,7 @@ App({
     menuButtonInfo: {},
     searchMarginTop: 0, // 搜索框上边距
     searchWidth: 0, // 搜索框宽度
-    searchHeight: 0
+    searchHeight: 0,
+    isFullScreen: false,
   }
 })

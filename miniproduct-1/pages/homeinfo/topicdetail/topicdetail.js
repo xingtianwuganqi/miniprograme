@@ -6,13 +6,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    topicInfo: null
+    topicInfo: null,
+    bottomHeight: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (app.isFullScreen) {
+      this.setData({
+        bottomHeight: 210
+      })
+    }else{
+      this.setData({
+        bottomHeight: 180
+      })
+    }
     console.log(options);
     var topic_id = options.topic_id;
     this.topicDetailNetworking(topic_id);

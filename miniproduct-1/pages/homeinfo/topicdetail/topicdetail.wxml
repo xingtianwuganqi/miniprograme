@@ -33,10 +33,10 @@
       <!-- </view> -->
     </view>
   </scroll-view>
-  <view class='bottom-view' style="position:fixed; bottom:0;width: 750rpx;">
+  <view class='bottom-view' style="position:fixed; bottom:0;width: 750rpx;height: {{bottomHeight}}rpx;">
   <!-- 获取联系方式 -->
     <view class='contact-view'>
-      <button class="mini-btn" style="width:690rpx;color:#ffffff;background-color:#ffa500;" type="default" >点击获取联系方式</button>
+      <button class="mini-btn" style="width:690rpx;color:#ffffff;background-color:#ffa500;height: 85rpx;" type="default" >点击获取联系方式</button>
     </view>
     <!-- 评论区 -->
     <view class='interaction'>
