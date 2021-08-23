@@ -226,5 +226,16 @@ Page({
         })
       }
     })
+  },
+  /** 发表评论 */
+  commentAction() {
+    /**
+     * token
+     * topic_id
+     * content
+     * topic_type
+     * from_uid
+     * to_uid
+     */
   }
 })
