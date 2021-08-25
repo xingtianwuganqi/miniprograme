@@ -39,7 +39,7 @@
     </view>
   </scroll-view>
   <view class='input-back' style="height: {{bottomHeight}}rpx;">
-    <input class='input-view' placeholder="{{inputPlaceholder}}" type="text" confirm-type="search" bindinput='inputChange' bindconfirm='confirmClick' bindblur	='inputDisappear' focus="{{isFocus}}"></input>
-    <view class='send-button'>发送</view>
+    <input class='input-view' placeholder="{{inputPlaceholder}}" type="text" confirm-type="send" bindinput='inputChange' bindconfirm='confirmClick' bindblur	='inputDisappear' focus="{{isFocus}}" value="{{inputText}}"></input>
+    <view class='send-button' bindtap='sendButtonClick'>发送</view>
   </view>
 </view>

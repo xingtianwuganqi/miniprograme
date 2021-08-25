@@ -1,6 +1,8 @@
 // pages/comment/commentpage.js
+import { commentList, replyComment } from '../../config/api.js';
 import network from '../../config/network.js'
 const api = require('../../config/api.js')
+const util = require('../../utils/util.js')
 const app = getApp().globalData;
 Page({
 
@@ -10,14 +12,18 @@ Page({
   data: {
     topic_id: null,
     topic_type: null,
+    topic_uid: null,
     page: 1,
     size: 10,
     items: [],
     bottomHeight: 0,
     inputPlaceholder: "请输入评论",
-    inputType: 1, // 1.回复帖子，2.回复其他人
+    inputType: 1, // 1.回复帖子，2.回复评论，3.回复回复
     isFocus: false,
-    isLoadEnd: false
+    isLoadEnd: false,
+    currentCommentInfo: null,
+    currentReplyInfo: null,
+    inputText: '',// 输入时的文字
   },
 
   /**
@@ -36,8 +42,10 @@ Page({
     }
     var topic_id = options.topic_id
     var topic_type = options.topic_type
+    var topic_uid = options.topic_uid
     this.data.topic_id = topic_id
     this.data.topic_type = topic_type
+    this.data.topic_uid = topic_uid
     this.commentListNetworking(1)
   },
 
@@ -147,44 +155,75 @@ Page({
   },
   /**点击评论的回复按钮 */
   commentBtnClick:function(e) {
+    util.checkIsLogin() // 检测登录
     var item = e.currentTarget.dataset.id
     this.setData({
       inputType: 2,
       inputPlaceholder:"回复" + item.userInfo.username,
-      isFocus: true
+      isFocus: true,
+      currentCommentInfo: item,
     })
+    // reply_id 与 comment_id 传同一个id
   },
   /**点击回复的回复按钮 */
   replyBtnClick: function(e) {
-    var item = e.currentTarget.dataset.id
+    util.checkIsLogin()
+    // var comment = e.currentTarget.dataset.item
+    var reply = e.currentTarget.dataset.id
+    // console.log('comment',comment)
+    console.log('reply',reply)
     this.setData({
-      inputType: 2,
-      inputPlaceholder: '回复'+item.fromInfo.username,
-      isFocus: true
+      inputType: 3,
+      inputPlaceholder: '回复'+reply.fromInfo.username,
+      isFocus: true,
+      // currentCommentInfo: comment,
+      currentReplyInfo: reply
     })
+    // reply_id 与 comment_id 传不同的id
   },
   /**开始输入 */
   inputChange: function(e) {
+    var text = e.detail.value
     this.setData({
-      isSearching: false
+      isSearching: false,
+      inputText: text
     })
   },
-  /**点击搜索按钮 */
+  /**点击发送按钮 */
   confirmClick: function(event) {
-    var keyword = event.detail.value
-    console.log(event.detail.value)
-    this.data.searchKeyword = keyword
-    this.keywordSearch(keyword)
-    this.setData({
-      isLoadEnd: false
-    })
+    util.checkIsLogin() // 检测登录
+    // 获取输入的文本
+    var text = event.detail.value
+    if (text.length == 0) {
+      wx.showToast({
+        title: '请输入内容',
+        icon:'none'
+      })
+      return 
+    }
+    if (this.data.inputType == 1) { // 发表评论，回复的帖子
+      this.commentAction(text)
+    }else if (this.data.inputType == 2) { // 发表的回复，回复的评论
+      var comment_id = this.data.currentCommentInfo.comment_id
+      var reply_id = comment_id
+      var to_uid = this.data.currentCommentInfo.userInfo.id
+      this.commentReplyNetworking(text,comment_id,reply_id,to_uid)
+    }else if (this.data.inputType == 3) {
+      var comment_id = this.data.currentReplyInfo.comment_id
+      var reply_id = this.data.currentReplyInfo.id
+      var to_uid = this.data.currentReplyInfo.fromInfo.id
+      this.commentReplyNetworking(text,comment_id,reply_id,to_uid)
+    }
   },
   /**输入框失去焦点 */
   inputDisappear:function(event) {
     this.setData({
       inputType: 1,
       inputPlaceholder:"请输入评论",
-      isFocus: false
+      isFocus: false,
+      inputText: '',
+      currentCommentInfo:null,
+      currentReplyInfo:null,
     })
   },
   /**加载更多回复 */
@@ -227,8 +266,38 @@ Page({
       }
     })
   },
+  /**发送按钮点击 */
+  sendButtonClick(event){
+    // 获取输入的文本
+    var text = this.data.inputText
+    if (text.length == 0) {
+       wx.showToast({
+        title: '请输入内容',
+        icon:'none'
+      })
+      return 
+    }
+    
+    if (this.data.inputType == 1) { // 发表评论，回复的帖子
+      this.commentAction(text)
+    }else if (this.data.inputType == 2) { // 发表的回复，回复的评论
+      var comment_id = this.data.currentCommentInfo.comment_id
+      var reply_id = comment_id
+      var to_uid = this.data.currentCommentInfo.userInfo.id
+      this.commentReplyNetworking(text,comment_id,reply_id,to_uid)
+    }else if (this.data.inputType == 3) {
+      var comment_id = this.data.currentReplyInfo.comment_id
+      var reply_id = this.data.currentReplyInfo.id
+      var to_uid = this.data.currentReplyInfo.fromInfo.id
+      this.commentReplyNetworking(text,comment_id,reply_id)
+    }
+  },
   /** 发表评论 */
-  commentAction() {
+  commentAction(text) {
+    var that = this
+    var token = wx.getStorageSync('token')
+    var userInfo = wx.getStorageSync('userInfo')
+    var from_uid = userInfo.id
     /**
      * token
      * topic_id
@@ -237,5 +306,81 @@ Page({
      * from_uid
      * to_uid
      */
+    var param = {
+      'token': token,
+      'topic_id': that.data.topic_id,
+      'topic_type': that.data.topic_type,// topic_type 回复类型 1.帖子回复，2 秀宠回复
+      'content': text,
+      'from_uid': from_uid,
+      'to_uid': that.data.topic_uid
+    }
+    network({
+      url: api.commentAction,
+      data: param
+    }).then(res=>{
+      console.log('发表评论')
+      console.log(res.data)
+      if (res.data.code == 200) { // 回复成功，将数据加到数组顶部
+        console.log(res.data.data)
+        that.data.items.unshift(res.data.data)
+        that.setData({
+          items: that.data.items
+        })
+      }
+    })
+  },
+
+  /**发表回复的网络请求 */
+  commentReplyNetworking(text,comment_id,reply_id,to_uid) {
+    /**
+     * token
+     * content
+     * comment_id
+     * reply_id
+     * reply_type
+     * to_uid
+     * from_uid
+     */
+    var that = this
+    var token = wx.getStorageSync('token')
+    var from_uid = wx.getStorageSync('userInfo').id
+    var comment_id = comment_id
+    var reply_id = reply_id
+    var to_uid = to_uid
+    var reply_type = 1
+    var param = {
+      'token': token,
+      'content': text,
+      'comment_id': comment_id,
+      'reply_id': reply_id,
+      'reply_type': reply_type,
+      'to_uid': to_uid,
+      'from_uid': from_uid
+    }
+    console.log('回复param')
+    console.log(param)
+    network({
+      url:api.replyComment,
+      data: param
+    }).then(res=>{
+      console.log(res.data)
+      if (res.data.code == 200) { // 回复成功，将数据插入到replys
+        var newItems = that.data.items.map(model=>{
+          if (model.comment_id == res.data.data.comment_id) {
+            model.replys.unshift(res.data.data)
+          }
+          return model
+        })
+        that.setData({
+          items: newItems
+        })
+        
+      }else{
+        wx.showToast({
+          title: '回复失败',
+          icon: 'none'
+        })
+      }
+    })
   }
 })

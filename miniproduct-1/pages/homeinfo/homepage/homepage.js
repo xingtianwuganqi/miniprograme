@@ -229,10 +229,12 @@ Page({
   },
   /**点击了评论按钮 */
   commentBtnClick(e) {
-    var id = e.detail.topic
+    var item = e.detail.topic
+    var id = item.topic_id
+    var topic_uid = item.userInfo.id
     console.log('id 的值为',id)
     wx.navigateTo({
-      url: '../../comment/commentpage?topic_id='+id+'&topic_type='+'1',
+      url: '../../comment/commentpage?topic_id='+id+'&topic_type='+'1'+'&topic_uid='+topic_uid,
     })
   },
   //  tab切换逻辑

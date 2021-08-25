@@ -119,9 +119,9 @@ Component({
   },
   /**评论点击 */
   commentButtonClick(event) {
-    var topic_id = event.currentTarget.dataset.id
+    var topic = event.currentTarget.dataset.id
     var dic = {
-      topic: topic_id,
+      topic: topic,
     }
     console.log(dic)
     this.triggerEvent('commentClick',dic,{})

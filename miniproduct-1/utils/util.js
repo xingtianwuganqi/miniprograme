@@ -25,8 +25,21 @@ function randomString(len) {
   return pwd;
 }
 
+const checkIsLogin = function() {
+  var token = wx.getStorageSync('token')
+  if (token.length > 0) {
+    
+  }else{
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
+    return 
+  }
+}
+
 
 module.exports = {
   formatTime: formatTime,
-  randomString: randomString()
+  randomString: randomString(),
+  checkIsLogin: checkIsLogin
 }
