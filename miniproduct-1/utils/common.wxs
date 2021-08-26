@@ -1,5 +1,5 @@
 var loadThumbImg = function (imgUrl) {
-  if (imgUrl.length == 0) {
+  if (imgUrl == null || imgUrl.length == 0) {
     return null
   }
   if (imgUrl.indexOf('http') > 0) {

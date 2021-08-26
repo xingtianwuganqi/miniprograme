@@ -65,6 +65,12 @@
           "pathName": "pages/comment/commentpage",
           "query": "topic_id=11&topic_type=1",
           "scene": null
+        },
+        {
+          "name": "pages/messageinfo/messageinfo/messageinfo",
+          "pathName": "pages/messageinfo/messageinfo/messageinfo",
+          "query": "msg_type=3",
+          "scene": null
         }
       ]
     }

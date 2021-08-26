@@ -1,7 +1,7 @@
 <!--pages/message/message.wxml-->
 <!-- <view class='container'> -->
   <view class="content" wx:for="{{list}}" wx:item='item' wx:key='key'>
-    <view class='content-item'> 
+    <view class='content-item' bindtap="messageClick" data-id='{{item.id}}'> 
       <image src='{{item.img}}' class='img-item'>
       </image>
       <text class="text-item">{{item.title}}

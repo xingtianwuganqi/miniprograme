@@ -13,4 +13,7 @@ module.exports = {
   commentAction: baseUrl + '/api/v1/commentaction/', // 评论
   replyComment: baseUrl + '/api/v1/replycomment/', // 回复
   loadMoreReply: baseUrl + '/api/v1/replypageinfo/', // 更多回复 
+  systemMessage: baseUrl + '/api/v1/systemnotification/', // 系统消息
+  messageInfo: baseUrl + '/api/v1/authmessage/', // 消息列表
+  
 };

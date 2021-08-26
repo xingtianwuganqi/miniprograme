@@ -12,7 +12,9 @@
     "components/topicitem/topicitem",
     "components/citypicker/citypicker",
     "pages/homeinfo/searchpage/searchpage",
-    "pages/comment/commentpage"
+    "pages/comment/commentpage",
+    "pages/messageinfo/system/systemmsg",
+    "pages/messageinfo/messageinfo/messageinfo"
   ],
   "window": {
     "backgroundColor": "#fff",
