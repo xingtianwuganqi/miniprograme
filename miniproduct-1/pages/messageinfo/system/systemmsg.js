@@ -1,4 +1,6 @@
 // pages/messageinfo/system/systemmsg.js
+import network from '../../../config/network.js'
+const api = require('../../../config/api.js')
 Page({
 
   /**
@@ -12,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.systemMessageNetworking()
   },
 
   /**
@@ -62,5 +64,17 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  /**系统消息接口 */
+  systemMessageNetworking() {
+    var token = wx.getStorageSync('token')
+    network({
+      url:api.systemMessage,
+      data:{
+
+      }
+    }).then(res => {
+      console.log(res.data)
+    })
   }
 })
