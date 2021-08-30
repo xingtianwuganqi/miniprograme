@@ -1,5 +1,9 @@
 // pages/TopicDetail/TopicDetail.js
 const app = getApp().globalData;
+const util = require('../../../utils/util.js')
+import network from '../../../config/network.js'
+const api = require('../../../config/api.js')
+
 Page({
 
   /**
@@ -8,6 +12,8 @@ Page({
   data: {
     topicInfo: null,
     bottomHeight: null,
+    contactStatus: 0, // 0 点击获取联系方式，1 显示联系方式，2 已完成领养
+    contactInfo: '点击获取联系方式'
   },
 
   /**
@@ -30,11 +36,12 @@ Page({
 
   topicDetailNetworking: function (topic_id) {
     let that = this;
+    var token = wx.getStorageSync('token')
     wx.request({
       url: app.baseUrl + '/api/v1/topicdetail/',
       data:{
         'topic_id':topic_id,
-        'token': ''
+        'token': token
       },
       method: "POST",
       header: {
@@ -42,9 +49,25 @@ Page({
       },
       success(res){
         console.log(res.data);
-        that.setData({
-          topicInfo: res.data.data
-        })
+        if (res.data.code == 200) {
+          var contactStatus = 0
+          var contactInfo = ''
+          if (res.data.data.is_complete == true) {
+            contactStatus = 2
+            contactInfo = '已完成领养'
+          }else if (res.data.data.getedcontact == true && res.data.data.is_complete == false) {
+            contactStatus = 1
+            contactInfo = res.data.data.contact_info
+          }else{
+            contactStatus = 0
+            contactInfo = "点击获取联系方式"
+          }
+          that.setData({
+            topicInfo: res.data.data,
+            contactStatus: contactStatus,
+            contactInfo: contactInfo
+          })
+        }
       }
     });
   },
@@ -96,5 +119,162 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  /**点赞按钮点击 */
+  likeButtonClick:function(event) {
+    util.checkIsLogin()
+    var topic_id = event.currentTarget.dataset.id
+    var mark = event.currentTarget.dataset.mark
+    var token = wx.getStorageSync('token')
+    console.log('topicid',topic_id,'likeMark:',mark,'token:',token)
+    
+    this.likeNetworking(topic_id,mark,token);
+    
+  },
+  likeNetworking:function(id,likeMark,token) {
+    var that = this;
+    var mark = 0
+    if (likeMark == true) {
+      mark = 1
+    }
+    console.log('topicid',id,'likeMark:',mark,'token:',token)
+    network({
+      url: api.LikeAction,
+      data: {
+        'token': token,
+        'like_mark': mark,
+        'topic_id': id
+      }
+    }).then(res => {
+      if (res.data.code == 200) {
+        // 点赞成功
+        this.changeLikeStatus(mark)
+      }
+    })
+  },
+  /**改变点赞状态 */
+  changeLikeStatus(mark) {
+    var newItem = this.data.topicInfo
+    if (mark == 1) {
+      newItem.liked = true
+      newItem.likes_num = newItem.likes_num += 1
+    }else{
+      newItem.liked = false
+      if (newItem.likes_num >= 1) {
+        newItem.likes_num = newItem.likes_num -= 1
+      }else{
+        newItem.likes_num = 0
+      }
+    }
+    this.setData({
+      topicInfo: newItem
+    })
+  },
+  /** 收藏按钮点击 */
+  collectButtonClick: function(event) {
+    util.checkIsLogin
+    var topic_id = event.currentTarget.dataset.id
+    var mark = event.currentTarget.dataset.mark
+    var token = wx.getStorageSync('token')
+    this.collectNetworking(topic_id,mark,token);
+    
+  },
+  /**收藏网络请求 */
+  collectNetworking:function(id,collect_mark,token) {
+    var that = this;
+    var mark = 0
+    if (collect_mark == true) {
+      mark = 1
+    }
+    network({
+      url: api.collectionAction,
+      data: {
+        'token': token,
+        'collect_mark': mark,
+        'topic_id': id
+      }
+    }).then(res => {
+      if (res.data.code == 200) {
+        that.changeCollectionStatus(mark)
+      }
+    }) 
+  },
+  /**改变收藏状态 */
+  changeCollectionStatus(mark) {
+    var newItem = this.data.topicInfo
+    if (mark == 1) {
+      newItem.collectioned = true
+      newItem.collection_num = newItem.collection_num += 1
+    }else{
+      newItem.collectioned = false
+      if (newItem.collection_num >= 1) {
+        newItem.collection_num = newItem.collection_num -= 1
+      }else{
+        newItem.collection_num = 0
+      }
+    }
+    this.setData({
+      topicInfo: newItem
+    })
+  },
+  /**点击了评论按钮 */
+  commentBtnClick(e) {
+    var item = e.currentTarget.dataset.id
+    var id = item.topic_id
+    var topic_uid = item.userInfo.id
+    console.log('id 的值为',id)
+    wx.navigateTo({
+      url: '../../comment/commentpage?topic_id='+id+'&topic_type='+'1'+'&topic_uid='+topic_uid,
+    })
+  },
+  /**获取联系方式 */
+  getContactNetworking() {
+    var that = this
+    if (that.data.contactStatus == 1) {
+      // copy到剪贴板
+      wx.setClipboardData({
+        data: that.data.contactInfo,
+        success: function (res) {
+          wx.getClipboardData({
+            success: function (res) {
+              wx.showToast({
+                title: '复制成功',
+                icon: 'none'
+              })
+            }
+          })
+        }
+      })
+      return 
+    }
+    if (this.data.contactStatus == 2) {
+      wx.showToast({
+        title: '已完成领养',
+        icon: 'none'
+      })
+      return 
+    }
+    util.checkIsLogin
+    var token = wx.getStorageSync('token')
+    network({
+      url: api.getContact,
+      data: {
+        'token': token,
+        'topic_id': that.data.topicInfo.topic_id,
+      }
+    }).then(res => {
+      if (res.data.code == 200) {
+        console.log(res.data)
+        // 获取联系方式成功
+        var newItem = that.data.topicInfo
+        newItem.contact_info = res.data.data.contact
+        newItem.getedcontact = true
+        that.setData({
+          topicInfo: newItem,
+          contactStatus: 1,
+          contactInfo: res.data.data.contact
+        })
+      }
+    })
   }
 })

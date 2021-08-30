@@ -15,5 +15,5 @@ module.exports = {
   loadMoreReply: baseUrl + '/api/v1/replypageinfo/', // 更多回复 
   systemMessage: baseUrl + '/api/v1/systemnotification/', // 系统消息
   messageInfo: baseUrl + '/api/v1/authmessage/', // 消息列表
-  
+  getContact: baseUrl + '/api/v1/getcontact/', // 获取联系方式
 };
