@@ -1,0 +1,23 @@
+<!--pages/myinfo/userinfo/userinfo.wxml-->
+<wxs src="../../../utils/common.wxs" module="common" />
+<view class='back-view'>
+  <scroll-view scroll-y class='scroll-view'>
+    <view class='userInfo'>
+      <view class='user-avator'>
+        <image src="{{common.loadThumbImg(userInfo.avator)}}"></image>
+      </view>
+      <view class='nickname'>
+        {{userInfo.username != null ? userInfo.username : '登录/注册'}}
+      </view>
+    </view>
+    <view wx:for="{{list}}" wx:for-item='item' wx:key='user'>
+      <view class='user-cell'>
+        <image class='icon-img' src='{{item.img}}' ></image>
+        <view class='title-view'>{{item.title}}</view>
+        <view class='empty-view'></view>
+        <image class='right-icon' src='../../../icons/icon_center_allin.png'></image>
+      </view>
+      <view class='line-item'></view>
+    </view>
+  </scroll-view>
+</view>

@@ -14,7 +14,8 @@
     "pages/homeinfo/searchpage/searchpage",
     "pages/comment/commentpage",
     "pages/messageinfo/system/systemmsg",
-    "pages/messageinfo/messageinfo/messageinfo"
+    "pages/messageinfo/messageinfo/messageinfo",
+    "pages/myinfo/userinfo/userinfo"
   ],
   "window": {
     "backgroundColor": "#fff",
@@ -43,7 +44,7 @@
         "text": "消息"
       },
       {
-        "pagePath": "pages/myinfo/my/my",
+        "pagePath": "pages/myinfo/userinfo/userinfo",
         "iconPath": "icons/icon_tabbar_mi_un.png",
         "selectedIconPath": "icons/icon_tabbar_mi_se.png",
         "text": "我的"

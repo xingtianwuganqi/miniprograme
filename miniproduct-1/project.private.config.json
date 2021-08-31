@@ -71,6 +71,12 @@
           "pathName": "pages/messageinfo/messageinfo/messageinfo",
           "query": "msg_type=3",
           "scene": null
+        },
+        {
+          "name": "pages/myinfo/userinfo/userinfo",
+          "pathName": "pages/myinfo/userinfo/userinfo",
+          "query": "",
+          "scene": null
         }
       ]
     }
