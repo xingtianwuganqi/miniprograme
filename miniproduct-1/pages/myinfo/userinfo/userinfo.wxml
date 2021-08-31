@@ -2,7 +2,7 @@
 <wxs src="../../../utils/common.wxs" module="common" />
 <view class='back-view'>
   <scroll-view scroll-y class='scroll-view'>
-    <view class='userInfo'>
+    <view class='userInfo' bindtap="userInfoClick">
       <view class='user-avator'>
         <image src="{{common.loadThumbImg(userInfo.avator)}}"></image>
       </view>

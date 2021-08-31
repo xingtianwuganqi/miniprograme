@@ -1,4 +1,5 @@
 // pages/myinfo/userinfo/userinfo.js
+const util = require('../../../utils/util.js')
 Page({
 
   /**
@@ -76,5 +77,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  /**点击登录 */
+  userInfoClick: function() {
+    util.checkIsLogin()
   }
 })
