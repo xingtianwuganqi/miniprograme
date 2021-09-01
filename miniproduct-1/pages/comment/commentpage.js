@@ -155,7 +155,10 @@ Page({
   },
   /**点击评论的回复按钮 */
   commentBtnClick:function(e) {
-    util.checkIsLogin() // 检测登录
+    // 检测登录
+    if (util.checkIsNotLogin()) {
+      return 
+    }
     var item = e.currentTarget.dataset.id
     this.setData({
       inputType: 2,
@@ -167,7 +170,9 @@ Page({
   },
   /**点击回复的回复按钮 */
   replyBtnClick: function(e) {
-    util.checkIsLogin()
+    if (util.checkIsNotLogin()) {
+      return 
+    }
     // var comment = e.currentTarget.dataset.item
     var reply = e.currentTarget.dataset.id
     // console.log('comment',comment)
@@ -191,7 +196,9 @@ Page({
   },
   /**点击发送按钮 */
   confirmClick: function(event) {
-    util.checkIsLogin() // 检测登录
+    if (util.checkIsNotLogin()) {
+      return 
+    } // 检测登录
     // 获取输入的文本
     var text = event.detail.value
     if (text.length == 0) {

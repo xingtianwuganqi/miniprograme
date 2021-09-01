@@ -32,6 +32,7 @@ Page({
     console.log(options);
     var topic_id = options.topic_id;
     this.topicDetailNetworking(topic_id);
+    this.addViewHistoryNetworking(topic_id);
   },
 
   topicDetailNetworking: function (topic_id) {
@@ -122,7 +123,9 @@ Page({
   },
   /**点赞按钮点击 */
   likeButtonClick:function(event) {
-    util.checkIsLogin()
+    if (util.checkIsNotLogin()) {
+      return 
+    }
     var topic_id = event.currentTarget.dataset.id
     var mark = event.currentTarget.dataset.mark
     var token = wx.getStorageSync('token')
@@ -172,7 +175,9 @@ Page({
   },
   /** 收藏按钮点击 */
   collectButtonClick: function(event) {
-    util.checkIsLogin
+    if (util.checkIsNotLogin()) {
+      return 
+    }
     var topic_id = event.currentTarget.dataset.id
     var mark = event.currentTarget.dataset.mark
     var token = wx.getStorageSync('token')
@@ -181,6 +186,7 @@ Page({
   },
   /**收藏网络请求 */
   collectNetworking:function(id,collect_mark,token) {
+    
     var that = this;
     var mark = 0
     if (collect_mark == true) {
@@ -229,6 +235,11 @@ Page({
   },
   /**获取联系方式 */
   getContactNetworking() {
+    // 验证登录
+    if (util.checkIsNotLogin()) {
+      return 
+    }
+    console.log('====---------======')
     var that = this
     if (that.data.contactStatus == 1) {
       // copy到剪贴板
@@ -254,7 +265,9 @@ Page({
       })
       return 
     }
-    util.checkIsLogin
+    if (util.checkIsNotLogin()) {
+      return 
+    }
     var token = wx.getStorageSync('token')
     network({
       url: api.getContact,
@@ -276,5 +289,20 @@ Page({
         })
       }
     })
+  },
+  addViewHistoryNetworking(topic_id) {
+    var token = wx.getStorageSync('token')
+    if (token.length > 0) {
+      network({
+        url: api.addViewHistory,
+        data: {
+          'token': token,
+          'topic_id': topic_id
+        }
+      }).then(res=>{
+        console.log(res.data,'====')
+        console.log('addHistorySuccess')
+      })
+    }
   }
 })

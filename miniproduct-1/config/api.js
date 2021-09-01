@@ -16,4 +16,6 @@ module.exports = {
   systemMessage: baseUrl + '/api/v1/systemnotification/', // 系统消息
   messageInfo: baseUrl + '/api/v1/authmessage/', // 消息列表
   getContact: baseUrl + '/api/v1/getcontact/', // 获取联系方式
+  authHistroy: baseUrl + '/api/v1/authhistorylist/', // 历史记录
+  addViewHistory: baseUrl + '/api/v1/addviewhistory/', // 添加历史记录
 };

@@ -15,7 +15,8 @@
     "pages/comment/commentpage",
     "pages/messageinfo/system/systemmsg",
     "pages/messageinfo/messageinfo/messageinfo",
-    "pages/myinfo/userinfo/userinfo"
+    "pages/myinfo/userinfo/userinfo",
+    "pages/myinfo/history/history"
   ],
   "window": {
     "backgroundColor": "#fff",

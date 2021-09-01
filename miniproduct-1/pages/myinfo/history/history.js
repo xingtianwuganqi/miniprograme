@@ -1,26 +1,18 @@
-// pages/message/message.js
-const util = require('../../../utils/util.js')
+// pages/myinfo/history/history.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      list: [
-        // {img:'../../../icons/icon_message_sys.png',title: '系统消息',num: 0,id: 0},
-        {img:'../../../icons/icon_message_like.png',title: '点赞',num: 0,id: 1},
-        {img:'../../../icons/icon_message_collect.png',title: '收藏',num: 0,id: 2},
-        {img:'../../../icons/icon_message_com.png',title: '评论',num: 0,id: 3},
-      ]
-    })
+
   },
 
   /**
@@ -70,19 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  /**消息点击 */
-  messageClick: function(e) {
-    var id = e.currentTarget.dataset.id
-    console.log(e)
-    if (id == 1 || id == 2 || id == 3) {
-      wx.navigateTo({
-        url: '../messageinfo/messageinfo?msg_type=' + id,
-      })
-    }else{
-      wx.navigateTo({
-        url: '../system/systemmsg',
-      })
-    }
   }
 })

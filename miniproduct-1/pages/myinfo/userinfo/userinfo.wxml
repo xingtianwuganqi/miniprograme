@@ -11,7 +11,7 @@
       </view>
     </view>
     <view wx:for="{{list}}" wx:for-item='item' wx:key='user'>
-      <view class='user-cell'>
+      <view class='user-cell' bindtap="didSelect" data-id="{{item.id}}">
         <image class='icon-img' src='{{item.img}}' ></image>
         <view class='title-view'>{{item.title}}</view>
         <view class='empty-view'></view>

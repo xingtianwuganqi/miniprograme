@@ -10,9 +10,9 @@ Page({
       {img:'../../../icons/icon_view_hist.png',title: '浏览记录',num: 0,id: 1},
       {img:'../../../icons/icon_mi_publish.png',title: '我的发布',num: 0,id: 2},
       {img:'../../../icons/icon_mi_collection.png',title: '我的收藏',num: 0,id: 3},
-      {img:'../../../icons/icon_mi_xy.png',title: '用户协议',num: 0,id: 1},
-      {img:'../../../icons/icon_pravicy.png',title: '隐私政策',num: 0,id: 2},
-      {img:'../../../icons/icon_mi_about.png',title: '关于我们',num: 0,id: 3},
+      {img:'../../../icons/icon_mi_xy.png',title: '用户协议',num: 0,id: 4},
+      {img:'../../../icons/icon_pravicy.png',title: '隐私政策',num: 0,id: 5},
+      {img:'../../../icons/icon_mi_about.png',title: '关于我们',num: 0,id: 6},
     ],
     userInfo: null
   },
@@ -80,6 +80,28 @@ Page({
   },
   /**点击登录 */
   userInfoClick: function() {
-    util.checkIsLogin()
+    if (util.checkIsNotLogin()) {
+      return 
+    }
+  },
+  /**点击cell */
+  didSelect: function(e) {
+    if (util.checkIsNotLogin()) {
+      return 
+    }
+    var id = e.currentTarget.dataset.id
+    console.log(id)
+    if (id == 1) {
+      wx.navigateTo({
+        url: '../history/history',
+      })
+    }else if (id == 2) {
+
+    }else if (id == 3) {
+
+    }else if (id == 4) {
+
+    }
+    
   }
 })
