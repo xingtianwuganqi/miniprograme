@@ -1,3 +1,13 @@
 {
-  "usingComponents": {}
+
+  "backgroundColor":"#fff",
+  "backgroundTextStyle":"dark",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "浏览记录",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance":100,
+  "usingComponents": {
+    "custom-topicitem": "../../../components/topicitem/topicitem"
+  }
 }

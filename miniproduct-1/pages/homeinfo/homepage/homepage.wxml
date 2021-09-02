@@ -46,7 +46,7 @@
     </view>
     <!-- 使用组件 -->
     <view wx:for="{{items}}" wx:item='item' wx:key='key'>
-      <custom-topicitem item="{{item}}" bind:likeChanged='likeMarkAction' bind:collectChanged= 'collectMarkAcion' bind:commentClick='commentBtnClick'></custom-topicitem>
+      <custom-topicitem item="{{item}}" bind:likeChanged='likeMarkAction' bind:collectChanged= 'collectMarkAcion' bind:commentClick='commentBtnClick' bind:cellDidSelect='cellDidSelect' ></custom-topicitem>
     </view>
   </scroll-view>
   <view class='add-back' bindtap='addButtonClick'>

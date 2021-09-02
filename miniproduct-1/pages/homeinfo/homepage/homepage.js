@@ -237,6 +237,14 @@ Page({
       url: '../../comment/commentpage?topic_id='+id+'&topic_type='+'1'+'&topic_uid='+topic_uid,
     })
   },
+  /**整个cell点击 */
+  cellDidSelect(e) {
+    var id = e.detail.topic
+    console.log('id 的值为',id)
+    wx.navigateTo({
+      url: '../../homeinfo/topicdetail/topicdetail?topic_id=' + id,
+    })
+  },
   //  tab切换逻辑
   swichNav: function( e ) {
     var that = this;

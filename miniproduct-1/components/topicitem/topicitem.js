@@ -31,9 +31,14 @@ Component({
     handleToTopicDetail: function(e) {
       console.log(e.currentTarget.dataset.id);
       var id = e.currentTarget.dataset.id;
-      wx.navigateTo({
-        url: '../topicdetail/topicdetail?topic_id=' + id,
-      })
+      // wx.navigateTo({
+      //   url: '../topicdetail/topicdetail?topic_id=' + id,
+      // })
+      var event = {
+        topic: id,
+      }
+      // 组件向外产值
+      this.triggerEvent("cellDidSelect",event,{})
     },
     /**点赞按钮点击 */
   likeButtonClick:function(event) {

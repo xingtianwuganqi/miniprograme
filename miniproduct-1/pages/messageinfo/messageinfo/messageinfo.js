@@ -105,6 +105,9 @@ Page({
     }).then(res=>{
       console.log(res.data)
       wx.hideLoading()
+      wx.stopPullDownRefresh({
+        success: (res) => {},
+      })
       if (res.data.code == 200) {
         var datas = res.data.data.map(model =>{
           var newModel = model
