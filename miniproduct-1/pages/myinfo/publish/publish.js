@@ -1,7 +1,6 @@
-// pages/myinfo/history/history.js
+// pages/myinfo/publish/publish.js
 const api = require("../../../config/api")
 const { default: network } = require("../../../config/network")
-
 Page({
 
   /**
@@ -18,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.historyListNetworking(1)
+    this.publishListNetworking(1)
   },
 
   /**
@@ -53,7 +52,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.historyListNetworking(1)
+    this.publishListNetworking(1)
   },
 
   /**
@@ -71,23 +70,25 @@ Page({
   },
   /**上拉刷新 */
   onBottom() {
-    this.historyListNetworking(this.data.page)
+    this.publishListNetworking(this.data.page)
   },
   /**列表网络请求 */
-  historyListNetworking(page) {
+  publishListNetworking(page) {
     if (this.data.isLoadEnd == true) {
       return
     }
     var that = this
     that.page = page
     var token = wx.getStorageSync('token')
+    var data = {
+      'token': token,
+      'page': page,
+      'size': that.data.size
+    }
+    console.log(data)
     network({
-      url:api.authHistroy,
-      data: {
-        'token': token,
-        'page': page,
-        'size': that.data.size
-      }
+      url:api.authPublish,
+      data: data
     }).then(res => {
       console.log(res.data)
       // 停止刷新
@@ -95,10 +96,6 @@ Page({
         success: (res) => {},
       })
       if (res.data.code == 200) {
-        console.log("res.data.data")
-        console.log(res.data.data.length)
-        console.log("that.data.items.length")
-        console.log(that.data.items.length)
         if (page == 1) {
           that.setData({
             items: res.data.data
@@ -109,12 +106,12 @@ Page({
             items: datas.concat(res.data.data)
           })
         }
-        if (res.data.data.length == 10) {
-          that.data.page += 1
-        }else{
+        if (res.data.data.length < 10) {
           that.data.isLoadEnd = true
+          console.log("eee")
+        }else{
+          that.data.page += 1
         }
-        console.log('this.items的count',that.data.items.length)
       }
     })
   },
@@ -129,12 +126,12 @@ Page({
       if (item.topic_id == id) {
         var newItem = item
         if (mark == 1) {
-          newItem.topicInfo.liked = true
-          newItem.topicInfo.likes_num = newItem.topicInfo.likes_num + 1
+          newItem.liked = true
+          newItem.likes_num = newItem.likes_num + 1
         }else{
           newItem.topicInfo.liked = false
-          if (newItem.topicInfo.likes_num > 0) {
-            newItem.topicInfo.likes_num = newItem.topicInfo.likes_num - 1
+          if (newItem.likes_num > 0) {
+            newItem.likes_num = newItem.likes_num - 1
           }
         }
         return newItem
@@ -154,12 +151,12 @@ Page({
       if (item.topic_id == id) {
         var newItem = item
         if (mark == 1) {
-          newItem.topicInfo.collectioned = true
-          newItem.topicInfo.collection_num = newItem.topicInfo.collection_num + 1
+          newItem.collectioned = true
+          newItem.collection_num = newItem.collection_num + 1
         }else{
-          newItem.topicInfo.collectioned = false
-          if (newItem.topicInfo.collection_num > 0) {
-            newItem.topicInfo.collection_num = newItem.topicInfo.collection_num - 1
+          newItem.collectioned = false
+          if (newItem.collection_num > 0) {
+            newItem.collection_num = newItem.collection_num - 1
           }
         }
         return newItem

@@ -19,7 +19,8 @@ Page({
     size: 10,
     items: [],
     localItems: [],
-    currentTab: 0
+    currentTab: 0,
+    isLoadEnd: false
   },
 
   /**
@@ -46,6 +47,9 @@ Page({
 
   /* 网络请求*/
   listNetworking: function(e) {
+    if (this.data.isLoadEnd) {
+      return 
+    }
     this.data.page = e;
     var that = this;
     if (this.data.page == 1) {
@@ -88,6 +92,8 @@ Page({
           // })
         }
         that.data.page += 1
+      }else{
+        that.data.isLoadEnd = true
       }
     })
   },

@@ -1,0 +1,12 @@
+{
+  "backgroundColor":"#fff",
+  "backgroundTextStyle":"dark",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "我的发布",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance":100,
+  "usingComponents": {
+    "custom-topicitem": "../../../components/topicitem/topicitem"
+  }
+}

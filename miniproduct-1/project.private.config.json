@@ -79,8 +79,8 @@
           "scene": null
         },
         {
-          "name": "pages/myinfo/history/history",
-          "pathName": "pages/myinfo/history/history",
+          "name": "pages/myinfo/collection/collection",
+          "pathName": "pages/myinfo/collection/collection",
           "query": "",
           "scene": null
         }

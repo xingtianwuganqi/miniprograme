@@ -1,4 +1,4 @@
-// pages/myinfo/history/history.js
+// pages/myinfo/collection/collection.js
 const api = require("../../../config/api")
 const { default: network } = require("../../../config/network")
 
@@ -18,7 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.historyListNetworking(1)
+    this.collectionListNetworking(1)
   },
 
   /**
@@ -53,7 +53,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.historyListNetworking(1)
+    this.collectionListNetworking(1)
   },
 
   /**
@@ -71,10 +71,10 @@ Page({
   },
   /**上拉刷新 */
   onBottom() {
-    this.historyListNetworking(this.data.page)
+    this.collectionListNetworking(this.data.page)
   },
   /**列表网络请求 */
-  historyListNetworking(page) {
+  collectionListNetworking(page) {
     if (this.data.isLoadEnd == true) {
       return
     }
@@ -82,7 +82,7 @@ Page({
     that.page = page
     var token = wx.getStorageSync('token')
     network({
-      url:api.authHistroy,
+      url:api.authCollection,
       data: {
         'token': token,
         'page': page,
@@ -150,26 +150,15 @@ Page({
   collectMarkAcion(e) {
     var id = e.detail.topic
     var mark = e.detail.mark
-    var items = this.data.items.map((item) =>{
-      if (item.topic_id == id) {
-        var newItem = item
-        if (mark == 1) {
-          newItem.topicInfo.collectioned = true
-          newItem.topicInfo.collection_num = newItem.topicInfo.collection_num + 1
-        }else{
-          newItem.topicInfo.collectioned = false
-          if (newItem.topicInfo.collection_num > 0) {
-            newItem.topicInfo.collection_num = newItem.topicInfo.collection_num - 1
-          }
-        }
-        return newItem
-      }else{
-        return item
-      }
-    })
-    this.setData({
-      items: items
-    })
+    console.log('marrrrrrrrrrrrrrrrrrrk',mark)
+    if (mark == 0) {
+      var items = this.data.items.filter(item=>{
+        return item.topic_id != id
+      })
+      this.setData({
+        items: items
+      })
+    }
   },
   /**点击了评论按钮 */
   commentBtnClick(e) {

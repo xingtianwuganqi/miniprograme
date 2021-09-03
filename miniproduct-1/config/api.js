@@ -18,4 +18,11 @@ module.exports = {
   getContact: baseUrl + '/api/v1/getcontact/', // 获取联系方式
   authHistroy: baseUrl + '/api/v1/authhistorylist/', // 历史记录
   addViewHistory: baseUrl + '/api/v1/addviewhistory/', // 添加历史记录
+  authPublish: baseUrl + '/api/v1/authpublishlist/', // 我的发布
+  authCollection: baseUrl + '/api/v1/authcollection/', // 我的收藏
+
+  pravicy: baseUrl + "/api/pravicy/", // 隐私协议
+  userAgreen: baseUrl + "/api/useragreen/", // 用户协议
+  aboutUs: baseUrl + "/api/aboutus/", // 关于我们
+  instruction: baseUrl + "/api/instruction/", //领养说明
 };

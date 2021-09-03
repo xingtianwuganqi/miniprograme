@@ -1,0 +1,2 @@
+<!--pages/myinfo/webinfo/webinfo.wxml-->
+<web-view class='web-page' src="{{api}}"></web-view>

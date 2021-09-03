@@ -16,7 +16,10 @@
     "pages/messageinfo/system/systemmsg",
     "pages/messageinfo/messageinfo/messageinfo",
     "pages/myinfo/userinfo/userinfo",
-    "pages/myinfo/history/history"
+    "pages/myinfo/history/history",
+    "pages/myinfo/publish/publish",
+    "pages/myinfo/collection/collection",
+    "pages/myinfo/webinfo/webinfo"
   ],
   "window": {
     "backgroundColor": "#fff",
