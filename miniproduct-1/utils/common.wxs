@@ -53,9 +53,83 @@ var timeInfo = function(timeStr) {
   return new Date(d[0], d[1] - 1, d[2], t[0], t[1], t[2]);
 }
 
+/**
+    * 处理日期显示
+*/
+function getGapTime (date) {  //传入的date为‘yyyy-mm-dd hh:mm:ss’形式的
+  var re = "00"
+  
+  var timestamp = getDate().getTime();//wxs中不能使用js中的Date()函数，只能使用getDate()来获取当前标准时间，getTime()函数可以用来将标准时间转换为时间戳，单位为ms
+  timestamp = parseInt(timestamp / 1000);
+  //发表文章的时间戳 s
+  var publicstamp = getDate(date).getTime();
+  publicstamp = parseInt(publicstamp / 1000)
+  //时间差s
+  var gap = timestamp - publicstamp
+
+  if (gap < 60) {
+    re = "刚刚"
+  } else if (gap < 60 * 60) {
+    re = parseInt(gap / 60) + "分钟前"
+  } else if (gap < 60 * 60 * 24) {
+    re = parseInt(gap / 60 / 60) + "小时前"
+  } else if (gap < 60 * 60 * 24 * 5) {
+    var time = formatTime(date)
+    re = parseInt(gap / 60 / 60 / 24) + "天前" + " " + time
+  } else {
+    // re = date.substring(0,19)  //时间超过1个月返回具体的 年-月-日
+    re = formatDate(date)
+}
+return re
+}
+  
+  //将自定义函数暴露出来
+//   //形式为    对外使用的函数名：wxs中定义的函数名
+// module.exports = {
+//   getGap:getGapTime
+// }
+
+function formatDate(value) {
+  var time = getDate(value);
+  var year = time.getFullYear();
+  var month = time.getMonth() + 1;
+  var date = time.getDate();
+  var hour = time.getHours();
+  var minute = time.getMinutes();
+  var second = time.getSeconds();
+  month = month < 10 ? "0" + month : month;
+  date = date < 10 ? "0" + date : date;
+  hour = hour < 10 ? "0" + hour : hour;
+  minute = minute < 10 ? "0" + minute : minute;
+  second = second < 10 ? "0" + second : second;
+// 　　return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+  return year + "-" + month + "-" + date + " " + hour + ":" + minute;
+}
+
+function formatTime(value) {
+  var time = getDate(value);
+  var year = time.getFullYear();
+  var month = time.getMonth() + 1;
+  var date = time.getDate();
+  var hour = time.getHours();
+  var minute = time.getMinutes();
+  var second = time.getSeconds();
+  month = month < 10 ? "0" + month : month;
+  date = date < 10 ? "0" + date : date;
+  hour = hour < 10 ? "0" + hour : hour;
+  minute = minute < 10 ? "0" + minute : minute;
+  second = second < 10 ? "0" + second : second;
+// 　　return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+  return hour + ":" + minute;
+}
+
+
+
+
 module.exports = {
   loadThumbImg: loadThumbImg,
   loadFourImg: loadFourImg,
   loadSevenImg: loadSevenImg,
-  loadOriginImg: loadOriginImg
+  loadOriginImg: loadOriginImg,
+  getGap:getGapTime
 };

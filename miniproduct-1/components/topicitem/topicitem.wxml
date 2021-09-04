@@ -11,7 +11,7 @@
         <view class='userName'> 
           <text wx:if="{{item.userInfo.username.length>0}}">{{item.userInfo.username}}</text>
           <text wx:else>佚名</text>
-          <text class='time-item'>{{item.userInfo.create_time}}</text>
+          <text class='time-item'>{{common.getGap(item.create_time)}}</text>
         </view>
         <view class='icon-view'>
           <mp-icon icon="more" color="#666666" size="{{20}}"></mp-icon>
