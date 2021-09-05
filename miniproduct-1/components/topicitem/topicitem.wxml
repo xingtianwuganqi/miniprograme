@@ -13,7 +13,7 @@
           <text wx:else>佚名</text>
           <text class='time-item'>{{common.getGap(item.create_time)}}</text>
         </view>
-        <view class='icon-view'>
+        <view class='icon-view' catchtap='moreButtonClick' hover-stop-propagation='true' data-id="{{item.topic_id}}" >
           <mp-icon icon="more" color="#666666" size="{{20}}"></mp-icon>
         </view>
       </view>

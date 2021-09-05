@@ -110,9 +110,6 @@ Page({
     })
   },
   searchNetworking(keyword,page) {
-    if (this.data.isLoadEnd==true) {
-      return 
-    }
     this.data.page = page
     var that = this
     var data = {
@@ -182,6 +179,9 @@ Page({
   /**加载更多 */
   loadMore: function() {
     if (this.data.isSearching) {
+      if (this.data.isLoadEnd==true) {
+        return 
+      }
       this.searchNetworking(this.data.searchKeyword,this.data.page)
     }
   }

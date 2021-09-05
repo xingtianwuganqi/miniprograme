@@ -1,6 +1,7 @@
 // components/topicitem/topicitem.js
 import network from '../../config/network.js'
 const api = require('../../config/api.js')
+const util = require('../../utils/util.js')
 Component({
   /**
    * 组件的属性列表
@@ -131,6 +132,25 @@ Component({
     console.log(dic)
     this.triggerEvent('commentClick',dic,{})
   },
-
+  /**更多按钮点击 */
+  moreButtonClick(event) {
+    var that = this
+    wx.showActionSheet({
+      itemList: ['投诉举报'],
+      success(res) {
+        if (res.tapIndex == 0) {
+          if (util.checkIsNotLogin()) {
+            return 
+          }
+          var id = event.currentTarget.dataset.id
+          var dic = {
+            topic: id
+          }
+          that.triggerEvent('moreBtnClick',dic,{})
+        }
+      }
+    })
+    
+  }
   }
 })

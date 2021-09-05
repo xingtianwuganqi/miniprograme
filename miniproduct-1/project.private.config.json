@@ -77,12 +77,6 @@
           "pathName": "pages/myinfo/userinfo/userinfo",
           "query": "",
           "scene": null
-        },
-        {
-          "name": "pages/myinfo/collection/collection",
-          "pathName": "pages/myinfo/collection/collection",
-          "query": "",
-          "scene": null
         }
       ]
     }

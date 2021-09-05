@@ -70,13 +70,14 @@ Page({
   },
   /**上拉刷新 */
   onBottom() {
+    if (this.data.isLoadEnd == true) {
+      return
+    }
     this.publishListNetworking(this.data.page)
   },
   /**列表网络请求 */
   publishListNetworking(page) {
-    if (this.data.isLoadEnd == true) {
-      return
-    }
+    
     var that = this
     that.page = page
     var token = wx.getStorageSync('token')

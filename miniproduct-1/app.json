@@ -19,7 +19,8 @@
     "pages/myinfo/history/history",
     "pages/myinfo/publish/publish",
     "pages/myinfo/collection/collection",
-    "pages/myinfo/webinfo/webinfo"
+    "pages/myinfo/webinfo/webinfo",
+    "pages/myinfo/reportpage/reportpage"
   ],
   "window": {
     "backgroundColor": "#fff",

@@ -2,8 +2,8 @@
   "backgroundColor":"#fff",
   "backgroundTextStyle":"dark",
   "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "消息",
+  "navigationBarTitleText": "投诉举报",
   "navigationBarTextStyle": "black",
-  "enablePullDownRefresh": true,
-  "onReachBottomDistance":100
+  "usingComponents": {
+  }
 }

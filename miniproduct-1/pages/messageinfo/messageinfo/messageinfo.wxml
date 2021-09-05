@@ -8,7 +8,7 @@
           <image class='img-avator' src='{{common.loadThumbImg(item.fromInfo.avator)}}'></image>
           <view class='name-info'>
             <view class='name'>{{item.fromInfo.username.length>0 ? item.fromInfo.username : "佚名"}}</view>
-            <view class='create-tiem'>{{item.create_time}}</view>
+            <view class='create-tiem'>{{common.getGap(item.create_time)}}</view>
           </view>
         </view>
         <view class='content'>{{item.msg_content}}</view>

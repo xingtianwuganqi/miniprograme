@@ -47,9 +47,6 @@ Page({
 
   /* 网络请求*/
   listNetworking: function(e) {
-    if (this.data.isLoadEnd) {
-      return 
-    }
     this.data.page = e;
     var that = this;
     if (this.data.page == 1) {
@@ -182,6 +179,9 @@ Page({
 
   //触底响应函数
   onBottom(){
+    if (this.data.isLoadEnd) {
+      return 
+    }
     this.listNetworking(this.data.page);
   },
   /**触发点赞 */
@@ -249,6 +249,14 @@ Page({
     console.log('id 的值为',id)
     wx.navigateTo({
       url: '../../homeinfo/topicdetail/topicdetail?topic_id=' + id,
+    })
+  },
+  /**更多按钮点击 */
+  moreButtonClick(e) {
+    var id = e.detail.topic
+    console.log(id)
+    wx.navigateTo({
+      url: '../../myinfo/reportpage/reportpage?report_id=' + id,
     })
   },
   //  tab切换逻辑

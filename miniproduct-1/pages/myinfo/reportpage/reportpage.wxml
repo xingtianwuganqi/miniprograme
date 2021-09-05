@@ -1,0 +1,21 @@
+<!--pages/myinfo/reportpage/reportpage.wxml-->
+<view class='back-view'>
+  <view class='title-view'>请选择对应的理由，理由与内容不符，会延迟处理</view>
+  <view class='gridview'>
+    <block wx:for="{{listdata}}" wx:for-item='item' wx:key="key">
+      <view class='gridview-item' bindtap="gridviewClick" data-id="{{item}}">
+        <view class='gridview-cell'>
+          <view wx:if='{{item.isSelect}}'>
+            <i class="weui-icon-success" style="color:#ffa500;width:40rpx;height:40rpx;"></i>
+          </view>
+          <view wx:else>
+            <i class="weui-icon-circle" style="color:#ffa500;width:40rpx;height:40rpx;"></i>
+          </view>
+          <view class='empty-view'></view>
+          <text>{{item.vio_name}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class='push-button' bindtap="pushButtonClick">提交</view>
+</view>

@@ -73,6 +73,10 @@ Page({
   },
 
   onBottom:function() {
+    // 上拉刷新时判断是否已经加载完了
+    if (this.data.isLoadEnd) {
+      return 
+    }
     var page = this.data.page
     this.messageListNetworking(page)
   },
@@ -85,9 +89,6 @@ Page({
   },
   /**消息列表 */
   messageListNetworking(page) {
-    if (this.data.isLoadEnd) {
-      return 
-    }
     var token = wx.getStorageSync('token')
     var that = this
     that.data.page = page
@@ -128,20 +129,16 @@ Page({
           that.setData({
             items: datas
           })
-          if (datas.length == 10) {
-            that.data.page = page + 1
-          }else{
-            that.data.isLoadEnd = true
-          }
+        
         }else{
           that.setData({
             items: that.data.concat(datas)
           })
-          if (datas.length == 10) {
-            that.data.page = page + 1
-          }else{
-            that.data.isLoadEnd = true
-          }
+        }
+        if (datas.length == 10) {
+          that.data.page = page + 1
+        }else{
+          that.data.isLoadEnd = true
         }
       }
     })

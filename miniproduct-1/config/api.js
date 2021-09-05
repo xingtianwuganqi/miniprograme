@@ -25,4 +25,7 @@ module.exports = {
   userAgreen: baseUrl + "/api/useragreen/", // 用户协议
   aboutUs: baseUrl + "/api/aboutus/", // 关于我们
   instruction: baseUrl + "/api/instruction/", //领养说明
+
+  violationList: baseUrl + '/api/v1/violations/', // 举报列表
+  report: baseUrl + '/api/v1/report/', //举报
 };
