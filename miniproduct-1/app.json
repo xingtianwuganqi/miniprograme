@@ -20,7 +20,8 @@
     "pages/myinfo/publish/publish",
     "pages/myinfo/collection/collection",
     "pages/myinfo/webinfo/webinfo",
-    "pages/myinfo/reportpage/reportpage"
+    "pages/myinfo/reportpage/reportpage",
+    "pages/myinfo/suggestion/suggestion"
   ],
   "window": {
     "backgroundColor": "#fff",

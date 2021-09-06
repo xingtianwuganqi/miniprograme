@@ -28,4 +28,5 @@ module.exports = {
 
   violationList: baseUrl + '/api/v1/violations/', // 举报列表
   report: baseUrl + '/api/v1/report/', //举报
+  suggestion: baseUrl + '/api/v1/suggestion/', // 意见反馈
 };

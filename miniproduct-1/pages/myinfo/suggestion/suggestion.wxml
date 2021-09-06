@@ -1,0 +1,23 @@
+<!--pages/myinfo/suggestion/suggestion.wxml-->
+<view class='back-view'>
+  <scroll-view scroll-y class='scroll-back'>
+    <view class='title-view'>请输入您的建议</view>
+    <view class='inputview'>
+      <textarea class='text-area' 
+      placeholder="您的建议对我们非常重要"
+      bindblur="bindTextAreaBlur"
+      focus="{{contactFocus}}"
+      bindconfirm='contentConfirmClick'
+      >
+      </textarea>
+    </view> 
+    <view class='contact-view'>请输入您的联系方式</view>
+    <view class='contact'>
+      <input class="input-text" placeholder="请输入联系方式" 
+      bindinput="contactInput" focus="{{contactFocus}}"       bindconfirm='contactConfirmClick'
+      />
+    </view>
+    <view class='push-button' bindtap="suggestionNetworking">提交</view>
+  </scroll-view>
+</view>
+

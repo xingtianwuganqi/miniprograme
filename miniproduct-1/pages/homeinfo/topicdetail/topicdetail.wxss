@@ -34,7 +34,7 @@ page{
   width: 60rpx;
   height: 60rpx;
   border-radius: 30rpx;
-  background-color: white;
+  background-color: #f5f5f5;
 }
 .head-img{
   width: 80rpx;

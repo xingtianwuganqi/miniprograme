@@ -10,6 +10,7 @@ Page({
       {img:'../../../icons/icon_view_hist.png',title: '浏览记录',num: 0,id: 1},
       {img:'../../../icons/icon_mi_publish.png',title: '我的发布',num: 0,id: 2},
       {img:'../../../icons/icon_mi_collection.png',title: '我的收藏',num: 0,id: 3},
+      {img:'../../../icons/icon_mi_xy.png',title: '意见反馈',num: 0, id: 4},
       // {img:'../../../icons/icon_mi_xy.png',title: '用户协议',num: 0,id: 4},
       // {img:'../../../icons/icon_pravicy.png',title: '隐私政策',num: 0,id: 5},
       // {img:'../../../icons/icon_mi_about.png',title: '关于我们',num: 0,id: 6},
@@ -104,11 +105,11 @@ Page({
         url: '../collection/collection',
       })
     }
-    // else if (id == 4) {
-    //   wx.navigateTo({
-    //     url: '../webinfo/webinfo',
-    //   })
-    // }
+    else if (id == 4) {
+      wx.navigateTo({
+        url: '../suggestion/suggestion',
+      })
+    }
     
   }
 })
