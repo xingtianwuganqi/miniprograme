@@ -14,6 +14,10 @@ Component({
         // 不可修改本身的值 应该在data里添加一个_count
         console.log(newVal, oldVal)
       }
+    },
+    fromType: { // 1 来自我的发布，
+      type: String,
+      value: null,
     }
   },
 
@@ -134,23 +138,38 @@ Component({
   },
   /**更多按钮点击 */
   moreButtonClick(event) {
+    var id = event.currentTarget.dataset.id
+    var dic = {
+      topic: id
+    }
     var that = this
-    wx.showActionSheet({
-      itemList: ['投诉举报'],
-      success(res) {
-        if (res.tapIndex == 0) {
-          if (util.checkIsNotLogin()) {
-            return 
+    if (that.properties.fromType == "1") {
+      wx.showActionSheet({
+        itemList: ['完成领养'],
+        success(res) {
+          if (res.tapIndex == 0) {
+            if (util.checkIsNotLogin()) {
+              return 
+            }
+            that.triggerEvent('complateRescueClick',dic,{})
           }
-          var id = event.currentTarget.dataset.id
-          var dic = {
-            topic: id
-          }
-          that.triggerEvent('moreBtnClick',dic,{})
         }
-      }
-    })
-    
+      })
+    }else {
+      wx.showActionSheet({
+        itemList: ['投诉举报'],
+        success(res) {
+          if (res.tapIndex == 0) {
+            if (util.checkIsNotLogin()) {
+              return 
+            }
+            that.triggerEvent('moreBtnClick',dic,{})
+          }
+        }
+      })
+    }
   }
   }
+  /**完成领养 */
+
 })

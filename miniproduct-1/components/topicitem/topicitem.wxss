@@ -43,9 +43,9 @@
 }
 
 .icon-view{
-  width: 60rpx;
-  height: 60rpx;
-  padding-right: 60rpx;
+  width: 80rpx;
+  height: 80rpx;
+  padding-right: 30rpx;
   flex-grow: 0;
 }
 
@@ -232,4 +232,11 @@
   justify-content: center;
   align-items: center;
   border-radius: 50rpx;
+}
+
+.com-img{
+  height: 120rpx;
+  width: 120rpx;
+  padding-right: 20rpx;
+  flex-grow: 0;
 }

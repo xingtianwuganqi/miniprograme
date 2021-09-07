@@ -132,3 +132,10 @@ page{
   color:#777777;
   width: 230rpx;
 }
+
+.com-img{
+  height: 120rpx;
+  width: 120rpx;
+  padding-right: 20rpx;
+  flex-grow: 0;
+}

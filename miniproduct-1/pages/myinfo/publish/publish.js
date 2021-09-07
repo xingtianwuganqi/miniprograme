@@ -91,7 +91,8 @@ Page({
       url:api.authPublish,
       data: data
     }).then(res => {
-      console.log(res.data)
+      console.log('======--------======')
+      console.log(res.data.data.length)
       // 停止刷新
       wx.stopPullDownRefresh({
         success: (res) => {},
@@ -187,4 +188,35 @@ Page({
       url: '../../homeinfo/topicdetail/topicdetail?topic_id=' + id,
     })
   },
+  // 完成领养点击
+  complateClick(e) {
+    var topic_id = e.detail.topic
+    var token = wx.getStorageSync('token')
+    var that = this
+    var data = {
+      'topic_id': topic_id,
+      'token': token
+    }
+    network({
+      url: api.complateRescue,
+      data: data
+    }).then(res=>{
+      console.log(res.data);
+      if (res.data.code == 200) {
+        var datas = that.data.items
+        datas = datas.map(model => {
+          if (model.topic_id == topic_id) {
+            var newModel = model
+            newModel.is_complete = true
+            return newModel
+          }else{
+            return model
+          }
+        })
+        that.setData({
+          items: datas
+        })
+      }
+    })
+  }
 })

@@ -77,6 +77,12 @@
           "pathName": "pages/myinfo/userinfo/userinfo",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/myinfo/publish/publish",
+          "pathName": "pages/myinfo/publish/publish",
+          "query": "",
+          "scene": null
         }
       ]
     }
