@@ -247,8 +247,14 @@ Page({
   cellDidSelect(e) {
     var id = e.detail.topic
     console.log('id 的值为',id)
+    var that = this
     wx.navigateTo({
       url: '../../homeinfo/topicdetail/topicdetail?topic_id=' + id,
+      events: {
+        statusChanged: (item) => {
+          that.topicItemStatusChanged(item)
+        }
+      }
     })
   },
   /**更多按钮点击 */
@@ -287,5 +293,47 @@ Page({
     wx.navigateTo({
       url: '../searchpage/searchpage',
     })
+  },
+  /**点赞收藏状态改变 */
+  topicItemStatusChanged (dic) {
+    if (dic.type == 'like') {
+      var datas = this.data.items.map(model => {
+        var newModel = model
+        if (newModel.topic_id == dic.topic_id) {
+          if (dic.mark == 1) {
+            newModel.liked = true
+            newModel.likes_num += 1
+          }else{
+            newModel.liked = false
+            if (newModel.likes_num > 1) {
+              newModel.likes_num -= 1
+            }
+          }
+        }
+        return newModel
+      })
+      this.setData({
+        items: datas
+      })
+    }else{
+      var datas = this.data.items.map(model => {
+        var newModel = model
+        if (newModel.topic_id == dic.topic_id) {
+          if (dic.mark == 1) {
+            newModel.collectioned = true
+            newModel.collection_num += 1
+          }else{
+            newModel.collectioned = false
+            if (newModel.collection_num > 1) {
+              newModel.collection_num -= 1
+            }
+          }
+        }
+        return newModel
+      })
+      this.setData({
+        items: datas
+      })
+    }
   }
 })

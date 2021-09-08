@@ -13,7 +13,7 @@
         </view>
         <view class='content'>{{item.msg_content}}</view>
         <view class='msg-info'>
-          <image class='topic-img' src='{{common.loadThumbImg(item.topicInfo.imgs[0])}}'></image>
+          <image class='topic-img' src='{{common.loadThumbImg(item.topicInfo.imgs[0])}}' mode="aspectFill"></image>
           <view class='msg-content'>
             <!-- 标签 -->
             <view class='tag-content'> 

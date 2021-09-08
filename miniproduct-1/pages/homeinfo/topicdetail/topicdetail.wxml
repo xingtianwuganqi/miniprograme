@@ -29,11 +29,11 @@
     
     <!-- 文字区 -->
     <view class='content'>
-      <text class='content-text'> {{topicInfo.content}} </text>
+      <text user-select='true' class='content-text'> {{topicInfo.content}} </text>
     </view>
-    <view class='image-content' wx:for="{{topicInfo.imgs}}" wx:for-item="imageItem" wx:key='topicDetail' >
+    <view class='image-content' wx:for="{{topicInfo.imgs}}" wx:for-item="imageItem" wx:key='topicDetail' bindtap="imgClick" data-id="{{imageItem}}" >
       <!-- <view class='image-info'> -->
-        <image class='topic-img' src='http://img.rxswift.cn/{{imageItem}}' mode="widthFix"></image>
+        <image class='topic-img' src='{{common.loadFourImg(imageItem)}}' mode="widthFix"></image>
       <!-- </view> -->
     </view>
   </scroll-view>

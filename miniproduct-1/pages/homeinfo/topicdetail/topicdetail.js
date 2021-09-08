@@ -3,7 +3,6 @@ const app = getApp().globalData;
 const util = require('../../../utils/util.js')
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
-
 Page({
 
   /**
@@ -151,7 +150,7 @@ Page({
     }).then(res => {
       if (res.data.code == 200) {
         // 点赞成功
-        this.changeLikeStatus(mark)
+        that.changeLikeStatus(mark)
       }
     })
   },
@@ -172,6 +171,15 @@ Page({
     this.setData({
       topicInfo: newItem
     })
+    // 回调
+    let eventChannel = this.getOpenerEventChannel()
+    // statusChanged 这个方法需要上一个页面的支持, 上一个页面在navigateTo方法中的events数据中定义这个方法来接收数据
+    var dic = {
+      'type': 'like',
+      'mark': mark,
+      'topic_id': this.data.topicInfo.topic_id
+    }
+    eventChannel.emit('statusChanged', dic)
   },
   /** 收藏按钮点击 */
   collectButtonClick: function(event) {
@@ -222,6 +230,15 @@ Page({
     this.setData({
       topicInfo: newItem
     })
+    // 回调
+    let eventChannel = this.getOpenerEventChannel()
+    // statusChanged 这个方法需要上一个页面的支持, 上一个页面在navigateTo方法中的events数据中定义这个方法来接收数据
+    var dic = {
+      'type': 'collect',
+      'mark': mark,
+      'topic_id': this.data.topicInfo.topic_id
+    }
+    eventChannel.emit('statusChanged', dic)
   },
   /**点击了评论按钮 */
   commentBtnClick(e) {
@@ -304,5 +321,19 @@ Page({
         console.log('addHistorySuccess')
       })
     }
+  },
+  /** 图片点击 */
+  imgClick(e) {
+    var imgUrl = e.currentTarget.dataset.id
+    var current = app.imgBaseUrl + imgUrl
+    var that = this
+    var imgs = that.data.topicInfo.imgs
+    var allImgs = imgs.map(res => {
+      return app.imgBaseUrl + res
+    })
+    wx.previewImage({
+      urls: allImgs,
+      current: current
+    })
   }
 })
