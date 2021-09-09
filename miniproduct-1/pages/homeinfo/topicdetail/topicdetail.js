@@ -244,8 +244,7 @@ Page({
   commentBtnClick(e) {
     var item = e.currentTarget.dataset.id
     var id = item.topic_id
-    var topic_uid = item.userInfo.id
-    console.log('id 的值为',id)
+    var topic_uid = item.userInfo.id;
     wx.navigateTo({
       url: '../../comment/commentpage?topic_id='+id+'&topic_type='+'1'+'&topic_uid='+topic_uid,
     })
@@ -256,8 +255,7 @@ Page({
     if (util.checkIsNotLogin()) {
       return 
     }
-    console.log('====---------======')
-    var that = this
+    var that = this;
     if (that.data.contactStatus == 1) {
       // copy到剪贴板
       wx.setClipboardData({

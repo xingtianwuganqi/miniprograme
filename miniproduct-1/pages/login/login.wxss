@@ -6,9 +6,10 @@ page{
   background-color: white;
   width: 100vw;
   height: 100vh;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
-  justify-content: center; */
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .logo-view{
@@ -18,6 +19,7 @@ page{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-grow: 0;
 }
 
 .logo-image{
@@ -48,4 +50,14 @@ page{
   flex-direction: row;
   justify-content: center;
   font-size: 26rpx;
+}
+
+.empty-view{
+  flex-grow: 1;
+}
+
+.phone-login{
+  height: 50rpx;
+  color: #ffa500;
+  font: 30rpx;
 }

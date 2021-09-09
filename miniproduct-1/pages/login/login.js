@@ -13,13 +13,22 @@ Page({
     hideLoading: false,
     textInfo: null,
     loading: false,
+    bottomHeight: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (app.isFullScreen) {
+      this.setData({
+        bottomHeight: 90
+      })
+    }else{
+      this.setData({
+        bottomHeight: 40
+      })
+    }
   },
 
   /**
@@ -70,44 +79,10 @@ Page({
   onShareAppMessage: function () {
 
   },
-  /**登录按钮点击 */
-  // loginBtnClick: function() {
-  //   if (this.data.loading==true) {
-  //     return 
-  //   }
-  //   if (this.data.isAgreen==false) {
-  //     console.log('=========')
-  //     this.openTextToast('请阅读并勾选用户协议与隐私协议');
-  //     return 
-  //   }
-  //   this.setData({
-  //     loading:true
-  //   })
-  //   var that = this
-  //   wx.login({
-  //     timeout: 50000,
-  //     success(res){
-  //       console.log(res);
-  //       wx.getUserInfo({
-  //         success (userinfo) {
-  //           console.log(userinfo);
-  //         },fail(error) {
-  //           that.setData({
-  //             loading: false
-  //           })
-  //         }
-  //       })
-  //     }
-  //   })
-  // },
+
   /** 登录按钮点击 */
   getUserInfo:function(){
     if (this.data.loading==true) {
-      return 
-    }
-    if (this.data.isAgreen==false) {
-      console.log('=========')
-      this.openTextToast('请阅读并勾选用户协议与隐私协议');
       return 
     }
     this.setData({
@@ -205,30 +180,29 @@ Page({
      }
    )
  },
- /**用户协议点击 */
- useragreenClick: function() {
-
- },
- /**隐私协议点击 */
- privacyClick: function() {
-  
- },
- /**文字提示 */
- openTextToast: function(textcontent) {
-  this.setData({
-      textInfo: textcontent,
-      textToast: true
-  });
-  setTimeout(() => {
-      this.setData({
-          hideTextToast: true
-      });
-      setTimeout(() => {
-          this.setData({
-              textToast: false,
-              hideTextToast: false,
-          });
-      }, 300);
-  }, 3000);
-},
+ 
+  /**文字提示 */
+  openTextToast: function(textcontent) {
+    this.setData({
+        textInfo: textcontent,
+        textToast: true
+    });
+    setTimeout(() => {
+        this.setData({
+            hideTextToast: true
+        });
+        setTimeout(() => {
+            this.setData({
+                textToast: false,
+                hideTextToast: false,
+            });
+        }, 300);
+    }, 3000);
+  },
+  /**电话登录点击 */
+  phoneLoginClick() {
+    wx.navigateTo({
+      url: '../phonelogin/phonelogin',
+    })
+  }
 })

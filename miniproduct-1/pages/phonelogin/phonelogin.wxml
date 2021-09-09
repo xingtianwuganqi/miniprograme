@@ -1,0 +1,17 @@
+<!--pages/phonelogin/phonelogin.wxml-->
+<view class='back-view'>
+  <view class='title-view'>真命天喵</view>
+  <form class="page__bd" bindsubmit="formSubmit" bindreset="formReset">
+    <view class='account-view'>
+      <image class='account-img' src='../../icons/icon_login_phone.png'></image>
+      <input name='account' placeholder="请输入手机或邮箱" class='account-input' />
+    </view>
+    <view class='account-line'></view>
+    <view class='pswd-view'>
+      <image class='account-img' src='../../icons/icon_login_pswd.png'></image>
+      <input name='password' placeholder="请输入密码" class='account-input'/>
+    </view>
+    <view class='pswd-line'></view>
+  </form>
+  <button class='login-button' style='width:690rpx;height: 100rpx;'>登录</button>
+</view>

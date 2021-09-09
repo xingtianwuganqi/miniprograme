@@ -7,23 +7,13 @@
     <text>微信快捷登录</text>
   </view> -->
   <button class='login-button' style='width:690rpx;height: 100rpx;' bindgetuserinfo="getUserInfo" open-type="getUserInfo" loading="{{}}">微信快捷登录</button>
-  <view class='agreement-view'>
-    <view bindtap='iconClick' wx:if='{{isAgreen==true}}'>
-      <i class="weui-icon-success" style="color:#ffa500;width:40rpx;height:40rpx;"></i>
-    </view>
-    <view bindtap='iconUnselectClick' wx:else>
-      <i class="weui-icon-circle" style="color:#ffa500;width:40rpx;height:40rpx;"></i>
-    </view>
-    <text>同意</text>
-    <text bindtap='useragreenClick' style="color:#ffa500;">《用户协议》</text>
-    <text>与</text>
-    <text bindtap="privacyClick" style="color:#ffa500;">《隐私协议》</text>
-  </view>
 
-  <view class="fadeIn {{hideTextToast ? 'fadeOut' : ''}}" wx:if="{{textToast}}">
+  <!-- <view class="fadeIn {{hideTextToast ? 'fadeOut' : ''}}" wx:if="{{textToast}}">
 		<view class="weui-mask_transparent"></view>
 		<view class="weui-toast weui-toast_text">
 			<view class="weui-toast__content">{{textInfo}}</view>
 		</view>
-	</view>
+	</view> -->
+  <view class='empty-view'></view>
+  <view class='phone-login' style="padding-bottom: {{bottomHeight}}rpx;" bindtap="phoneLoginClick">使用账号登录</view>
 </view>
