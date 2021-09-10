@@ -31,8 +31,15 @@ page{
 }
 
 .account-img {
-  width: 40rpx;
-  height: 50rpx;
+  width: 30rpx;
+  height: 40rpx;
+  padding-left: 60rpx;
+  flex-grow: 0
+}
+
+.pswd-img {
+  width: 30rpx;
+  height: 35rpx;
   padding-left: 60rpx;
   flex-grow: 0
 }

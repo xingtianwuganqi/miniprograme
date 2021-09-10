@@ -15,5 +15,5 @@
 		</view>
 	</view> -->
   <view class='empty-view'></view>
-  <view class='phone-login' style="padding-bottom: {{bottomHeight}}rpx;" bindtap="phoneLoginClick">使用账号登录</view>
+  <view class='phone-login' style="padding-bottom: {{bottomHeight}}rpx;" bindtap="phoneLoginClick">已有账号？使用账号登录</view>
 </view>

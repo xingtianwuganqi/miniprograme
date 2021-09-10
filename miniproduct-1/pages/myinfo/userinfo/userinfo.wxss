@@ -27,6 +27,15 @@ page{
   margin-left: 30rpx;
 }
 
+.user-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  border-width: 2;
+  border-color: white;
+  background-color: #f5f5f5;
+}
+
 .nickname {
   font-size: 40rpx;
   font-weight: 700;

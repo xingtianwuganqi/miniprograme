@@ -8,10 +8,10 @@
     </view>
     <view class='account-line'></view>
     <view class='pswd-view'>
-      <image class='account-img' src='../../icons/icon_login_pswd.png'></image>
+      <image class='pswd-img' src='../../icons/icon_login_pswd.png'></image>
       <input name='password' placeholder="请输入密码" class='account-input'/>
     </view>
     <view class='pswd-line'></view>
+    <button form-type="submit" class='login-button' style='width:690rpx;height: 100rpx;'>登录</button>
   </form>
-  <button class='login-button' style='width:690rpx;height: 100rpx;'>登录</button>
 </view>

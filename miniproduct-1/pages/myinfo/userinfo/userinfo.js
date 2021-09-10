@@ -42,7 +42,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var userinfo = wx.getStorageSync('userInfo')
+    if (userinfo != null) {
+      this.setData({
+        userInfo: userinfo
+      })
+    }
   },
 
   /**

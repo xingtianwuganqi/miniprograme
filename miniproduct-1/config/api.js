@@ -30,4 +30,6 @@ module.exports = {
   report: baseUrl + '/api/v1/report/', //举报
   suggestion: baseUrl + '/api/v1/suggestion/', // 意见反馈
   complateRescue: baseUrl + '/api/v1/completetopic/', // 完成领养
+
+  login: baseUrl + '/api/v1/login/', // 登录
 };

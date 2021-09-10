@@ -4,7 +4,7 @@
   <scroll-view scroll-y class='scroll-view'>
     <view class='userInfo' bindtap="userInfoClick">
       <view class='user-avator'>
-        <image src="{{common.loadThumbImg(userInfo.avator)}}"></image>
+        <image class='user-img' src="{{common.loadThumbImg(userInfo.avator)}}"></image>
       </view>
       <view class='nickname'>
         {{userInfo.username != null ? userInfo.username : '登录/注册'}}
