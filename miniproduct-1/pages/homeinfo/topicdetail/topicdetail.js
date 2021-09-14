@@ -37,6 +37,9 @@ Page({
   topicDetailNetworking: function (topic_id) {
     let that = this;
     var token = wx.getStorageSync('token')
+    wx.showLoading({
+      title: '正在加载',
+    })
     wx.request({
       url: app.baseUrl + '/api/v1/topicdetail/',
       data:{
@@ -49,6 +52,9 @@ Page({
       },
       success(res){
         console.log(res.data);
+        wx.hideLoading({
+          success: (res) => {},
+        })
         if (res.data.code == 200) {
           var contactStatus = 0
           var contactInfo = ''
@@ -68,6 +74,10 @@ Page({
             contactInfo: contactInfo
           })
         }
+      },fail(error){
+        wx.hideLoading({
+          success: (res) => {},
+        })
       }
     });
   },

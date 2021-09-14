@@ -73,6 +73,9 @@ Page({
   },
   /**消息点击 */
   messageClick: function(e) {
+    if (util.checkIsNotLogin()) {
+      return 
+    }
     var id = e.currentTarget.dataset.id
     console.log(e)
     if (id == 1 || id == 2 || id == 3) {

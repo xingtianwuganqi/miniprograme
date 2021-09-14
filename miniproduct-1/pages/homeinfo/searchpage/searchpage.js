@@ -112,10 +112,12 @@ Page({
   searchNetworking(keyword,page) {
     this.data.page = page
     var that = this
+    var token = wx.getStorageSync('token')
     var data = {
       'keyword': keyword,
       'page': that.data.page,
       'size': that.data.size,
+      'token': token
     }
     console.log(keyword,data)
     wx.showLoading({
@@ -184,5 +186,87 @@ Page({
       }
       this.searchNetworking(this.data.searchKeyword,this.data.page)
     }
-  }
+  },
+
+  /**触发点赞 */
+  likeMarkAction(e) {
+    var id = e.detail.topic
+    var mark = e.detail.mark
+    var items = this.data.items.map((item) =>{
+      if (item.topic_id == id) {
+        var newItem = item
+        if (mark == 1) {
+          newItem.liked = true
+          newItem.likes_num = newItem.likes_num + 1
+        }else{
+          newItem.liked = false
+          if (newItem.likes_num > 0) {
+            newItem.likes_num = newItem.likes_num - 1
+          }
+        }
+        return newItem
+      }else{
+        return item
+      }
+    })
+    this.setData({
+      items: items
+    })
+  },
+  collectMarkAcion(e) {
+    var id = e.detail.topic
+    var mark = e.detail.mark
+    var items = this.data.items.map((item) =>{
+      if (item.topic_id == id) {
+        var newItem = item
+        if (mark == 1) {
+          newItem.collectioned = true
+          newItem.collection_num = newItem.collection_num + 1
+        }else{
+          newItem.collectioned = false
+          if (newItem.collection_num > 0) {
+            newItem.collection_num = newItem.collection_num - 1
+          }
+        }
+        return newItem
+      }else{
+        return item
+      }
+    })
+    this.setData({
+      items: items
+    })
+  },
+  /**点击了评论按钮 */
+  commentBtnClick(e) {
+    var item = e.detail.topic
+    var id = item.topic_id
+    var topic_uid = item.userInfo.id
+    console.log('id 的值为',id)
+    wx.navigateTo({
+      url: '../../comment/commentpage?topic_id='+id+'&topic_type='+'1'+'&topic_uid='+topic_uid,
+    })
+  },
+  /**整个cell点击 */
+  cellDidSelect(e) {
+    var id = e.detail.topic
+    console.log('id 的值为',id)
+    var that = this
+    wx.navigateTo({
+      url: '../../homeinfo/topicdetail/topicdetail?topic_id=' + id,
+      events: {
+        statusChanged: (item) => {
+          that.topicItemStatusChanged(item)
+        }
+      }
+    })
+  },
+  /**更多按钮点击 */
+  moreButtonClick(e) {
+    var id = e.detail.topic
+    console.log(id)
+    wx.navigateTo({
+      url: '../../myinfo/reportpage/reportpage?report_id=' + id,
+    })
+  },
 })
