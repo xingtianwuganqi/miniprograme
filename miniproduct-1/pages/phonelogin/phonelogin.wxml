@@ -4,12 +4,12 @@
   <form class="page__bd" bindsubmit="formSubmit" bindreset="formReset">
     <view class='account-view'>
       <image class='account-img' src='../../icons/icon_login_phone.png'></image>
-      <input name='account' placeholder="请输入手机或邮箱" class='account-input' />
+      <input name='account' placeholder="请输入手机或邮箱" placeholder-style="color:#828282;" class='account-input' />
     </view>
     <view class='account-line'></view>
     <view class='pswd-view'>
       <image class='pswd-img' src='../../icons/icon_login_pswd.png'></image>
-      <input name='password' placeholder="请输入密码" class='account-input'/>
+      <input name='password' placeholder="请输入密码" placeholder-style="color:#828282;" class='account-input'/>
     </view>
     <view class='pswd-line'></view>
     <button form-type="submit" class='login-button' style='width:690rpx;height: 100rpx;'>登录</button>
