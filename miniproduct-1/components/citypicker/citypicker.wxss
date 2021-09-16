@@ -42,6 +42,10 @@
   box-sizing: border-box;
   /* border: 1rpx solid #000; */
   font-size: 32rpx;
+  color: #333;
+  overflow: hidden; 
+  text-overflow:ellipsis;
+  white-space:nowrap; 
 }
  
 .goodsdetail-top-l-o {
@@ -51,6 +55,10 @@
   box-sizing: border-box;
   border-bottom: 1rpx solid #e22e1f;
   font-size: 32rpx;
+  color: #333;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  white-space:nowrap; 
   /* color: #e22e1f; */
 }
  
@@ -132,6 +140,7 @@
   display: flex;
   /* border: 1rpx solid #000; */
   position: relative;
+  color: #333;
 }
  
 .icon-cheveron-right:before {

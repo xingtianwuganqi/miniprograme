@@ -48,7 +48,7 @@ page{
 } */
 
 .imageview{
-  margin: 30rpx 20rpx 30rpx 20rpx;
+  margin: 30rpx 20rpx 20rpx 20rpx;
 }
 
 .img-item {
@@ -95,7 +95,7 @@ page{
   border-radius: 10rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
-  margin-bottom: 15rpx;
+  margin-bottom: 10rpx;
   height: 100rpx;
   display: flex;
   flex-direction: row;
@@ -106,7 +106,7 @@ page{
 .addressinfo{
   background-color: #f5f5f5;
   border-radius: 10rpx;
-  margin-top: 15rpx;
+  margin-top: 10rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
   height: 100rpx;
@@ -120,6 +120,27 @@ page{
   /* box-sizing: border-box; */
 }
 
+.push-button {
+  background-color: #ffa500;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  height: 100rpx;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center; */
+  color:white;
+  font-size: 36rpx;
+  font-weight: 700;
+  text-align: center;
+  line-height: 100rpx;
+  /* display: block; */
+  /* border: 1rpx solid #000; */
+  /* box-sizing: border-box; */
+}
+
 .input-text{
   padding-left: 20rpx;
   padding-right: 20rpx;
@@ -128,6 +149,7 @@ page{
 .address-text{
   padding-left: 20rpx;
   padding-right: 20rpx;
+  color:#828282;
 }
 
 .remind-text{

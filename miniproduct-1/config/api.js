@@ -32,4 +32,7 @@ module.exports = {
   complateRescue: baseUrl + '/api/v1/completetopic/', // 完成领养
 
   login: baseUrl + '/api/v1/login/', // 登录
+
+  location: baseUrl + '/api/location/', // 选取地址
+  
 };

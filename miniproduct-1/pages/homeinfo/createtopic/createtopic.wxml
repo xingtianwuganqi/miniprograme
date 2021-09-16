@@ -15,7 +15,7 @@
   </view>
   <view class='inputview'>
     <textarea class='text-area' 
-    placeholder="请简单介绍下宠物，例如：\n名字：xxx\n年龄：xxx\n性别：xxx\n品种：xxx\n健康信息：xxx\n领养要求：xxx"
+    placeholder="请简单介绍下宠物，例如：\n名字：xxx\n年龄：xxx\n性别：xxx\n品种：xxx\n健康信息：xxx\n领养要求：xxx" placeholder-style="color:#828282;"
     bindblur="bindTextAreaBlur"
     focus="{{contact-focus}}"
     >
@@ -38,12 +38,15 @@
    </view>
   </view>
   <view class='contact'>
-    <input class="input-text" placeholder="请输入联系方式" 
+    <input class="input-text" placeholder="请输入联系方式" placeholder-style="color:#828282;"
     bindinput="contactInput"/>
   </view>
   <view class='addressinfo' bindtap='chooseAddress'>
-    <view class='address-text' wx:if='{{showAddress==true}}'>{{address}}</view>
+    <view class='address-text' wx:if='{{showAddress==true}}' style="color:#292929">{{address}}</view>
     <view class='address-text' wx:else >请选择位置</view>
+  </view>
+  <view class='push-button' bindtap='addButtonClick'>
+    <text>发布</text>
   </view>
   <view class='remind-text'>
     <text>
@@ -51,9 +54,9 @@
     </text>
   </view>
 
-  <view class='add-back' bindtap='addButtonClick'>
+  <!-- <view class='add-back' bindtap='addButtonClick'>
     <text>发布</text>
-  </view>
+  </view> -->
   
 </view>
 <getAddress id='getAddress' locationArr="{{locationArr}}" bind:resultEvent="resultEvent">
