@@ -2,31 +2,36 @@
 <wxs src="../../../utils/common.wxs" module="common" />
 <view class='backview'>
   <scroll-view scroll-y class='scroll-page'>
-    <view wx:for="{{items}}" wx:for-item='item' wx:key='key'>
-      <view class='message-view' bindtap="messageClick" data-id="{{item.topicInfo.topic_id}}">
-        <view class='user-info'>
-          <image class='img-avator' src='{{common.loadThumbImg(item.fromInfo.avator)}}'></image>
-          <view class='name-info'>
-            <view class='name'>{{item.fromInfo.username.length>0 ? item.fromInfo.username : "佚名"}}</view>
-            <view class='create-tiem'>{{common.getGap(item.create_time)}}</view>
+    <view wx:if='{{loading==2 && items.length == 0}}'>
+      <custom-empty bind:emptyDidClick='emptyPageClick'></custom-empty>
+    </view>
+    <view wx:elif='{{loading==2 && items.length > 0}}'>
+      <view wx:for="{{items}}" wx:for-item='item' wx:key='key'>
+        <view class='message-view' bindtap="messageClick" data-id="{{item.topicInfo.topic_id}}">
+          <view class='user-info'>
+            <image class='img-avator' src='{{common.loadThumbImg(item.fromInfo.avator)}}'></image>
+            <view class='name-info'>
+              <view class='name'>{{item.fromInfo.username.length>0 ? item.fromInfo.username : "佚名"}}</view>
+              <view class='create-tiem'>{{common.getGap(item.create_time)}}</view>
+            </view>
           </view>
-        </view>
-        <view class='content'>{{item.msg_content}}</view>
-        <view class='msg-info'>
-          <image class='topic-img' src='{{common.loadThumbImg(item.topicInfo.imgs[0])}}' mode="aspectFill"></image>
-          <view class='msg-content'>
-            <!-- 标签 -->
-            <view class='tag-content'> 
-              <view class='tags' wx:for="{{item.topicInfo.tagInfos}}" wx:for-item='tag' wx:key='tagInfo'>
-                {{tag.tag_name}}
+          <view class='content'>{{item.msg_content}}</view>
+          <view class='msg-info'>
+            <image class='topic-img' src='{{common.loadThumbImg(item.topicInfo.imgs[0])}}' mode="aspectFill"></image>
+            <view class='msg-content'>
+              <!-- 标签 -->
+              <view class='tag-content'> 
+                <view class='tags' wx:for="{{item.topicInfo.tagInfos}}" wx:for-item='tag' wx:key='tagInfo'>
+                  {{tag.tag_name}}
+                </view>
+              </view>
+              <view class='text-content'>
+                {{item.topicInfo.content}}
               </view>
             </view>
-            <view class='text-content'>
-              {{item.topicInfo.content}}
-            </view>
           </view>
+          <view class='line-view'></view>
         </view>
-        <view class='line-view'></view>
       </view>
     </view>
   </scroll-view>

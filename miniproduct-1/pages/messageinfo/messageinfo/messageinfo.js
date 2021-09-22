@@ -13,7 +13,8 @@ Page({
     items: [],
     msg_type: null,
     content: null,
-    isLoadEnd: false
+    isLoadEnd: false,
+    loading: 1, // 0：空，1：loading，2：加载完数据
   },
 
   /**
@@ -127,7 +128,8 @@ Page({
         })
         if (page == 1) {
           that.setData({
-            items: datas
+            items: datas,
+            loading: 2
           })
         
         }else{
@@ -149,5 +151,9 @@ Page({
     wx.navigateTo({
       url: '../../homeinfo/topicdetail/topicdetail?topic_id=' + id,
     })
+  },
+  // 空页面点击
+  emptyPageClick() {
+    this.messageListNetworking(1)
   }
 })

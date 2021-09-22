@@ -2,8 +2,14 @@
 <view class='backview'>
   <scroll-view scroll-y class='scroll-page'>
     <!-- 使用组件 -->
-    <view wx:for="{{items}}" wx:item='item' wx:key='key'>
-      <custom-topicitem item="{{item.topicInfo}}" bind:likeChanged='likeMarkAction' bind:collectChanged= 'collectMarkAcion' bind:commentClick='commentBtnClick' bind:cellDidSelect='cellClick'></custom-topicitem>
+    <view wx:if='{{loading == 2 && items.length == 0}}'>
+      <custom-empty item='{{emptyItem}}'></custom-empty>
     </view>
+    <view wx:elif="{{loading == 2 && items.length > 0}}">
+      <view wx:for="{{items}}" wx:item='item' wx:key='key'>
+        <custom-topicitem item="{{item.topicInfo}}" bind:likeChanged='likeMarkAction' bind:collectChanged= 'collectMarkAcion' bind:commentClick='commentBtnClick' bind:cellDidSelect='cellClick'></custom-topicitem>
+      </view>
+    </view>
+    
   </scroll-view>
 </view>

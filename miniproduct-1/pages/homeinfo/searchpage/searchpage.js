@@ -14,10 +14,13 @@ Page({
     keywords: null,
     page: 1,
     size: 10,
-    items: null,
+    items: [],
     searchKeyword: '',
     isLoadEnd: false,
-    isEmpty: false
+    isEmpty: false,
+    emptyItem: {'title':'暂无数据','desc':'请重新搜索'},
+    loading: 1, // 0：空，1：loading，2：加载完数据
+
   },
 
   /**
@@ -135,12 +138,17 @@ Page({
             that.setData({
               isSearching: true,
               items: res.data.data,
+              loading: 2,
+              isLoadEnd: false,
             })
             that.data.page += 1
 
           }else{
             that.setData({
-              isEmpty: true
+              isSearching: true,
+              items: [],
+              loading: 2,
+              isLoadEnd: true
             })
           }
         }else{

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "custom-topicitem": "../../../components/topicitem/topicitem"
+    "custom-topicitem": "../../../components/topicitem/topicitem",
+    "custom-empty": "../../../components/emptypage/emptypage"
   },
   "backgroundColor":"#fff",
   "backgroundTextStyle":"dark",

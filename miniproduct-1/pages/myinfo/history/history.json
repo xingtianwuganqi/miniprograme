@@ -8,6 +8,7 @@
   "enablePullDownRefresh": true,
   "onReachBottomDistance":100,
   "usingComponents": {
-    "custom-topicitem": "../../../components/topicitem/topicitem"
+    "custom-topicitem": "../../../components/topicitem/topicitem",
+    "custom-empty": "../../../components/emptypage/emptypage"
   }
 }

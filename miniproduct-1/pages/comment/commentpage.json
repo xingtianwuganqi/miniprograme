@@ -6,5 +6,7 @@
   "navigationBarTextStyle": "black",
   "enablePullDownRefresh": false,
   "onReachBottomDistance":100,
-  "usingComponents": {}
+  "usingComponents": {
+    "custom-empty": "../../components/emptypage/emptypage"
+  }
 }

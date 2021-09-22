@@ -8,8 +8,8 @@
   "onReachBottomDistance":100,
   "usingComponents": {
     "custom-topicitem": "../../../components/topicitem/topicitem",
-    "navigation-bar": "../../../components/navigation-bar/navigation-bar"
-
+    "navigation-bar": "../../../components/navigation-bar/navigation-bar",
+    "custom-empty": "../../../components/emptypage/emptypage"
   }
   
 

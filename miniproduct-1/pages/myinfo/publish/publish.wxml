@@ -2,9 +2,14 @@
 <view class='backview'>
   <scroll-view scroll-y class='scroll-page'>
     <view class='title-view'>点击列表右上角更多，点击完成领养，即代表宠物已被领养，他人将无法获取你的联系方式</view>
-    <!-- 使用组件 -->
-    <view wx:for="{{items}}" wx:item='item' wx:key='key'>
-      <custom-topicitem item="{{item}}" fromType='1' bind:likeChanged='likeMarkAction' bind:collectChanged= 'collectMarkAcion' bind:commentClick='commentBtnClick' bind:cellDidSelect='cellClick' bind:complateRescueClick='complateClick'></custom-topicitem>
+    <view wx:if="{{loading==2 && items.length == 0}}">
+      <custom-empty item='{{emptyItem}}'></custom-empty>
     </view>
+    <!-- 使用组件 -->
+    <view wx:elif="{{loading==2 && items.length > 0}}">
+      <view wx:for="{{items}}" wx:item='item' wx:key='key'>
+        <custom-topicitem item="{{item}}" fromType='1' bind:likeChanged='likeMarkAction' bind:collectChanged= 'collectMarkAcion' bind:commentClick='commentBtnClick' bind:cellDidSelect='cellClick' bind:complateRescueClick='complateClick'></custom-topicitem>
+      </view>
+    </view>    
   </scroll-view>
 </view>

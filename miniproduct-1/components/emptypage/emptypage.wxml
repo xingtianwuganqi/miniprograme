@@ -1,0 +1,7 @@
+<!--components/emptypage/emptypage.wxml-->
+<view class='back-view'>
+  <view class='content' bindtap="emptyClick">
+    <view class='title'>{{item.title}}</view>
+    <view class='desc'>{{item.desc}}</view>
+  </view>
+</view>

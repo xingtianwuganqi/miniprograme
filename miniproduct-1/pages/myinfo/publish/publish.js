@@ -10,7 +10,9 @@ Page({
     page: 1,
     size: 10,
     items: [],
-    isLoadEnd: false
+    isLoadEnd: false,
+    emptyItem: {'title':'暂无数据','desc':'快去发布宠物信息吧'},
+    loading: 1, // 0：空，1：loading，2：加载完数据
   },
 
   /**
@@ -100,7 +102,8 @@ Page({
       if (res.data.code == 200) {
         if (page == 1) {
           that.setData({
-            items: res.data.data
+            items: res.data.data,
+            loading: 2,
           })
         }else{
           var datas = that.data.items

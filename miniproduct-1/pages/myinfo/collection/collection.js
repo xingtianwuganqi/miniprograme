@@ -11,7 +11,9 @@ Page({
     page: 1,
     size: 10,
     items: [],
-    isLoadEnd: false
+    isLoadEnd: false,
+    emptyItem: {"title":"暂无数据","desc":"快去收藏喜欢的宠物吧"},
+    loading: 1,
   },
 
   /**
@@ -82,6 +84,9 @@ Page({
     var that = this
     that.page = page
     var token = wx.getStorageSync('token')
+    wx.showLoading({
+      title: '正在加载',
+    })
     network({
       url:api.authCollection,
       data: {
@@ -91,6 +96,9 @@ Page({
       }
     }).then(res => {
       console.log(res.data)
+      wx.hideLoading({
+        success: (res) => {},
+      })
       // 停止刷新
       wx.stopPullDownRefresh({
         success: (res) => {},
@@ -102,7 +110,8 @@ Page({
         console.log(that.data.items.length)
         if (page == 1) {
           that.setData({
-            items: res.data.data
+            items: res.data.data,
+            loading: 2,
           })
         }else{
           var datas = that.data.items

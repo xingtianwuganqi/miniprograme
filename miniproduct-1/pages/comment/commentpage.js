@@ -24,6 +24,8 @@ Page({
     currentCommentInfo: null,
     currentReplyInfo: null,
     inputText: '',// 输入时的文字
+    emptyItem: {'title':'暂无评论','desc':'快去发表第一条评论吧'},
+    loading: 1, // 0：空，1：loading，2：加载完数据
   },
 
   /**
@@ -138,7 +140,8 @@ Page({
         })
         if (page == 1) {
           that.setData({
-            items: datas
+            items: datas,
+            loading: 2
           })
         }else{
           var orginData = that.data.items
@@ -150,6 +153,11 @@ Page({
         if (res.data.data.length < 10) {
           that.data.isLoadEnd = true
         }
+      }else{
+        that.setData({
+          items: [],
+          loading: 2
+        })
       }
     })
   },
@@ -389,5 +397,9 @@ Page({
         })
       }
     })
+  },
+  /**空页面点击 */
+  emptyPageClick() {
+    this.commentListNetworking(1)
   }
 })

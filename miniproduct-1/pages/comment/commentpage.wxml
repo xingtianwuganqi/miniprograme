@@ -2,41 +2,48 @@
 <wxs src="../../utils/common.wxs" module="common" />
 <view class='comment-back'>
   <scroll-view scroll-y class='comment-scroll' style="padding-bottom: {{bottomHeight}}rpx;">
-    <view wx:for='{{items}}' wx:item='item' wx:key='commentKey'>
-      <view class='comment-content'>
-        <view class='user-head'>
-          <image class='head-img' src='{{common.loadThumbImg(item.userInfo.avator)}}'></image>
-        </view>
-        <view class='comment-info'>
-          <view class='user-name'>{{item.userInfo.username}}</view>
-          <view class='comment-text'>{{item.content}}</view>
-          <view class='comment-bottom'>
-            <view class='comment-time'>{{common.getGap(item.create_time)}}</view>
-            <view class='reply-btn' bindtap="commentBtnClick" data-id='{{item}}'>回复</view>
+    <!-- 空页面 -->
+    <view wx:if='{{loading==2 && items.length==0}}'>
+      <custom-empty item='{{emptyItem}}'></custom-empty>
+    </view>
+    <view wx:elif='{{loading==2 && items.length > 0}}'>
+      <view wx:for='{{items}}' wx:item='item' wx:key='commentKey'>
+        <view class='comment-content'>
+          <view class='user-head'>
+            <image class='head-img' src='{{common.loadThumbImg(item.userInfo.avator)}}'></image>
           </view>
-          <view wx:for='{{item.replys}}' wx:for-item="reply" wx:key='replyKey'>
-            <view class='reply-content'>
-              <view class='reply-head'>
-                <image class='reply-img' src='{{common.loadThumbImg(reply.fromInfo.avator)}}'></image>
-              </view>
-              <view class='comment-info'>
-                <view class='user-name'>{{reply.fromInfo.username + " 回复 " + reply.toInfo.username}}</view>
-                <view class='comment-text'>{{reply.content}}</view>
-                <view class='comment-bottom'>
-                  <view class='comment-time'>{{common.getGap(reply.create_time)}}</view>
-                  <view class='reply-btn' bindtap="replyBtnClick" data-id='{{reply}}'>回复</view>
+          <view class='comment-info'>
+            <view class='user-name'>{{item.userInfo.username}}</view>
+            <view class='comment-text'>{{item.content}}</view>
+            <view class='comment-bottom'>
+              <view class='comment-time'>{{common.getGap(item.create_time)}}</view>
+              <view class='reply-btn' bindtap="commentBtnClick" data-id='{{item}}'>回复</view>
+            </view>
+            <view wx:for='{{item.replys}}' wx:for-item="reply" wx:key='replyKey'>
+              <view class='reply-content'>
+                <view class='reply-head'>
+                  <image class='reply-img' src='{{common.loadThumbImg(reply.fromInfo.avator)}}'></image>
+                </view>
+                <view class='comment-info'>
+                  <view class='user-name'>{{reply.fromInfo.username + " 回复 " + reply.toInfo.username}}</view>
+                  <view class='comment-text'>{{reply.content}}</view>
+                  <view class='comment-bottom'>
+                    <view class='comment-time'>{{common.getGap(reply.create_time)}}</view>
+                    <view class='reply-btn' bindtap="replyBtnClick" data-id='{{reply}}'>回复</view>
+                  </view>
                 </view>
               </view>
             </view>
+            <view wx:if="{{item.isOpen==false}}">
+              <view class='more-view' bindtap="loadMoreReply" data-id='{{item}}'>查看更多回复 ></view>
+            </view>
+            <view class='bottom-line'></view>
           </view>
-          <view wx:if="{{item.isOpen==false}}">
-            <view class='more-view' bindtap="loadMoreReply" data-id='{{item}}'>查看更多回复 ></view>
-          </view>
-          <view class='bottom-line'></view>
+          
         </view>
-        
       </view>
     </view>
+    
   </scroll-view>
   <view class='input-back' style="height: {{bottomHeight}}rpx;">
     <input class='input-view' placeholder="{{inputPlaceholder}}" type="text" confirm-type="send" bindinput='inputChange' bindconfirm='confirmClick' bindblur	='inputDisappear' focus="{{isFocus}}" value="{{inputText}}"></input>

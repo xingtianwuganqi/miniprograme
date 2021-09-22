@@ -2,9 +2,11 @@ var loadThumbImg = function (imgUrl) {
   if (imgUrl == null || imgUrl.length == 0) {
     return null
   }
-  if (imgUrl.indexOf('http') > 0) {
+  //如果要检索的字符串值没有出现，则该方法返回 -1
+  if (imgUrl.indexOf('http') != -1) {
     return imgUrl
-  }else{
+  }
+  else{
     return 'http://img.rxswift.cn/' + imgUrl + '?imageView2/0/q/20'
   }
 }

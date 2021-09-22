@@ -20,7 +20,8 @@ Page({
     items: [],
     localItems: [],
     currentTab: 0,
-    isLoadEnd: false
+    isLoadEnd: false,
+    loading: 1, // 0：空，1：loading，2：加载完数据
   },
 
   /**
@@ -77,6 +78,7 @@ Page({
 
           that.setData({
             items: res.data.data,
+            loading: 2
           })
           
         }else{

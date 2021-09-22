@@ -21,7 +21,8 @@
     "pages/myinfo/collection/collection",
     "pages/myinfo/reportpage/reportpage",
     "pages/myinfo/suggestion/suggestion",
-    "pages/phonelogin/phonelogin"
+    "pages/phonelogin/phonelogin",
+    "components/emptypage/emptypage"
   ],
   "window": {
     "backgroundColor": "#fff",

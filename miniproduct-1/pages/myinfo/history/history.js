@@ -11,7 +11,9 @@ Page({
     page: 1,
     size: 10,
     items: [],
-    isLoadEnd: false
+    isLoadEnd: false,
+    emptyItem: {'title':'暂无数据','desc':'快去浏览宠物信息吧'},
+    loading: 1, // 0：空，1：loading，2：加载完数据
   },
 
   /**
@@ -81,6 +83,9 @@ Page({
     var that = this
     that.page = page
     var token = wx.getStorageSync('token')
+    wx.showLoading({
+      title: '正在加载',
+    })
     network({
       url:api.authHistroy,
       data: {
@@ -94,6 +99,7 @@ Page({
       wx.stopPullDownRefresh({
         success: (res) => {},
       })
+      wx.hideLoading()
       if (res.data.code == 200) {
         console.log("res.data.data")
         console.log(res.data.data.length)
@@ -101,12 +107,13 @@ Page({
         console.log(that.data.items.length)
         if (page == 1) {
           that.setData({
-            items: res.data.data
+            items: res.data.data,
+            loading: 2
           })
         }else{
           var datas = that.data.items
           that.setData({
-            items: datas.concat(res.data.data)
+            items: datas.concat(res.data.data),
           })
         }
         if (res.data.data.length == 10) {
