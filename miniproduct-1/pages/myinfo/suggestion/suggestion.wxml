@@ -5,6 +5,7 @@
     <view class='inputview'>
       <textarea class='text-area' 
       placeholder="您的建议对我们非常重要"
+      placeholder-style="color:#828282;"
       bindblur="bindTextAreaBlur"
       focus="{{contactFocus}}"
       bindconfirm='contentConfirmClick'
@@ -13,7 +14,7 @@
     </view> 
     <view class='contact-view'>请输入您的联系方式</view>
     <view class='contact'>
-      <input class="input-text" placeholder="请输入联系方式" 
+      <input class="input-text" placeholder="请输入联系方式" placeholder-style="color:#828282;"
       bindinput="contactInput" focus="{{contactFocus}}"       bindconfirm='contactConfirmClick'
       />
     </view>

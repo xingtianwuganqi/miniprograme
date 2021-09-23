@@ -6,7 +6,7 @@
   <!-- <view class='login-button' bindtap='loginBtnClick'>
     <text>微信快捷登录</text>
   </view> -->
-  <button class='login-button' style='width:690rpx;height: 100rpx;' bindgetuserinfo="getUserInfo" open-type="getUserInfo" loading="{{}}">微信快捷登录</button>
+  <button class='login-button' style='width:690rpx;height: 100rpx;' bindgetuserinfo="getUserInfo" open-type="getUserInfo" loading="{{loading}}">微信快捷登录</button>
 
   <!-- <view class="fadeIn {{hideTextToast ? 'fadeOut' : ''}}" wx:if="{{textToast}}">
 		<view class="weui-mask_transparent"></view>

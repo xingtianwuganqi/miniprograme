@@ -6,7 +6,7 @@ page{
   background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100vw;
   height: 100vh;
@@ -19,7 +19,7 @@ page{
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 50%;
+  height: 80%;
 }
 
 .title {

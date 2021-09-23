@@ -8,7 +8,6 @@ Page({
   data: {
     isAgreen: true,
     textToast: false,
-    loading: false,
     hideTextToast: false,
     hideLoading: false,
     textInfo: null,
@@ -106,15 +105,17 @@ Page({
               wx.login({
                 timeout: 50000,
                 success(loginRes){
+                  var data = {
+                    'avatarUrl':response.userInfo.avatarUrl,
+                    'username': response.userInfo.nickName,
+                    'code': loginRes.code
+                  }
+                  console.log(response.userInfo.avatarUrl.length)
                   console.log(loginRes)
                   /// 获取到code之后传给后台
                   wx.request({
                     url:  app.baseUrl + '/api/v2/wxlogin/',
-                    data:{
-                      'avatarUrl':response.userInfo.avatarUrl,
-                      'username': response.userInfo.nickName,
-                      'code': loginRes.code
-                    },
+                    data: data,
                     method: "POST",
                     header: {
                       "Content-Type": "application/x-www-form-urlencoded"

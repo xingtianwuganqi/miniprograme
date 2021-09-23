@@ -150,13 +150,16 @@ Page({
           })
         }
         that.data.page += 1
-        if (res.data.data.length < 10) {
-          that.data.isLoadEnd = true
+        if (datas.length < 10) {
+          that.setData({
+            isLoadEnd: true
+          })
         }
       }else{
         that.setData({
           items: [],
-          loading: 2
+          loading: 2,
+          isLoadEnd: true
         })
       }
     })
