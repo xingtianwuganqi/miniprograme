@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    topic_id: null,
     topicInfo: null,
     bottomHeight: null,
     contactStatus: 0, // 0 点击获取联系方式，1 显示联系方式，2 已完成领养
@@ -30,6 +31,7 @@ Page({
     }
     console.log(options);
     var topic_id = options.topic_id;
+    this.data.topic_id = topic_id
     this.topicDetailNetworking(topic_id);
     this.addViewHistoryNetworking(topic_id);
   },
@@ -128,7 +130,18 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    var id = this.data.topic_id
+    var path = '/pages/homeinfo/topicdetail/topicdetail?topic_id=' + id
+    console.log(path)
+    var imgUrl = ''
+    if (this.data.topicInfo.imgs.length > 0) {
+      imgUrl = 'http://img.rxswift.cn/' + this.data.topicInfo.imgs[0]
+    }
+    return {
+      title: this.data.topicInfo.content,
+      path: path,
+      imageUrl: imgUrl
+    }
   },
   /**点赞按钮点击 */
   likeButtonClick:function(event) {

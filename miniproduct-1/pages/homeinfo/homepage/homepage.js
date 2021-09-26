@@ -6,6 +6,7 @@
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
 const app = getApp().globalData;
+const util = require('../../../utils/util.js')
 Page({
   /**
    * 页面的初始数据
@@ -44,6 +45,7 @@ Page({
 
     });
     this.listNetworking(this.data.page);
+    this.unreadMsgNumNetworking()
   },
 
   /* 网络请求*/
@@ -169,7 +171,15 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '真命天喵',
+      desc: '一起帮宠物找个家',
+      path: '../homepage/homepage'
+    }
   },
 
   /**
@@ -337,5 +347,42 @@ Page({
         items: datas
       })
     }
+  },
+  /**设置消息tabbar未读消息数 */
+  unreadMsgNumNetworking() {
+    var that = this
+    var token = wx.getStorageSync('token')
+    if (util.checkIsNotLogin) {
+      return 
+    }
+    network({
+      url: api.unreadMsgNum,
+      data: {
+        "token": token
+      }
+    }).then(res=>{
+      console.log(res.data.data)
+      if (res.data.code == 200) {
+        var like_unread = res.data.data.like_unread
+        var collec_unread = res.data.data.collec_unread
+        var com_unread = res.data.data.com_unread
+        var total_num = like_unread + collec_unread + com_unread
+        if (total_num > 99) {
+          wx.setTabBarBadge({
+            index: 1,
+            text: '99+',
+          })
+        }else if (total_num > 0) {
+          wx.setTabBarBadge({
+            index: 1,
+            text: total_num.toString(),
+          })
+        }else{
+          wx.removeTabBarBadge({
+            index: 1,
+          })
+        }
+      }
+    })
   }
 })

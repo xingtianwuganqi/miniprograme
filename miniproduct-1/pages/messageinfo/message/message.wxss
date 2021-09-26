@@ -38,6 +38,19 @@ page{
 .empty-view{
   flex-grow: 1;
 }
+.num-view{
+  flex-grow: 0;
+  height: 50rpx;
+  /* width: 50rpx; */
+  padding-left: 12rpx;
+  padding-right: 12rpx;
+  margin-right: 20rpx;
+  border-radius: 25rpx;
+  background-color: red;
+  color: white;
+  text-align: center;
+  line-height: 50rpx;
+}
 .right-icon{
   width: 16rpx;
   height: 25rpx;

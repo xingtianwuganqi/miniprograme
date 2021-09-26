@@ -8,6 +8,7 @@
       </text>
       <view class='empty-view'>
       </view>
+      <view class='num-view' wx:if='{{item.num.length > 0}}' >{{item.num}}</view>
       <image class='right-icon' src='../../../icons/icon_center_allin.png'></image>
     </view>
     <view class='line-item'>
