@@ -67,7 +67,7 @@ page{
 .title-view{
   padding-left: 20rpx;
   font-size: 32rpx;
-  color: #292929;
+  color: #333;
 }
 
 .empty-view{

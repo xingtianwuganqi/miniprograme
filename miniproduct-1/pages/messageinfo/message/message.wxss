@@ -31,7 +31,7 @@ page{
 .text-item{
   text-align: center;
   padding: 20rpx;
-  color: #292929;
+  color: #333;
   flex-grow: 0;
   font-size: 32rpx;
 }

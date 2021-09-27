@@ -41,6 +41,8 @@ page{
   padding-left: 30rpx;
   padding-right: 30rpx;
   flex-grow: 1;
+  color: #333;
+  font-size: 32rpx;
 }
 
 /* .text-area{
@@ -132,7 +134,7 @@ page{
   justify-content: flex-start;
   align-items: center; */
   color:white;
-  font-size: 36rpx;
+  font-size: 32rpx;
   font-weight: 700;
   text-align: center;
   line-height: 100rpx;
@@ -150,6 +152,7 @@ page{
   padding-left: 20rpx;
   padding-right: 20rpx;
   color:#828282;
+  font-size: 32rpx;
 }
 
 .remind-text{
@@ -157,7 +160,8 @@ page{
   padding-left: 30rpx;
   padding-right: 30rpx;
   margin-bottom: 30rpx;
-  color: #666666
+  color: #8b8b8b;
+  font-size: 32rpx;
 }
 
 .img-show{

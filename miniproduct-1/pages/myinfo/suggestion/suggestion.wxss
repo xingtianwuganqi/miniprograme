@@ -11,7 +11,7 @@ page{
 }
 
 .title-view{
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #333333;
   padding-left: 30rpx;
   padding-right: 30rpx;
@@ -37,7 +37,7 @@ page{
 }
 
 .contact-view{
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #333333;
   padding-left: 30rpx;
   padding-right: 30rpx;

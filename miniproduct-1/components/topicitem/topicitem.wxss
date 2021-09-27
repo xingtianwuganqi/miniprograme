@@ -35,11 +35,12 @@
   padding-left: 20rpx;
   flex-grow: 1;
   align-items: flex-start;
+  color: #000;
 }
 
 .time-item{
   font-size: 24rpx;
-  color: #999999;
+  color: #707070;
 }
 
 .icon-view{
@@ -85,12 +86,13 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #333;
 }
 
 .address{
   margin-top: 10rpx;
-  font-size: 26.rpx;
-  color: #999999;
+  font-size: 26rpx;
+  color: #707070;
   padding-left: 100rpx;
   padding-right: 20rpx;
   text-align: left;

@@ -40,7 +40,7 @@
   <view class='bottom-view' style="position:fixed; bottom:0;width: 750rpx;height: {{bottomHeight}}rpx;">
   <!-- 获取联系方式 -->
     <view class='contact-view'>
-      <button class="mini-btn" style="width:690rpx;color:#ffffff;background-color:#ffa500;height: 85rpx;" type="default" bindtap="getContactNetworking">{{contactInfo}}</button>
+      <button class="mini-btn" style="width:690rpx;color:#ffffff;background-color:#ffa500;height: 85rpx;font-size: 32rpx;" type="default" bindtap="getContactNetworking">{{contactInfo}}</button>
     </view>
     <!-- 评论区 -->
     <view class='interaction'>

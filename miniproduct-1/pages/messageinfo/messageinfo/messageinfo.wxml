@@ -11,7 +11,7 @@
           <view class='user-info'>
             <image class='img-avator' src='{{common.loadThumbImg(item.fromInfo.avator)}}'></image>
             <view class='name-info'>
-              <view class='name'>{{item.fromInfo.username.length>0 ? item.fromInfo.username : "佚名"}}</view>
+              <view class='name'>{{item.from_info.username.length>0 ? item.from_info.username : "佚名"}}</view>
               <view class='create-tiem'>{{common.getGap(item.create_time)}}</view>
             </view>
           </view>
@@ -25,7 +25,7 @@
                   {{tag.tag_name}}
                 </view>
               </view>
-              <view class='text-content'>
+              <view class='text-content' style="-webkit-line-clamp: {{item.topicInfo.tagInfos.length > 0 ? 2 : 3}};">
                 {{item.topicInfo.content}}
               </view>
             </view>

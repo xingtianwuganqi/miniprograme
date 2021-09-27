@@ -133,8 +133,9 @@ Page({
           })
         
         }else{
+          var newDatas = that.data.items.concat(datas)
           that.setData({
-            items: that.data.concat(datas)
+            items: newDatas
           })
         }
         if (datas.length == 10) {
