@@ -1,0 +1,25 @@
+/* pages/myinfo/instruction/instruction.wxss */
+page{
+  background-color: white;
+}
+
+.back-view{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 60rpx;
+}
+
+.attention{
+  font-size: 32rpx;
+  color: #222;
+  line-height: 60rpx;
+  font-weight: 700;
+}

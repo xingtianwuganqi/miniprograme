@@ -103,7 +103,7 @@ page{
   padding-bottom: 5rpx;
   text-align: start;
   font-size: 24rpx;
-  color: #999999;
+  color: #707070;
 }
 
 .reply-btn{
@@ -113,7 +113,7 @@ page{
   padding-left: 30rpx;
   padding-right: 30rpx;
   font-size: 24rpx;
-  color: #999;
+  color: #707070;
 }
 
 .reply-content{

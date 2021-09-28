@@ -10,7 +10,9 @@ Page({
       {img:'../../../icons/icon_view_hist.png',title: '浏览记录',num: 0,id: 1},
       {img:'../../../icons/icon_mi_publish.png',title: '我的发布',num: 0,id: 2},
       {img:'../../../icons/icon_mi_collection.png',title: '我的收藏',num: 0,id: 3},
-      {img:'../../../icons/icon_mi_xy.png',title: '意见反馈',num: 0, id: 4},
+      {img:'../../../icons/icon_setting_fk.png',title: '意见反馈',num: 0, id: 4},
+      {img:'../../../icons/icon_mi_xy.png',title: '领养说明',num: 0,id: 5},
+      {img:'../../../icons/icon_mi_about.png',title: '关于我们',num: 0,id: 6}
       // {img:'../../../icons/icon_mi_xy.png',title: '用户协议',num: 0,id: 4},
       // {img:'../../../icons/icon_pravicy.png',title: '隐私政策',num: 0,id: 5},
       // {img:'../../../icons/icon_mi_about.png',title: '关于我们',num: 0,id: 6},
@@ -92,27 +94,44 @@ Page({
   },
   /**点击cell */
   didSelect: function(e) {
-    if (util.checkIsNotLogin()) {
-      return 
-    }
     var id = e.currentTarget.dataset.id
     console.log(id)
     if (id == 1) {
+      if (util.checkIsNotLogin()) {
+        return 
+      }
       wx.navigateTo({
         url: '../history/history',
       })
     }else if (id == 2) {
+      if (util.checkIsNotLogin()) {
+        return 
+      }
       wx.navigateTo({
         url: '../publish/publish',
       })
     }else if (id == 3) {
+      if (util.checkIsNotLogin()) {
+        return 
+      }
       wx.navigateTo({
         url: '../collection/collection',
       })
     }
     else if (id == 4) {
+      if (util.checkIsNotLogin()) {
+        return 
+      }
       wx.navigateTo({
         url: '../suggestion/suggestion',
+      })
+    }else if (id == 5) {
+      wx.navigateTo({
+        url: '../instruction/instruction',
+      })
+    }else if (id == 6) {
+      wx.navigateTo({
+        url: '../aboutus/aboutus',
       })
     }
     

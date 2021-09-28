@@ -3,7 +3,7 @@
   <view class='searchback'>
     <view class='searchview' bindtap="searchViewClick">
       <image src='../../../icons/icon_wx_search.png' style="height:28rpx;width:28rpx; padding-left: 30rpx;"></image>
-      <input class="searchtext"  type="text" confirm-type="search" placeholder="输入关键词！" bindinput='searchInput' bindconfirm='searchBegin' value="{{searchKeyword.length > 0 ? searchKeyword : null}}" ></input>
+      <input class="searchtext"  type="text" confirm-type="search" style="color: #333;font-size: 30rpx;" placeholder="请输入关键词！" placeholder-style="color: #828282;font-size: 30rpx;" bindinput='searchInput' bindconfirm='searchBegin' value="{{searchKeyword.length > 0 ? searchKeyword : null}}" ></input>
     </view>
     
   </view>

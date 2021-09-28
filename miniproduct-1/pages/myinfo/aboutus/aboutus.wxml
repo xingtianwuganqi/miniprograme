@@ -1,0 +1,11 @@
+<!--pages/myinfo/aboutus/aboutus.wxml-->
+<scroll-view scroll-y>
+  <view class='back-view'>
+    <view>感谢使用真命天喵小程序。真命天喵小程序是由微信公众号真命天喵为了宠物救助领养而开发维护的一款小程序。本公众号旨在帮助宠物找到它们的真命铲屎官、帮助漂泊的人找到能陪伴在身边的宠物。欢迎关注投稿！</view>
+    <view>欢迎加入我们，一起帮宠物找个温暖的家。</view>
+    <view>欢迎关注公众号：真命天喵</view>
+  </view>
+  <view class='img-view'>
+    <image class='img-view' style="width: 500rpx;height: 581rpx;" src='../../../icons/zmtmgzh.jpg'></image>
+  </view>
+</scroll-view>

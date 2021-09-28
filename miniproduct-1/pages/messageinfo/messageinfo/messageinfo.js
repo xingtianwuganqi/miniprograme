@@ -93,9 +93,11 @@ Page({
     var token = wx.getStorageSync('token')
     var that = this
     that.data.page = page
-    wx.showLoading({
-      title: '正在加载',
-    })
+    if (page == 1 && that.data.loading == 1) {
+      wx.showLoading({
+        title: '正在加载',
+      })
+    }
     network({
       url: api.messageInfo,
       data: {
@@ -108,6 +110,9 @@ Page({
       console.log(res.data)
       wx.hideLoading()
       wx.stopPullDownRefresh({
+        success: (res) => {},
+      })
+      wx.hideLoading({
         success: (res) => {},
       })
       if (res.data.code == 200) {

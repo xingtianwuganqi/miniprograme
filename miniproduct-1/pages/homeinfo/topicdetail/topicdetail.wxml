@@ -47,27 +47,27 @@
         <view class="mini-btn" >
           <view class="mini-btn" wx:if='{{topicInfo.liked==true}}' bindtap='likeButtonClick' data-id="{{topicInfo.topic_id}}" data-mark='{{false}}'>
             <image src='../../../icons/icon_zan_se.png' style="width:40rpx;height:40rpx;" mode="widthFix"></image>
-            <text style="font-size:28rpx;color:#666666;padding-left: 10rpx;">{{topicInfo.likes_num > 0 ? topicInfo.likes_num : "点赞"}}</text>
+            <text style="font-size:28rpx;color:#707070;padding-left: 10rpx;">{{topicInfo.likes_num > 0 ? topicInfo.likes_num : "点赞"}}</text>
           </view>
           <view class="mini-btn" wx:else bindtap='likeButtonClick' data-id="{{topicInfo.topic_id}}" data-mark='{{true}}'>
             <image class='icon-size' src='../../../icons/icon_zan_un.png' style="width:40rpx;height:40rpx;" mode="widthFix"></image>
-            <text style="font-size:28rpx;color:#666666;padding-left: 10rpx;">{{topicInfo.likes_num > 0 ? topicInfo.likes_num : "点赞"}}</text>
+            <text style="font-size:28rpx;color:#707070;padding-left: 10rpx;">{{topicInfo.likes_num > 0 ? topicInfo.likes_num : "点赞"}}</text>
           </view>
         </view>
         <view class="mini-btn" >
           <view class="mini-btn" wx:if='{{topicInfo.collectioned==true}}' bindtap='collectButtonClick' data-id="{{topicInfo.topic_id}}" data-mark='{{false}}'>
             <image src='../../../icons/icon_collection_se.png' style="width:40rpx;height:40rpx;" mode="widthFix"></image>
-            <text style="font-size:28rpx;color:#666666;padding-left: 10rpx;">{{topicInfo.collection_num > 0 ? topicInfo.collection_num : "收藏"}}</text>
+            <text style="font-size:28rpx;color:#707070;padding-left: 10rpx;">{{topicInfo.collection_num > 0 ? topicInfo.collection_num : "收藏"}}</text>
           </view>
           <view class="mini-btn" wx:else bindtap='collectButtonClick' data-id="{{topicInfo.topic_id}}" data-mark='{{true}}'>
             <image class='icon-size' src='../../../icons/icon_collection_un.png' style="width:40rpx;height:40rpx;" mode="widthFix"></image>
-            <text style="font-size:28rpx;color:#666666;padding-left: 10rpx;">{{topicInfo.collection_num > 0 ? topicInfo.collection_num : "收藏"}}</text>
+            <text style="font-size:28rpx;color:#707070;padding-left: 10rpx;">{{topicInfo.collection_num > 0 ? topicInfo.collection_num : "收藏"}}</text>
           </view>
         </view>
         <view class="mini-btn" >
           <view class="mini-btn" bindtap="commentBtnClick" data-id='{{topicInfo}}'>
             <image src='../../../icons/icon_sh_commen.png' style="width:40rpx;height:40rpx;" mode="widthFix"></image>
-            <text style="font-size:28rpx;color:#666666;padding-left: 10rpx;">{{topicInfo.commNum > 0 ? topicInfo.commNum : "评论"}}</text>
+            <text style="font-size:28rpx;color:#707070;padding-left: 10rpx;">{{topicInfo.commNum > 0 ? topicInfo.commNum : "评论"}}</text>
           </view>
         </view>
       </view>

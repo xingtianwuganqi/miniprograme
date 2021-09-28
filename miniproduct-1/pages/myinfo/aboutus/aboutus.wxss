@@ -1,0 +1,26 @@
+/* pages/myinfo/aboutus/aboutus.wxss */
+page{
+  background-color: white;
+}
+
+.back-view{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 60rpx;
+}
+
+.img-view{
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}

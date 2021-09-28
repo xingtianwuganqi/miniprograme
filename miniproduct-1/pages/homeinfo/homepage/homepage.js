@@ -52,9 +52,14 @@ Page({
   listNetworking: function(e) {
     this.data.page = e;
     var that = this;
-    if (this.data.page == 1) {
+    if (that.data.page == 1) {
       //在当前页面显示导航条加载动画
       wx.showNavigationBarLoading(); 
+    }
+    if (that.data.page == 1 && that.data.loading == 1) {
+      wx.showLoading({
+        title: '正在加载',
+      })
     }
     var token = wx.getStorageSync('token')
     console.log(token)
@@ -69,15 +74,19 @@ Page({
     }).then(res=>{
       console.log('===----------=====')
       console.log(res.data)
+      if (that.data.page == 1) {
+        wx.hideNavigationBarLoading({
+          success: (res) => {},
+        })
+        wx.stopPullDownRefresh({
+          success: (res) => {},
+        })
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
       if (res.data['code'] == 200 && res.data['data'].length > 0) {
         if (that.data.page == 1) {
-          wx.hideNavigationBarLoading({
-            success: (res) => {},
-          })
-          wx.stopPullDownRefresh({
-            success: (res) => {},
-          })
-
           that.setData({
             items: res.data.data,
             loading: 2
@@ -88,13 +97,13 @@ Page({
           that.setData({
             items: orginData.concat(res.data.data)
           })
-          // that.setData({
-          //   items: res.data.data,
-          // })
         }
         that.data.page += 1
       }else{
-        that.data.isLoadEnd = true
+        that.setData({
+          isLoadEnd: true,
+          loading:2
+        })
       }
     })
   },

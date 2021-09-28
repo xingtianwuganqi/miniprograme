@@ -84,9 +84,11 @@ Page({
     var that = this
     that.page = page
     var token = wx.getStorageSync('token')
-    wx.showLoading({
-      title: '正在加载',
-    })
+    if (page == 1 && that.data.loading == 1) {
+      wx.showLoading({
+        title: '正在加载',
+      })
+    }
     network({
       url:api.authCollection,
       data: {

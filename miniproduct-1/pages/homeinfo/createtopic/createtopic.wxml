@@ -10,11 +10,11 @@
       </view>
     </view>
     <view class='add-tags' wx:else bindtap="addTagsClick">
-      <view>添加标签 </view>
+      <view>添加标签 ></view>
     </view>
   </view>
   <view class='inputview'>
-    <textarea class='text-area' style="font-size: 32rpx;color: #333;"
+    <textarea class='text-area' style="font-size: 32rpx;color: #333;height: 100%;"
     placeholder="请简单介绍下宠物，例如：\n名字：xxx\n年龄：xxx\n性别：xxx\n品种：xxx\n健康信息：xxx\n领养要求：xxx" placeholder-style="color:#828282;font-size: 32rpx;"
     bindblur="bindTextAreaBlur"
     focus="{{contact-focus}}"

@@ -123,9 +123,11 @@ Page({
       'token': token
     }
     console.log(keyword,data)
-    wx.showLoading({
-      title: '正在加载',
-    })
+    if (page == 1 && that.data.loading == 1) {
+      wx.showLoading({
+        title: '正在加载',
+      })
+    }
     network({
       url: api.searchAction,
       data: data
@@ -173,7 +175,8 @@ Page({
   /**开始输入 */
   searchInput: function(e) {
     this.setData({
-      isSearching: false
+      isSearching: false,
+      loading: 1
     })
   },
   /**点击搜索 */

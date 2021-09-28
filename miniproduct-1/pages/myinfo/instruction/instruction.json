@@ -1,0 +1,10 @@
+{
+  "backgroundColor":"#fff",
+  "backgroundTextStyle":"dark",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "领养说明",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+
+  }
+}

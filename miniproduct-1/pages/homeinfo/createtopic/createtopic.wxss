@@ -40,7 +40,7 @@ page{
   bottom: 0rpx;
   padding-left: 30rpx;
   padding-right: 30rpx;
-  flex-grow: 1;
+  flex-grow: 100;
   color: #333;
   font-size: 32rpx;
 }

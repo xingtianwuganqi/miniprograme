@@ -151,7 +151,16 @@ Component({
             if (util.checkIsNotLogin()) {
               return 
             }
-            that.triggerEvent('complateRescueClick',dic,{})
+
+            wx.showModal({
+              title:"提示",
+              content: "确定完成领养吗？",
+              success: function(res) {
+                if (res.confirm) {
+                  that.triggerEvent('complateRescueClick',dic,{})
+                }
+              }
+            })
           }
         }
       })

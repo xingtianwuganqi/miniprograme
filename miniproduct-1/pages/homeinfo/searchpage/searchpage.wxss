@@ -64,6 +64,7 @@ page{
   border-color:#EDEDED;
   border-width:2rpx;
   margin-right: 20rpx;
+  margin-bottom: 20rpx;
   font-size: 32rpx;
   color:#666666;
 }

@@ -1,8 +1,11 @@
 /* pages/myinfo/reportpage/reportpage.wxss */
-
+page{
+  background-color: white;
+}
 .back-view{
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 
 .gridview{

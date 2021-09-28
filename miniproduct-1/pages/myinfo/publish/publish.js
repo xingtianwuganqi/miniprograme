@@ -88,7 +88,11 @@ Page({
       'page': page,
       'size': that.data.size
     }
-    console.log(data)
+    if (page == 1 && that.data.loading == 1) {
+      wx.showLoading({
+        title: '正在加载',
+      })
+    }
     network({
       url:api.authPublish,
       data: data
@@ -97,6 +101,9 @@ Page({
       console.log(res.data.data.length)
       // 停止刷新
       wx.stopPullDownRefresh({
+        success: (res) => {},
+      })
+      wx.hideLoading({
         success: (res) => {},
       })
       if (res.data.code == 200) {

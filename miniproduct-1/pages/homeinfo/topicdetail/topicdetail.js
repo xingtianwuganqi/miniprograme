@@ -43,7 +43,7 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: app.baseUrl + '/api/v1/topicdetail/',
+      url: api.topicDetail,
       data:{
         'topic_id':topic_id,
         'token': token
@@ -296,16 +296,27 @@ Page({
       })
       return 
     }
-    if (this.data.contactStatus == 2) {
+    if (that.data.contactStatus == 2) {
       wx.showToast({
         title: '已完成领养',
         icon: 'none'
       })
       return 
     }
-    if (util.checkIsNotLogin()) {
-      return 
-    }
+    wx.showModal({
+      title: '提示',
+      content: '请认真阅读我的页面《领养说明》。不要相信任何理由的提前转账要求，如定金、运费等。若是红包领养，请当面给送养人。领养更多是一种爱心行为，一些必要的程序，如领养协议、互换身份证复印件等必不可少。宠物是生命不是物品或工具，一切领养活动都应在为生命负责的态度下进行。',
+      confirmText:'继续获取',
+      success: function(res) {
+        if (res.confirm) {
+          that.confirmGetContactNetworking()
+        }
+      }
+    })
+    
+  },
+  confirmGetContactNetworking(){
+    var that = this
     var token = wx.getStorageSync('token')
     network({
       url: api.getContact,

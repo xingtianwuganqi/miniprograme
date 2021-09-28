@@ -30,7 +30,6 @@
 .userName{
   display: flex;
   flex-direction: column;
-  color: #333333;
   font-size: 32rpx;
   padding-left: 20rpx;
   flex-grow: 1;
