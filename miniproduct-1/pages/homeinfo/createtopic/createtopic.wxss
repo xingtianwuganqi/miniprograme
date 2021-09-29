@@ -1,14 +1,18 @@
 /* pages/HomeInfo/createtopic/createtopic.wxss */
 page{
   background-color: white;
+  height: 100%;
+  width: 100%;
 }
 
 .back-view{
   background-color: white;
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
+  height: 100%;
+  width: 100%;
 }
 
 .scroll-page{
@@ -36,18 +40,24 @@ page{
 }
 
 .inputview{
-  display: block;
-  bottom: 0rpx;
+  /* display: block; */
+  /* bottom: 0rpx; */
   padding-left: 30rpx;
   padding-right: 30rpx;
-  flex-grow: 100;
+  flex-grow: 1;
   color: #333;
   font-size: 32rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 
-/* .text-area{
-  
-} */
+.text-area{
+  font-size: 32rpx;
+  width: 100%;
+  flex-grow: 1;
+  color: #333;
+}
 
 .imageview{
   margin: 30rpx 20rpx 20rpx 20rpx;

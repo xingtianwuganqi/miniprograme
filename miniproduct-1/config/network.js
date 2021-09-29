@@ -12,6 +12,9 @@ export default function(options) {
           console.log('认证有误')
           wx.removeStorageSync('token')
           wx.removeStorageSync('userInfo')
+          wx.navigateBack({
+            delta: 3,
+          })
           wx.navigateTo({
             url: '../../login/login',
           })
