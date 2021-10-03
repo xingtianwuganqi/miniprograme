@@ -34,6 +34,7 @@ module.exports = {
   suggestion: baseUrl + '/api/v1/suggestion/', // 意见反馈
   complateRescue: baseUrl + '/api/v1/completetopic/', // 完成领养
   login: baseUrl + '/api/v1/login/', // 登录
+  wxLogin: baseUrl + '/api/v2/wxlogin/', // 微信登录
   location: baseUrl + '/api/location/', // 选取地址
   unreadMsgNum: baseUrl + '/api/v1/authunreadnum/', // 未读消息数
 };

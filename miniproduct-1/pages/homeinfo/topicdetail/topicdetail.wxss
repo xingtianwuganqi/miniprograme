@@ -73,6 +73,7 @@ page{
   justify-content: flex-start;
   padding-left: 30rpx;
   padding-right: 30rpx;
+  margin-bottom: 10rpx;
 }
 
 .tags {
@@ -88,7 +89,6 @@ page{
 
 
 .content{
-  margin-top: 10rpx;
   font-size: 32rpx;
   color: #333;
   padding-left: 30rpx;

@@ -278,6 +278,10 @@ Page({
     if (util.checkIsNotLogin()) {
       return 
     }
+    // 如果没有数据，返回
+    if (this.data.topicInfo == null) {
+      return
+    }
     var that = this;
     if (that.data.contactStatus == 1) {
       // copy到剪贴板

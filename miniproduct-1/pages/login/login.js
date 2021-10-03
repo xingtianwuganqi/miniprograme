@@ -1,5 +1,6 @@
 // pages/login/login.js
 const app = getApp().globalData;
+const api = require('../../config/api.js')
 Page({
 
   /**
@@ -88,83 +89,100 @@ Page({
       loading: true
     })
     let that = this
-    //首先查看是否得到用户 的授权
-    wx.getSetting({
-      success:function(settingRes){
-        //console.log(res)
-        //res.authSetting['scope.userInfo']   代表用户授予权限的状态
-        console.log(settingRes.authSetting['scope.userInfo'])
-        if(settingRes.authSetting['scope.userInfo']){
-          //如果用户给与了这个权限 可以进行获取用户信息
-          wx.getUserInfo({
-            success: (response) => {
-              console.log(response.userInfo)
-              that.setData({
-                userInfo: response.userInfo
-              })
-              wx.login({
-                timeout: 50000,
-                success(loginRes){
-                  var data = {
-                    'avatarUrl':response.userInfo.avatarUrl,
-                    'username': response.userInfo.nickName,
-                    'code': loginRes.code
-                  }
-                  console.log(response.userInfo.avatarUrl.length)
-                  console.log(loginRes)
-                  /// 获取到code之后传给后台
-                  wx.request({
-                    url:  app.baseUrl + '/api/v2/wxlogin/',
-                    data: data,
-                    method: "POST",
-                    header: {
-                      "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    success(userRes) {
-                      console.log(userRes);
-                      that.setData({
-                        loading: false
-                      })
-                      if (userRes.data.code==200) { // 登录成功，保存用户信息
-                        wx.setStorageSync('userInfo', userRes.data.data)
-                        wx.setStorageSync('token', userRes.data.data.token)
-                        wx.navigateBack({
-                          delta: 0,
-                        })
-                        wx.showToast({
-                          title: '登录成功',
-                          icon:'none'
-                        })
-                      }
-                    },fail(error){
-                      console.log(error);
-                    }
-                  })
+    wx.getUserProfile({
+      desc: '以完成注册登录',
+      success: function(res) {
+        console.log(res)
+        that.loginNetworking(res.userInfo)
+      },fail:function(e) {
+        wx.showToast({
+          title: '授权失败',
+          icon:'none'
+        })
+      }
+    })
+    // //首先查看是否得到用户 的授权
+    // wx.getSetting({
+    //   success:function(settingRes){
+    //     //console.log(res)
+    //     //res.authSetting['scope.userInfo']   代表用户授予权限的状态
+    //     console.log(settingRes.authSetting['scope.userInfo'])
+    //     if(settingRes.authSetting['scope.userInfo']){
+    //       //如果用户给与了这个权限 可以进行获取用户信息
+    //       wx.getUserInfo({
+    //         success: (response) => {
+    //           console.log(response.userInfo)
+    //           that.setData({
+    //             userInfo: response.userInfo
+    //           })
+    //         }
+    //       })
+    //     }else{
+    //       //如果用户没有给与这个权限则  发送询问权限的请求
+    //       wx.authorize({
+    //         scope:"scope.userInfo",//询问授权的属性
+    //         success:function(res){
+    //           console.log(res)
+    //         }
+    //       })
+    //     }
+    //   },fail(error) {
+    //     that.setData({
+    //       loading: false
+    //     })
+    //   }
+    // })
+  },
 
-                },fail(error){
-                  that.setData({
-                    loading: false
-                  })
-                }
+  loginNetworking(userInfo) {
+    var that = this
+    wx.login({
+      timeout: 50000,
+      success(loginRes){
+        var data = {
+          'avatarUrl':userInfo.avatarUrl,
+          'username': userInfo.nickName,
+          'code': loginRes.code
+        }
+        console.log(userInfo.avatarUrl.length)
+        console.log(loginRes)
+        /// 获取到code之后传给后台
+        wx.request({
+          url:  api.wxLogin,
+          data: data,
+          method: "POST",
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          success(userRes) {
+            console.log(userRes);
+            that.setData({
+              loading: false
+            })
+            if (userRes.data.code==200) { // 登录成功，保存用户信息
+              wx.setStorageSync('userInfo', userRes.data.data)
+              wx.setStorageSync('token', userRes.data.data.token)
+              wx.navigateBack({
+                delta: 0,
+              })
+              wx.showToast({
+                title: '登录成功',
+                icon:'none'
               })
             }
-          })
-        }else{
-          //如果用户没有给与这个权限则  发送询问权限的请求
-          wx.authorize({
-            scope:"scope.userInfo",//询问授权的属性
-            success:function(res){
-              console.log(res)
-            }
-          })
-        }
-      },fail(error) {
+          },fail(error){
+            console.log(error);
+          }
+        })
+
+      },fail(error){
         that.setData({
           loading: false
         })
       }
     })
   },
+
   /*
   icon 点击
   */

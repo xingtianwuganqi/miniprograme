@@ -24,7 +24,7 @@
         </view>
       </view>
       <!-- 标签 -->
-      <view class='tag-content'> 
+      <view class='tag-content' wx:if='{{item.tagInfos.length > 0}}'> 
         <view class='tags' wx:for="{{item.tagInfos}}" wx:for-item='tag' wx:key='tagInfo'>
           {{tag.tag_name}}
         </view>

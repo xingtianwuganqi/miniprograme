@@ -56,6 +56,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   padding-left: 100rpx;
+  margin-bottom: 10rpx;
 }
 
 .tags {
@@ -71,7 +72,6 @@
 
 
 .content{
-  margin-top: 10rpx;
   font-size: 32rpx;
   color: #666666;
   padding-left: 100rpx;
@@ -147,6 +147,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #f5f5f5;
 }
 .img-four{
   background-color: white;
@@ -161,11 +162,13 @@
 .img-row-line{
   width: 100%;
   height: 6rpx;
+  background-color: white;
 }
 
 .img-coloum-line{
   height: 100%;
   width: 10rpx;
+  background-color: white;
 }
 
 .img-show{
@@ -181,14 +184,14 @@
 }
 
 .image-left {
-  background-color: white;
+  background-color: #f5f5f5;
   display: block;
   width: 308rpx;
   height: 383rpx;
 }
 
 .image-right{
-  background-color: white;
+  background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
   width: 310rpx;
@@ -198,6 +201,7 @@
 .img-thr-coloum-line{
   width: 6rpx;
   height: 383rpx;
+  background-color: white;
 }
 
 .img-thr-row-line{
