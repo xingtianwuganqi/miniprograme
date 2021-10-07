@@ -1,5 +1,6 @@
 <!--pages/message/message.wxml-->
 <!-- <view class='container'> -->
+<scroll-view scroll-y>
   <view class="content" wx:for="{{list}}" wx:item='item' wx:key='key'>
     <view class='content-item' bindtap="messageClick" data-id='{{item.id}}'> 
       <image src='{{item.img}}' class='img-item'>
@@ -14,4 +15,5 @@
     <view class='line-item'>
     </view>
   </view>
+</scroll-view>
 <!-- </view> -->

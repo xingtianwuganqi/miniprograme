@@ -1,7 +1,7 @@
 <!--pages/myinfo/publish/publish.wxml-->
 <view class='backview'>
   <scroll-view scroll-y class='scroll-page'>
-    <view class='title-view'>点击列表右上角更多，点击完成领养，即代表宠物已被领养，他人将无法获取你的联系方式</view>
+    <view class='title-view'>点击发布列表右上角更多按钮，点击完成领养，即代表宠物已被领养，他人将无法获取你的联系方式</view>
     <view wx:if="{{loading==2 && items.length == 0}}">
       <custom-empty item='{{emptyItem}}'></custom-empty>
     </view>

@@ -37,4 +37,5 @@ module.exports = {
   wxLogin: baseUrl + '/api/v2/wxlogin/', // 微信登录
   location: baseUrl + '/api/location/', // 选取地址
   unreadMsgNum: baseUrl + '/api/v1/authunreadnum/', // 未读消息数
+  getTags: baseUrl + '/api/v1/gettaglist/', // 获取标签
 };

@@ -1,5 +1,6 @@
 // pages/HomeInfo/selectedtags/selectedtags.js
 const app = getApp().globalData;
+const api = require('../../../config/api.js')
 Page({
 
   /**
@@ -76,7 +77,7 @@ Page({
   getTagList: function() {
     var that = this;
     wx.request({
-      url: app.baseUrl + '/api/v1/gettaglist/',
+      url: api.getTags,
       method: "POST",
       header: {
         "Content-Type": "application/x-www-form-urlencoded"

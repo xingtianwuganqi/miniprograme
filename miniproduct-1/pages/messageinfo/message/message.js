@@ -37,6 +37,7 @@ Page({
    */
   onShow: function () {
     this.unreadMsgNumNetworking();
+    console.log('onshow')
   },
 
   /**
@@ -57,7 +58,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.unreadMsgNumNetworking();
+    wx.showNavigationBarLoading({
+      success: (res) => {},
+    })
   },
 
   /**
@@ -93,7 +97,7 @@ Page({
   unreadMsgNumNetworking() {
     var that = this
     var token = wx.getStorageSync('token')
-    if (util.checkIsNotLogin) {
+    if (token == null || token.length == 0) {
       var datas = that.data.list.map(model=>{
         model.num = ''
         return model
@@ -113,6 +117,12 @@ Page({
       }
     }).then(res=>{
       console.log(res.data.data)
+      wx.hideNavigationBarLoading({
+        success: (res) => {},
+      })
+      wx.stopPullDownRefresh({
+        success: (res) => {},
+      })
       if (res.data.code == 200) {
         var like_unread = res.data.data.like_unread
         var collec_unread = res.data.data.collec_unread

@@ -116,7 +116,8 @@ Page({
         success: (res) => {},
       })
       if (res.data.code == 200) {
-        var datas = res.data.data.map(model =>{
+        var list = res.data.data
+        var datas = list.map(model =>{
           var newModel = model
           if (that.data.msg_type == 1) {
             newModel.msg_content = "赞了这条帖子"
@@ -154,6 +155,13 @@ Page({
   /**消息点击 跳转帖子详情 */
   messageClick(e) {
     var id = e.currentTarget.dataset.id
+    if (id == null) {
+      wx.showToast({
+        title: '暂无帖子信息',
+        icon: 'error'
+      })
+      return 
+    }
     wx.navigateTo({
       url: '../../homeinfo/topicdetail/topicdetail?topic_id=' + id,
     })

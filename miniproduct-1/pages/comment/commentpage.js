@@ -295,7 +295,8 @@ Page({
       })
       return 
     }
-    
+    console.log('inputType',this.data.inputType)
+
     if (this.data.inputType == 1) { // 发表评论，回复的帖子
       this.commentAction(text)
     }else if (this.data.inputType == 2) { // 发表的回复，回复的评论
@@ -303,11 +304,11 @@ Page({
       var reply_id = comment_id
       var to_uid = this.data.currentCommentInfo.userInfo.id
       this.commentReplyNetworking(text,comment_id,reply_id,to_uid)
-    }else if (this.data.inputType == 3) {
+    }else if (this.data.inputType == 3) { // 回复的回复
       var comment_id = this.data.currentReplyInfo.comment_id
       var reply_id = this.data.currentReplyInfo.id
       var to_uid = this.data.currentReplyInfo.fromInfo.id
-      this.commentReplyNetworking(text,comment_id,reply_id)
+      this.commentReplyNetworking(text,comment_id,reply_id,to_uid)
     }
   },
   /** 发表评论 */

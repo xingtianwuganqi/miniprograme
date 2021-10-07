@@ -40,7 +40,7 @@ page{
 }
 .num-view{
   flex-grow: 0;
-  height: 50rpx;
+  height: 40rpx;
   /* width: 50rpx; */
   padding-left: 12rpx;
   padding-right: 12rpx;
@@ -49,7 +49,8 @@ page{
   background-color: red;
   color: white;
   text-align: center;
-  line-height: 50rpx;
+  line-height: 40rpx;
+  font-size: 24rpx;
 }
 .right-icon{
   width: 16rpx;

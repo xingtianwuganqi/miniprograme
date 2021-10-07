@@ -158,7 +158,7 @@ Page({
         //   imglist: _this.data.imglist.concat(tempFilePaths)
         // })
         var temp = tempFilePaths.map((num) => {
-          return {isAdd: false,progress: 0,complete: 0,photoKey: Date.parse(new Date()) + '/' + util.randomString + '.jpeg',photoUrl: num}
+          return {isAdd: false,progress: 0,complete: 0,photoKey: Date.parse(new Date()) + '/' + util.randomString() + '.jpeg',photoUrl: num}
         })
         console.log(temp)
         var totalDatas = temp.concat(that.data.photoModels)

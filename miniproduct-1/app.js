@@ -56,14 +56,8 @@ App({
       }
     })
   },
-  /*
-  case local = "http://127.0.0.1:8000"
-    case test = "https://test.rxswift.cn"
-    case formal = "https://rescue.rxswift.cn"
-    */
   globalData: {
     userInfo: null,
-    baseUrl: 'https://test.rxswift.cn',
     imgSuffix: '?imageView2/0/q/20',
     imgBaseUrl: 'http://img.rxswift.cn/',
     // navBarHeight: 0, // 导航栏高度

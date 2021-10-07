@@ -322,6 +322,9 @@ Page({
   confirmGetContactNetworking(){
     var that = this
     var token = wx.getStorageSync('token')
+    wx.showLoading({
+      title: '正在获取',
+    })
     network({
       url: api.getContact,
       data: {
@@ -329,6 +332,9 @@ Page({
         'topic_id': that.data.topicInfo.topic_id,
       }
     }).then(res => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
       if (res.data.code == 200) {
         console.log(res.data)
         // 获取联系方式成功
@@ -339,6 +345,11 @@ Page({
           topicInfo: newItem,
           contactStatus: 1,
           contactInfo: res.data.data.contact
+        })
+      }else{
+        wx.showToast({
+          title: '获取失败',
+          icon: 'none'
         })
       }
     })

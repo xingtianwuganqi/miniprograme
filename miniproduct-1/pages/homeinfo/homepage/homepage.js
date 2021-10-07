@@ -120,6 +120,9 @@ Page({
   /*点击添加跳转到发布页面*/
   addButtonClick: function() {
     var that = this
+    if (util.checkIsNotLogin()) {
+      return
+    }
     wx.navigateTo({
       url: '../createtopic/createtopic',
       // 回调传值
@@ -361,7 +364,7 @@ Page({
   unreadMsgNumNetworking() {
     var that = this
     var token = wx.getStorageSync('token')
-    if (util.checkIsNotLogin) {
+    if (token == null || token.length == 0) {
       return 
     }
     network({
