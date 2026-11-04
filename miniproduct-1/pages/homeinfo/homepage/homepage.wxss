@@ -49,29 +49,6 @@ page{
 }
 
 
-.add-icon{
-  /* position: fixed; */
-  width:50rpx;
-  height:50rpx;
-  /* bottom: 30px;
-  right: 20px;
-  background-color: #ffa500; */
-}
-
-.add-back{
-  position: fixed;
-  width:100rpx;
-  height:100rpx;
-  bottom: 50rpx;
-  right: 40rpx;
-  background-color: #ffa500;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50rpx;
-}
-
 /* .icon-size{
   width: 40rpx;
   height: 40rpx;

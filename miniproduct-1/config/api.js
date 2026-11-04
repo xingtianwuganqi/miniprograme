@@ -3,6 +3,7 @@ const baseUrl_test = 'https://test.rxswift.cn'
 const baseUrl_formal = 'https://rescue.rxswift.cn'
 const baseUrl = baseUrl_formal;
 module.exports = {
+  baseUrl: baseUrl,
   TopicList: baseUrl + '/api/v1/topiclist/', //获取首页列表
   topicDetail: baseUrl + '/api/v1/topicdetail/',
   LikeAction: baseUrl + '/api/v1/likeaction/', //首页数据接口
@@ -38,4 +39,15 @@ module.exports = {
   location: baseUrl + '/api/location/', // 选取地址
   unreadMsgNum: baseUrl + '/api/v1/authunreadnum/', // 未读消息数
   getTags: baseUrl + '/api/v1/gettaglist/', // 获取标签
+
+  // 领养申请 V2
+  adoptionApplicationState: baseUrl + '/api/v2/adoptions/', // + {topic_id}/application-state
+  adoptionApplications: baseUrl + '/api/v2/adoptions/', // + {topic_id}/applications
+  adoptionApplicationDetail: baseUrl + '/api/v2/adoption-applications/', // + {application_id}
+  adoptionProfile: baseUrl + '/api/v2/adoption-profile/me',
+  adoptionMyApplications: baseUrl + '/api/v2/adoption-applications/mine',
+  adoptionReceivedApplications: baseUrl + '/api/v2/adoptions/mine/applications',
+  adoptionNotifications: baseUrl + '/api/v2/adoption-notifications',
+  adoptionNotificationRead: baseUrl + '/api/v2/adoption-notifications/', // + {notification_id}/read
+  adoptionStatus: baseUrl + '/api/v2/adoptions/', // + {topic_id}/status
 };

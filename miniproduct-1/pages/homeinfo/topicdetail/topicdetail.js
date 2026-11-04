@@ -3,6 +3,7 @@ const app = getApp().globalData;
 const util = require('../../../utils/util.js')
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
+const adoption = require('../../../config/adoption.js')
 Page({
 
   /**
@@ -12,8 +13,16 @@ Page({
     topic_id: null,
     topicInfo: null,
     bottomHeight: null,
-    contactStatus: 0, // 0 点击获取联系方式，1 显示联系方式，2 已完成领养
-    contactInfo: '点击获取联系方式'
+    adoptionState: null,
+    adoptionStateError: null,
+    adoptionTitle: '申请领养',
+    adoptionBusy: false,
+    showApplyNotice: false,
+    showApplicationPanel: false,
+    applicationPanelTitle: '',
+    applicationPanelMessage: '',
+    applicationPanelContact: '',
+    applicationPanelCanReapply: false
   },
 
   /**
@@ -58,23 +67,10 @@ Page({
           success: (res) => {},
         })
         if (res.data.code == 200) {
-          var contactStatus = 0
-          var contactInfo = ''
-          if (res.data.data.is_complete == true) {
-            contactStatus = 2
-            contactInfo = '已完成领养'
-          }else if (res.data.data.getedcontact == true && res.data.data.is_complete == false) {
-            contactStatus = 1
-            contactInfo = res.data.data.contact_info
-          }else{
-            contactStatus = 0
-            contactInfo = "点击获取联系方式"
-          }
           that.setData({
-            topicInfo: res.data.data,
-            contactStatus: contactStatus,
-            contactInfo: contactInfo
+            topicInfo: res.data.data
           })
+          that.renderAdoptionTitle()
         }
       },fail(error){
         wx.hideLoading({
@@ -95,14 +91,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 从登录、领养资料页或后台返回时重新查询申请状态
+    if (!this.data.adoptionBusy) {
+      this.refreshAdoptionState().catch(function () {})
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    // 离开页面时清理私人联系面板，避免再次进入时继续展示
+    this.pendingProfile = null
+    this.currentApplication = null
+    this.setData({
+      showApplyNotice: false,
+      showApplicationPanel: false,
+      applicationPanelContact: '',
+      applicationPanelCanReapply: false
+    })
   },
 
   /**
@@ -272,86 +279,411 @@ Page({
       url: '../../comment/commentpage?topic_id='+id+'&topic_type='+'1'+'&topic_uid='+topic_uid,
     })
   },
-  /**获取联系方式 */
-  getContactNetworking() {
-    // 验证登录
-    if (util.checkIsNotLogin()) {
-      return 
+  /** 根据服务端申请状态刷新底部按钮文案 */
+  renderAdoptionTitle() {
+    var token = wx.getStorageSync('token')
+    var complete = this.data.topicInfo != null && this.data.topicInfo.is_complete == true
+    var title = ''
+    if (!token) {
+      title = complete ? '送养已结束' : '申请领养'
+    } else if (this.data.adoptionStateError) {
+      title = this.data.adoptionStateError.status === 404 ? '帖子不可用' : '状态加载失败 · 重试'
+    } else if (this.data.adoptionState) {
+      title = adoption.stateTitle(this.data.adoptionState)
+    } else {
+      title = '正在查询状态'
     }
-    // 如果没有数据，返回
+    this.setData({
+      adoptionTitle: title
+    })
+  },
+
+  /** 查询当前帖子的领养申请状态 */
+  refreshAdoptionState() {
+    var that = this
+    var token = wx.getStorageSync('token')
+    if (!token) {
+      that.setData({
+        adoptionState: null,
+        adoptionStateError: null
+      })
+      that.renderAdoptionTitle()
+      return Promise.resolve()
+    }
+    return adoption.applicationState(that.data.topic_id).then(function (data) {
+      that.setData({
+        adoptionState: adoption.stateFrom(data),
+        adoptionStateError: null
+      })
+      that.renderAdoptionTitle()
+      return data
+    }).catch(function (error) {
+      that.setData({
+        adoptionState: null,
+        adoptionStateError: error
+      })
+      that.renderAdoptionTitle()
+      throw error
+    })
+  },
+
+  /** 申请领养按钮点击 */
+  adoptionButtonClick() {
+    var that = this
+    if (this.data.adoptionBusy) {
+      return
+    }
+    if (util.checkIsNotLogin()) {
+      return
+    }
     if (this.data.topicInfo == null) {
       return
     }
-    var that = this;
-    if (that.data.contactStatus == 1) {
-      // copy到剪贴板
-      wx.setClipboardData({
-        data: that.data.contactInfo,
-        success: function (res) {
-          wx.getClipboardData({
-            success: function (res) {
+    this.setData({ adoptionBusy: true })
+    this.renderAdoptionTitle()
+    this.refreshAdoptionState().then(function () {
+      that.setData({ adoptionBusy: false })
+      that.renderAdoptionTitle()
+      var state = that.data.adoptionState
+      if (!state) {
+        return
+      }
+      if (state.owner) {
+        that.manageAdoption()
+        return
+      }
+      if (state.workflowEnded) {
+        that.showToast('送养已结束，无法提交新申请')
+        return
+      }
+      if (state.workflowStatus !== 'open') {
+        that.showToast('帖子状态暂不可用，请稍后重试')
+        return
+      }
+      switch (state.status) {
+        case 'applying':
+        case 'communicating':
+        case 'ended':
+          that.openApplicationPanel()
+          break
+        default:
+          if (state.canApply) {
+            that.loadAdoptionProfile()
+          } else {
+            that.showToast('当前暂不可提交申请，请稍后重试')
+          }
+      }
+    }).catch(function (error) {
+      that.setData({ adoptionBusy: false })
+      that.renderAdoptionTitle()
+      that.handleAdoptionError(error, '申请领养')
+    })
+  },
+
+  /** 检查本人领养资料 */
+  loadAdoptionProfile() {
+    var that = this
+    if (this.data.adoptionBusy) {
+      return
+    }
+    this.setData({ adoptionBusy: true })
+    this.renderAdoptionTitle()
+    adoption.adoptionProfile().then(function (data) {
+      that.setData({ adoptionBusy: false })
+      that.renderAdoptionTitle()
+      var profile = adoption.profileFrom(data)
+      if (data.is_complete == true && adoption.profileValid(profile)) {
+        that.pendingProfile = profile
+        that.setData({ showApplyNotice: true })
+      } else {
+        that.requireAdoptionProfile()
+      }
+    }).catch(function (error) {
+      that.setData({ adoptionBusy: false })
+      that.renderAdoptionTitle()
+      that.handleAdoptionError(error, '申请领养')
+    })
+  },
+
+  /** 没有资料或资料不完整时提示填写 */
+  requireAdoptionProfile() {
+    wx.showModal({
+      title: '领养资料',
+      content: '没有领养资料，需要填写后再申请。',
+      cancelText: '取消',
+      confirmText: '去申请',
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/adoption/profile/profile'
+          })
+        }
+      }
+    })
+  },
+
+  /** 关闭领养须知 */
+  closeApplyNotice() {
+    this.pendingProfile = null
+    this.setData({ showApplyNotice: false })
+  },
+
+  /** 查看领养说明 */
+  openInstruction() {
+    this.pendingProfile = null
+    this.setData({ showApplyNotice: false })
+    wx.navigateTo({
+      url: '/pages/myinfo/instruction/instruction'
+    })
+  },
+
+  /** 确认领养须知后提交申请 */
+  confirmApply() {
+    var profile = this.pendingProfile
+    this.setData({ showApplyNotice: false })
+    if (profile) {
+      this.submitAdoptionApplication(profile)
+    }
+  },
+
+  /** 提交领养申请 */
+  submitAdoptionApplication(profile) {
+    var that = this
+    var state = this.data.adoptionState
+    if (this.data.adoptionBusy || !state || !state.canApply) {
+      return
+    }
+    var body = {
+      profile_version: profile.version,
+      statement: ''
+    }
+    var applicationID = state.id
+    if (this.submittedApplicationID !== applicationID ||
+        !this.submittedBody ||
+        this.submittedBody.profile_version !== body.profile_version ||
+        this.submittedBody.statement !== body.statement) {
+      this.idempotencyKey = adoption.uuid()
+    }
+    if (!this.idempotencyKey) {
+      this.idempotencyKey = adoption.uuid()
+    }
+    this.submittedBody = body
+    this.submittedApplicationID = applicationID
+    this.setData({ adoptionBusy: true })
+    this.renderAdoptionTitle()
+    adoption.submitApplication(this.data.topic_id, body, this.idempotencyKey).then(function (data) {
+      that.idempotencyKey = null
+      that.submittedBody = null
+      that.submittedApplicationID = null
+      that.setData({ adoptionBusy: false })
+      that.renderAdoptionTitle()
+      that.refreshAdoptionState().catch(function () {})
+      var application = adoption.applicationFrom(data)
+      if (!adoption.applicationActive(application)) {
+        wx.showModal({
+          title: '申请状态已变化',
+          content: '未创建新的有效申请，请刷新后重新申请。',
+          showCancel: false,
+          confirmText: '知道了'
+        })
+        return
+      }
+      if (application.status === 'applying') {
+        that.showToast('申请成功，等待送养人反馈。')
+      } else {
+        that.showSubmittedContact(application)
+      }
+    }).catch(function (error) {
+      that.setData({ adoptionBusy: false })
+      that.renderAdoptionTitle()
+      that.refreshAdoptionState().catch(function () {})
+      that.handleSubmissionError(error)
+    })
+  },
+
+  /** 申请成功后展示已授权联系方式 */
+  showSubmittedContact(application) {
+    var contact = adoption.applicationContact(application)
+    var message = contact ? '可联系送养人\n送养人联系方式：' + contact : '申请成功，联系方式暂不可用，请稍后在「我的申请」中查看。'
+    if (!contact) {
+      wx.showModal({
+        title: '申请成功',
+        content: message,
+        showCancel: false,
+        confirmText: '知道了'
+      })
+      return
+    }
+    wx.showModal({
+      title: '申请成功',
+      content: message,
+      cancelText: '关闭',
+      confirmText: '复制',
+      success: function (res) {
+        if (res.confirm) {
+          wx.setClipboardData({
+            data: contact,
+            success: function () {
               wx.showToast({
-                title: '复制成功',
+                title: '已复制联系方式',
                 icon: 'none'
               })
             }
           })
         }
-      })
-      return 
+      }
+    })
+  },
+
+  /** 查看本人当前申请或申请结果 */
+  openApplicationPanel() {
+    var that = this
+    var state = this.data.adoptionState
+    if (!state || state.id <= 0) {
+      return
     }
-    if (that.data.contactStatus == 2) {
+    wx.showLoading({
+      title: '正在加载'
+    })
+    adoption.applicationDetail(state.id).then(function (data) {
+      wx.hideLoading()
+      var application = adoption.applicationFrom(data)
+      var statusText = adoption.applicationStatusText(application)
+      var message = application.status === 'applying' ? '已申请，等待送养人同意' :
+        application.status === 'communicating' ? '可联系送养人' : statusText
+      var contact = adoption.applicationContact(application)
+      that.currentApplication = application
+      that.setData({
+        showApplicationPanel: true,
+        applicationPanelTitle: statusText,
+        applicationPanelMessage: message + (contact ? '\n送养人联系方式：' + contact : ''),
+        applicationPanelContact: contact,
+        applicationPanelCanReapply: application.status === 'ended' && state.canApply && application.result === 'not_completed'
+      })
+    }).catch(function (error) {
+      wx.hideLoading()
+      that.handleAdoptionError(error, '申请详情')
+      that.refreshAdoptionState().catch(function () {})
+    })
+  },
+
+  /** 关闭申请状态面板 */
+  closeApplicationPanel() {
+    this.currentApplication = null
+    this.setData({
+      showApplicationPanel: false,
+      applicationPanelContact: '',
+      applicationPanelCanReapply: false
+    })
+  },
+
+  /** 复制已授权联系方式，复制前重新拉取申请详情 */
+  copyApplicationContact() {
+    var that = this
+    var state = this.data.adoptionState
+    if (!state || state.id <= 0) {
+      return
+    }
+    adoption.applicationDetail(state.id).then(function (data) {
+      var contact = adoption.applicationContact(adoption.applicationFrom(data))
+      if (!contact) {
+        that.showToast('联系方式暂不可用')
+        that.refreshAdoptionState().catch(function () {})
+        return
+      }
+      wx.setClipboardData({
+        data: contact,
+        success: function () {
+          wx.showToast({
+            title: '已复制联系方式',
+            icon: 'none'
+          })
+        }
+      })
+    }).catch(function (error) {
+      that.handleAdoptionError(error, '联系方式')
+      that.refreshAdoptionState().catch(function () {})
+    })
+  },
+
+  /** 未完成送养时重新申请 */
+  reapplyApplication() {
+    this.setData({
+      showApplicationPanel: false,
+      applicationPanelContact: '',
+      applicationPanelCanReapply: false
+    })
+    this.loadAdoptionProfile()
+  },
+
+  /** 本人发布：管理申请 */
+  manageAdoption() {
+    wx.navigateTo({
+      url: '/pages/adoption/receivedapplications/receivedapplications?topic_id=' + this.data.topic_id
+    })
+  },
+
+  /** 统一处理 V2 错误 */
+  handleAdoptionError(error, title) {
+    if (!error) {
+      return
+    }
+    if (error.status === 401 || error.code === 'AUTH_REQUIRED' || error.code === 'SESSION_CHANGED') {
+      wx.removeStorageSync('token')
+      wx.removeStorageSync('userInfo')
       wx.showToast({
-        title: '已完成领养',
+        title: '请先登录',
         icon: 'none'
       })
-      return 
+      wx.navigateTo({
+        url: '/pages/login/login'
+      })
+      return
+    }
+    var content = error.message
+    if (error.code === 'BLACKLISTED' || error.businessCode === 202) {
+      if (content === '操作失败，请刷新重试' || content === '拒绝访问') {
+        content = '当前账号受限制，无法申请领养。'
+      }
+    } else if (content === '操作失败，请刷新重试' || !content) {
+      content = '申请失败，请稍后重试。'
     }
     wx.showModal({
-      title: '提示',
-      content: '请认真阅读我的页面《领养说明》。不要相信任何理由的提前转账要求，如定金、运费等。若是红包领养，请当面给送养人。领养更多是一种爱心行为，一些必要的程序，如领养协议、互换身份证复印件等必不可少。宠物是生命不是物品或工具，一切领养活动都应在为生命负责的态度下进行。',
-      confirmText:'继续获取',
-      success: function(res) {
-        if (res.confirm) {
-          that.confirmGetContactNetworking()
-        }
-      }
+      title: title || '操作失败',
+      content: content,
+      showCancel: false,
+      confirmText: '知道了'
     })
-    
   },
-  confirmGetContactNetworking(){
-    var that = this
-    var token = wx.getStorageSync('token')
-    wx.showLoading({
-      title: '正在获取',
-    })
-    network({
-      url: api.getContact,
-      data: {
-        'token': token,
-        'topic_id': that.data.topicInfo.topic_id,
-      }
-    }).then(res => {
-      wx.hideLoading({
-        success: (res) => {},
+
+  /** 提交申请失败的细分处理 */
+  handleSubmissionError(error) {
+    if (!error) {
+      return
+    }
+    if (error.code === 'PROFILE_REQUIRED') {
+      this.requireAdoptionProfile()
+      return
+    }
+    if (error.code === 'PROFILE_CHANGED') {
+      this.idempotencyKey = null
+      this.submittedBody = null
+      this.submittedApplicationID = null
+      wx.showModal({
+        title: '资料已更新',
+        content: '领养资料已变化，请重新点击申请领养。',
+        showCancel: false,
+        confirmText: '知道了'
       })
-      if (res.data.code == 200) {
-        console.log(res.data)
-        // 获取联系方式成功
-        var newItem = that.data.topicInfo
-        newItem.contact_info = res.data.data.contact
-        newItem.getedcontact = true
-        that.setData({
-          topicInfo: newItem,
-          contactStatus: 1,
-          contactInfo: res.data.data.contact
-        })
-      }else{
-        wx.showToast({
-          title: '获取失败',
-          icon: 'none'
-        })
-      }
+      return
+    }
+    this.handleAdoptionError(error, '申请失败')
+  },
+
+  showToast(title) {
+    wx.showToast({
+      title: title,
+      icon: 'none'
     })
   },
   addViewHistoryNetworking(topic_id) {

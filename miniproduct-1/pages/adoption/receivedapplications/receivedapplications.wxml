@@ -1,0 +1,69 @@
+<wxs src="../../../utils/common.wxs" module="common" />
+<view class='page'>
+  <view class='filter-bar'>
+    <view wx:for='{{filters}}' wx:key='status' class='filter-item {{filterIndex == index ? "active" : ""}}' data-index='{{index}}' bindtap='filterTap'>{{item.label}}</view>
+  </view>
+
+  <scroll-view scroll-y class='scroll-page' bindscrolltolower='onBottom' lower-threshold='100'>
+    <view wx:if='{{loading == 2 && items.length == 0 && notifications.length == 0}}'>
+      <custom-empty item='{{emptyItem}}' bind:emptyDidClick='emptyPageClick'></custom-empty>
+    </view>
+    <block wx:else>
+      <view wx:if='{{notifications.length > 0}}' class='notice-section'>
+        <view class='section-title'>未读提醒</view>
+        <view wx:for='{{notifications}}' wx:for-item='notice' wx:key='id' class='notice-item' data-index='{{index}}' bindtap='notificationTap'>
+          <view class='notice-dot'></view>
+          <view class='notice-message'>{{notice.message}}</view>
+          <view class='notice-time'>{{notice.createdAt}}</view>
+        </view>
+      </view>
+
+      <view wx:for='{{items}}' wx:for-item='item' wx:key='id' class='card'>
+        <view class='card-header'>
+          <image wx:if='{{item.applicantAvatar}}' class='avatar' src='{{common.loadThumbImg(item.applicantAvatar)}}' mode='aspectFill'></image>
+          <image wx:else class='avatar' src='../../../icons/missing-face.png'></image>
+          <view class='identity'>
+            <view class='name'>{{item.applicantName}}</view>
+            <view class='time'>{{item.createdAt}}</view>
+          </view>
+          <view class='badge badge-{{item.badgeType}}'>{{item.badgeText}}</view>
+        </view>
+
+        <view wx:if='{{!item.hideStatusNote}}' class='status-note'>{{item.statusText}}</view>
+
+        <view class='profile-panel'>
+          <view class='profile-title'>申请时资料 · 用户填写</view>
+          <view class='profile-summary'>{{item.profileSummary}}</view>
+        </view>
+
+        <view class='divider'></view>
+
+        <view class='topic' data-index='{{index}}' bindtap='topicClick'>
+          <image wx:if='{{item.image}}' class='topic-img' src='{{common.loadThumbImg(item.image)}}' mode='aspectFill' data-index='{{index}}' binderror='imageError'></image>
+          <view wx:else class='topic-img topic-placeholder'>暂无图片</view>
+          <view class='topic-desc'>{{item.topicTitle}}</view>
+          <image class='arrow' src='../../../icons/icon_center_allin.png'></image>
+        </view>
+
+        <view wx:if='{{item.actions.length > 0}}' class='actions'>
+          <view wx:for='{{item.actions}}' wx:for-item='action' wx:key='key' class='btn' data-action='{{action.key}}' data-id='{{item.id}}' bindtap='actionTap'>{{action.label}}</view>
+        </view>
+      </view>
+
+      <view wx:if='{{items.length > 0}}' class='list-footer'>{{isLoadEnd ? "已经到底啦" : "上拉加载更多"}}</view>
+    </block>
+  </scroll-view>
+
+  <view wx:if='{{showEndDialog}}' class='dialog-mask'>
+    <view class='dialog-box'>
+      <view class='dialog-title'>结束沟通</view>
+      <view class='dialog-message'>结果为未完成送养，不影响其他申请。原因选填，最多200字。</view>
+      <textarea class='dialog-textarea' maxlength='200' value='{{endNote}}' placeholder='原因（选填）' bindinput='endNoteInput'></textarea>
+      <view class='dialog-count'>{{endNote.length}}/200</view>
+      <view class='dialog-actions'>
+        <view class='dialog-btn' bindtap='cancelEndDialog'>取消</view>
+        <view class='dialog-btn dialog-btn-primary' bindtap='confirmEndDialog'>确定结束</view>
+      </view>
+    </view>
+  </view>
+</view>

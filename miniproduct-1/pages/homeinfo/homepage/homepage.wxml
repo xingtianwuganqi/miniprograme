@@ -16,7 +16,4 @@
       </view>
     </view>
   </scroll-view>
-  <view class='add-back' bindtap='addButtonClick'>
-    <image class="add-icon" src="/icons/icon_home_write.png"></image>
-  </view>
 </view>

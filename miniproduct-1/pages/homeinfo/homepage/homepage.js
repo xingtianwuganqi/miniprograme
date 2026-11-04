@@ -6,7 +6,6 @@
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
 const app = getApp().globalData;
-const util = require('../../../utils/util.js')
 Page({
   /**
    * 页面的初始数据
@@ -114,25 +113,6 @@ Page({
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: '../topicdetail/topicdetail?topic_id=' + id,
-    })
-  },
-
-  /*点击添加跳转到发布页面*/
-  addButtonClick: function() {
-    var that = this
-    if (util.checkIsNotLogin()) {
-      return
-    }
-    wx.navigateTo({
-      url: '../createtopic/createtopic',
-      // 回调传值
-      events: {
-        // 这里用来接收后面页面传递回来的数据
-        updateTopicList: (items) => {
-           // 这里处理数据即可，回调回来的数据
-           that.listNetworking(1);
-        }
-      }
     })
   },
 

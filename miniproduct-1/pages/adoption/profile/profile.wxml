@@ -1,0 +1,44 @@
+<!--pages/adoption/profile/profile.wxml-->
+<view class='back-view'>
+  <scroll-view scroll-y class='scroll-view'>
+    <view wx:if='{{loading}}' class='loading-view'>正在加载...</view>
+    <block wx:else>
+      <view class='form-cell' bindtap='chooseAddress'>
+        <text class='form-label'>城市/区县</text>
+        <text class='form-value {{address ? "" : "placeholder"}}'>{{address ? address : "请选择"}}</text>
+        <image class='form-arrow' src='../../../icons/icon_center_allin.png'></image>
+      </view>
+
+      <view class='form-cell'>
+        <text class='form-label'>年龄</text>
+        <input class='form-input' type='number' maxlength='3' value='{{age}}' placeholder='10-100周岁' bindinput='ageInput' />
+      </view>
+
+      <picker mode='selector' range='{{housingOptions}}' range-key='label' value='{{housingIndex}}' bindchange='housingChange'>
+        <view class='form-cell'>
+          <text class='form-label'>住房情况</text>
+          <text class='form-value {{housingIndex > 0 ? "" : "placeholder"}}'>{{housingOptions[housingIndex].label}}</text>
+          <image class='form-arrow' src='../../../icons/icon_center_allin.png'></image>
+        </view>
+      </picker>
+
+      <picker mode='selector' range='{{employmentOptions}}' range-key='label' value='{{employmentIndex}}' bindchange='employmentChange'>
+        <view class='form-cell'>
+          <text class='form-label'>工作状态</text>
+          <text class='form-value {{employmentIndex > 0 ? "" : "placeholder"}}'>{{employmentOptions[employmentIndex].label}}</text>
+          <image class='form-arrow' src='../../../icons/icon_center_allin.png'></image>
+        </view>
+      </picker>
+
+      <view class='form-cell form-cell-textarea'>
+        <text class='form-label'>养宠经验（选填）</text>
+        <textarea class='form-textarea' maxlength='200' value='{{experience}}' placeholder='最多200字' bindinput='experienceInput'></textarea>
+        <view class='word-count'>{{experience.length}}/200</view>
+      </view>
+
+      <button class='save-btn' loading='{{saving}}' disabled='{{saving}}' bindtap='save'>保存</button>
+    </block>
+  </scroll-view>
+
+  <getAddress id='getAddress' locationArr='{{locationArr}}' bind:resultEvent='resultEvent'></getAddress>
+</view>

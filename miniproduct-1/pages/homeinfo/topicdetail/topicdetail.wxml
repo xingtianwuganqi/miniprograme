@@ -41,7 +41,7 @@
   <view class='bottom-view' style="position:fixed; bottom:0;width: 750rpx;height: {{bottomHeight}}rpx;">
   <!-- 获取联系方式 -->
     <view class='contact-view'>
-      <button class="mini-btn" style="width:690rpx;color:#ffffff;background-color:#ffa500;height: 85rpx;font-size: 32rpx;" type="default" bindtap="getContactNetworking">{{contactInfo}}</button>
+      <button class="mini-btn" style="width:690rpx;color:#ffffff;background-color:#ffa500;height: 85rpx;font-size: 32rpx;" type="default" disabled="{{adoptionBusy}}" bindtap="adoptionButtonClick">{{adoptionTitle}}</button>
     </view>
     <!-- 评论区 -->
     <view class='interaction'>
@@ -72,5 +72,35 @@
           </view>
         </view>
       </view>
+  </view>
+
+  <!-- 领养须知 -->
+  <view class='dialog-mask' wx:if='{{showApplyNotice}}'>
+    <view class='dialog-box'>
+      <view class='dialog-title'>领养须知</view>
+      <scroll-view scroll-y class='dialog-content'>
+        <view>请认真阅读我的页面《领养说明》。不要相信任何理由的提前转账要求，如定金、运费等。若是红包领养，请当面给送养人。领养更多是一种爱心行为，一些必要的程序，如领养协议、互换身份证复印件等必不可少。宠物是生命不是物品或工具，一切领养活动都应在为生命负责的态度下进行。</view>
+        <view class='dialog-link' bindtap='openInstruction'>查看《领养说明》</view>
+      </scroll-view>
+      <view class='dialog-actions dialog-actions-row'>
+        <view class='dialog-btn' bindtap='closeApplyNotice'>取消</view>
+        <view class='dialog-btn dialog-btn-primary' bindtap='confirmApply'>继续申请</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 我的申请状态 -->
+  <view class='dialog-mask' wx:if='{{showApplicationPanel}}'>
+    <view class='dialog-box'>
+      <view class='dialog-title'>{{applicationPanelTitle}}</view>
+      <scroll-view scroll-y class='dialog-content'>
+        <view class='dialog-message'>{{applicationPanelMessage}}</view>
+      </scroll-view>
+      <view class='dialog-actions dialog-actions-column'>
+        <view wx:if='{{applicationPanelContact}}' class='dialog-btn dialog-btn-primary' bindtap='copyApplicationContact'>复制联系方式</view>
+        <view wx:if='{{applicationPanelCanReapply}}' class='dialog-btn dialog-btn-primary' bindtap='reapplyApplication'>重新申请</view>
+        <view class='dialog-btn' bindtap='closeApplicationPanel'>关闭</view>
+      </view>
+    </view>
   </view>
 </view>

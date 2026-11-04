@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "收到的申请",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 100,
+  "usingComponents": {
+    "custom-empty": "../../../components/emptypage/emptypage"
+  }
+}
