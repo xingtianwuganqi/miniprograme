@@ -2,13 +2,28 @@
 const util = require('../../../utils/util.js')
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
+const adoption = require('../../../config/adoption.js')
+
+function badgeText(value) {
+  var count = Number(value) || 0
+  if (count > 99) {
+    return '99+'
+  }
+  return count > 0 ? String(count) : ''
+}
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[],
+    list: [],
+    likeUnread: 0,
+    collectUnread: 0,
+    commentUnread: 0,
+    adoptionMineUnread: 0,
+    adoptionReceivedUnread: 0
   },
 
   /**
@@ -17,10 +32,11 @@ Page({
   onLoad: function (options) {
     this.setData({
       list: [
-        // {img:'../../../icons/icon_message_sys.png',title: '系统消息',num: 0,id: 0},
-        {img:'../../../icons/icon_message_like.png',title: '点赞',num: '',id: 1},
-        {img:'../../../icons/icon_message_collect.png',title: '收藏',num: '',id: 2},
-        {img:'../../../icons/icon_message_com.png',title: '评论',num: '',id: 3},
+        { img: '../../../icons/icon_my_appli.png', title: '我的申请', num: '', id: 4 },
+        { img: '../../../icons/icon_rec_appli.png', title: '收到的申请', num: '', id: 5 },
+        { img: '../../../icons/icon_message_like.png', title: '点赞', num: '', id: 1 },
+        { img: '../../../icons/icon_message_collect.png', title: '收藏', num: '', id: 2 },
+        { img: '../../../icons/icon_message_com.png', title: '评论', num: '', id: 3 }
       ]
     })
   },
@@ -36,8 +52,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.unreadMsgNumNetworking();
-    console.log('onshow')
+    this.refreshUnread(false)
   },
 
   /**
@@ -58,10 +73,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.unreadMsgNumNetworking();
-    wx.showNavigationBarLoading({
-      success: (res) => {},
-    })
+    this.refreshUnread(true)
   },
 
   /**
@@ -77,104 +89,147 @@ Page({
   onShareAppMessage: function () {
 
   },
+
+  /** 同时刷新原有消息和领养申请未读 */
+  refreshUnread: function (fromPull) {
+    var that = this
+    wx.showNavigationBarLoading()
+    return Promise.all([
+      this.unreadMsgNumNetworking(),
+      this.adoptionUnreadNetworking()
+    ]).then(function () {
+      wx.hideNavigationBarLoading()
+      if (fromPull) {
+        wx.stopPullDownRefresh()
+      }
+    }).catch(function () {
+      wx.hideNavigationBarLoading()
+      if (fromPull) {
+        wx.stopPullDownRefresh()
+      }
+    })
+  },
+
   /**消息点击 */
-  messageClick: function(e) {
+  messageClick: function (e) {
     if (util.checkIsNotLogin()) {
-      return 
+      return
     }
     var id = e.currentTarget.dataset.id
-    console.log(e)
-    if (id == 1 || id == 2 || id == 3) {
+    if (id == 4) {
       wx.navigateTo({
-        url: '../messageinfo/messageinfo?msg_type=' + id,
+        url: '../../adoption/myapplications/myapplications'
       })
-    }else{
+    } else if (id == 5) {
       wx.navigateTo({
-        url: '../system/systemmsg',
+        url: '../../adoption/receivedapplications/receivedapplications'
+      })
+    } else if (id == 1 || id == 2 || id == 3) {
+      wx.navigateTo({
+        url: '../messageinfo/messageinfo?msg_type=' + id
+      })
+    } else {
+      wx.navigateTo({
+        url: '../system/systemmsg'
       })
     }
   },
-  unreadMsgNumNetworking() {
+
+  /** 原有消息未读数 */
+  unreadMsgNumNetworking: function () {
     var that = this
     var token = wx.getStorageSync('token')
-    if (token == null || token.length == 0) {
-      var datas = that.data.list.map(model=>{
-        model.num = ''
-        return model
-      })
+    if (!token) {
       that.setData({
-        list:datas
+        likeUnread: 0,
+        collectUnread: 0,
+        commentUnread: 0
       })
-      wx.removeTabBarBadge({
-        index: 1,
-      })
-      return 
+      that.applyUnread()
+      return Promise.resolve()
     }
-    network({
+    return network({
       url: api.unreadMsgNum,
       data: {
-        "token": token
+        token: token
       }
-    }).then(res=>{
-      console.log(res.data.data)
-      wx.hideNavigationBarLoading({
-        success: (res) => {},
-      })
-      wx.stopPullDownRefresh({
-        success: (res) => {},
-      })
+    }).then(function (res) {
       if (res.data.code == 200) {
-        var like_unread = res.data.data.like_unread
-        var collec_unread = res.data.data.collec_unread
-        var com_unread = res.data.data.com_unread
-        var datas = that.data.list.map(model=>{
-          if (model.title == '点赞') {
-            if (like_unread > 99) {
-              model.num = '99+'
-            }else if (like_unread > 0) {
-              model.num = like_unread.toString()
-            }else{
-              model.num = ''
-            }
-          }else if (model.title == '收藏') {
-            if (collec_unread > 99) {
-              model.num = '99+'
-            }else if (collec_unread > 0) {
-              model.num = collec_unread.toString()
-            }else{
-              model.num = ''
-            }
-          }else if (model.title == '评论') {
-            if (com_unread > 99) {
-              model.num = '99+'
-            }else if (com_unread > 0) {
-              model.num = com_unread.toString()
-            }else{
-              model.num = ''
-            }
-          }
-          return model
-        })
+        var data = res.data.data || {}
         that.setData({
-          list: datas
+          likeUnread: Number(data.like_unread) || 0,
+          collectUnread: Number(data.collec_unread) || 0,
+          commentUnread: Number(data.com_unread) || 0
         })
-        let total_num = like_unread + collec_unread + com_unread
-        if (total_num > 99) {
-          wx.setTabBarBadge({
-            index: 1,
-            text: '99+',
-          })
-        }else if (total_num > 0) {
-          wx.setTabBarBadge({
-            index: 1,
-            text: total_num.toString(),
-          })
-        }else{
-          wx.removeTabBarBadge({
-            index: 1,
-          })
-        }
+        that.applyUnread()
       }
+    }).catch(function () {
+      // 保留现有角标，等待下次刷新
     })
+  },
+
+  /** 领养申请未读数 */
+  adoptionUnreadNetworking: function () {
+    var that = this
+    var token = wx.getStorageSync('token')
+    if (!token) {
+      that.setData({
+        adoptionMineUnread: 0,
+        adoptionReceivedUnread: 0
+      })
+      that.applyUnread()
+      return Promise.resolve()
+    }
+    return adoption.notificationBuckets().then(function (buckets) {
+      that.setData({
+        adoptionMineUnread: buckets.mineCount,
+        adoptionReceivedUnread: buckets.receivedCount
+      })
+      that.applyUnread()
+    }).catch(function () {
+      // 保留现有角标，等待下次刷新
+    })
+  },
+
+  /** 将各类未读数写入列表和消息 Tab */
+  applyUnread: function () {
+    var that = this
+    var list = this.data.list.map(function (item) {
+      if (item.id == 1) {
+        item.num = badgeText(that.data.likeUnread)
+      } else if (item.id == 2) {
+        item.num = badgeText(that.data.collectUnread)
+      } else if (item.id == 3) {
+        item.num = badgeText(that.data.commentUnread)
+      } else if (item.id == 4) {
+        item.num = badgeText(that.data.adoptionMineUnread)
+      } else if (item.id == 5) {
+        item.num = badgeText(that.data.adoptionReceivedUnread)
+      }
+      return item
+    })
+    var total = (Number(that.data.likeUnread) || 0) +
+      (Number(that.data.collectUnread) || 0) +
+      (Number(that.data.commentUnread) || 0) +
+      (Number(that.data.adoptionMineUnread) || 0) +
+      (Number(that.data.adoptionReceivedUnread) || 0)
+    that.setData({
+      list: list
+    })
+    if (total > 99) {
+      wx.setTabBarBadge({
+        index: 1,
+        text: '99+'
+      })
+    } else if (total > 0) {
+      wx.setTabBarBadge({
+        index: 1,
+        text: String(total)
+      })
+    } else {
+      wx.removeTabBarBadge({
+        index: 1
+      })
+    }
   }
 })

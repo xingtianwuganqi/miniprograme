@@ -1,0 +1,49 @@
+<wxs src="../../../utils/common.wxs" module="common" />
+<view class='page'>
+  <view class='filter-bar'>
+    <view wx:for='{{filters}}' wx:key='status' class='filter-item {{filterIndex == index ? "active" : ""}}' data-index='{{index}}' bindtap='filterTap'>{{item.label}}</view>
+  </view>
+
+  <scroll-view scroll-y class='scroll-page' bindscrolltolower='onBottom' lower-threshold='100'>
+    <view wx:if='{{loading == 2 && items.length == 0 && notifications.length == 0}}'>
+      <custom-empty item='{{emptyItem}}' bind:emptyDidClick='emptyPageClick'></custom-empty>
+    </view>
+    <block wx:else>
+      <view wx:if='{{notifications.length > 0}}' class='notice-section'>
+        <view class='section-title'>未读提醒</view>
+        <view wx:for='{{notifications}}' wx:for-item='notice' wx:key='id' class='notice-item' data-index='{{index}}' bindtap='notificationTap'>
+          <view class='notice-dot'></view>
+          <view class='notice-message'>{{notice.message}}</view>
+          <view class='notice-time'>{{notice.createdAt}}</view>
+        </view>
+      </view>
+
+      <view wx:for='{{items}}' wx:for-item='item' wx:key='id' class='card'>
+        <view class='card-header'>
+          <view class='badge badge-{{item.badgeType}}'>{{item.badgeText}}</view>
+          <view class='time'>{{item.createdAt}}</view>
+        </view>
+        <view wx:if='{{!item.hideStatusNote}}' class='status-note'>{{item.statusText}}</view>
+
+        <view class='topic' data-index='{{index}}' bindtap='topicClick'>
+          <image wx:if='{{item.image}}' class='topic-img' src='{{common.loadThumbImg(item.image)}}' mode='aspectFill' data-index='{{index}}' binderror='imageError'></image>
+          <view wx:else class='topic-img topic-placeholder'>暂无图片</view>
+          <view class='topic-desc'>{{item.topicTitle}}</view>
+          <image class='arrow' src='../../../icons/icon_center_allin.png'></image>
+        </view>
+
+        <view class='contact-panel {{item.contact ? "has-contact" : ""}}'>
+          <view class='contact-title'>送养人联系方式</view>
+          <view class='contact-value'>{{item.contact ? item.contact : (item.topicOpen ? "暂无已获取的联系方式" : "送养已结束，不显示联系方式")}}</view>
+        </view>
+
+        <view wx:if='{{item.canCopy || item.canWithdraw}}' class='actions'>
+          <view wx:if='{{item.canCopy}}' class='btn primary' data-id='{{item.id}}' bindtap='copyContact'>复制联系方式</view>
+          <view wx:if='{{item.canWithdraw}}' class='btn' data-id='{{item.id}}' bindtap='withdraw'>放弃申请</view>
+        </view>
+      </view>
+
+      <view wx:if='{{items.length > 0}}' class='list-footer'>{{isLoadEnd ? "已经到底啦" : "上拉加载更多"}}</view>
+    </block>
+  </scroll-view>
+</view>

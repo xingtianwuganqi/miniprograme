@@ -10,6 +10,7 @@ Page({
       {img:'../../../icons/icon_view_hist.png',title: '浏览记录',num: 0,id: 1},
       {img:'../../../icons/icon_mi_publish.png',title: '我的发布',num: 0,id: 2},
       {img:'../../../icons/icon_mi_collection.png',title: '我的收藏',num: 0,id: 3},
+      {img:'../../../icons/icon_mi_xy.png',title: '领养资料',num: 0,id: 7},
       {img:'../../../icons/icon_setting_fk.png',title: '意见反馈',num: 0, id: 4},
       {img:'../../../icons/icon_mi_xy.png',title: '领养说明',num: 0,id: 5},
       {img:'../../../icons/icon_mi_about.png',title: '关于我们',num: 0,id: 6}
@@ -116,6 +117,14 @@ Page({
       }
       wx.navigateTo({
         url: '../collection/collection',
+      })
+    }
+    else if (id == 7) {
+      if (util.checkIsNotLogin()) {
+        return
+      }
+      wx.navigateTo({
+        url: '../../adoption/profile/profile',
       })
     }
     else if (id == 4) {

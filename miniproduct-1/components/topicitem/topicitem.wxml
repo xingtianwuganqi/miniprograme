@@ -13,7 +13,7 @@
           <text wx:else>佚名</text>
           <text class='time-item'>{{common.getGap(item.create_time)}}</text>
         </view>
-        
+        <text class='tiem-item'>{{item.topic_id}}</text>
         <view wx:if='{{item.is_complete}}'>
           <image class='com-img' src='../../icons/icon_complete.png'></image>
         </view>

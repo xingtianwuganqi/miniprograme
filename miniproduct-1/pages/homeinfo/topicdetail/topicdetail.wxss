@@ -139,3 +139,86 @@ page{
   padding-right: 20rpx;
   flex-grow: 0;
 }
+
+/* 领养须知 / 申请状态弹窗 */
+.dialog-mask{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.dialog-box{
+  width: 610rpx;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.dialog-title{
+  padding: 36rpx 30rpx 20rpx;
+  font-size: 34rpx;
+  color: #333333;
+  text-align: center;
+}
+
+.dialog-content{
+  max-height: 50vh;
+  padding: 0 36rpx 20rpx;
+  font-size: 28rpx;
+  line-height: 46rpx;
+  color: #333333;
+}
+
+.dialog-message{
+  white-space: pre-wrap;
+}
+
+.dialog-link{
+  margin-top: 20rpx;
+  color: #4169E1;
+  font-size: 28rpx;
+}
+
+.dialog-actions{
+  display: flex;
+  flex-direction: row;
+  border-top: 1rpx solid #ededed;
+}
+
+.dialog-actions-column{
+  flex-direction: column;
+}
+
+.dialog-btn{
+  flex: 1;
+  padding: 26rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+  color: #666666;
+}
+
+.dialog-actions-column .dialog-btn{
+  border-top: 1rpx solid #ededed;
+}
+
+.dialog-actions-column .dialog-btn:first-child{
+  border-top: none;
+}
+
+.dialog-btn-primary{
+  color: #ffa500;
+}
+
+.dialog-actions-row .dialog-btn + .dialog-btn{
+  border-left: 1rpx solid #ededed;
+}

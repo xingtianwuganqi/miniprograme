@@ -24,7 +24,10 @@
     "pages/phonelogin/phonelogin",
     "components/emptypage/emptypage",
     "pages/myinfo/aboutus/aboutus",
-    "pages/myinfo/instruction/instruction"
+    "pages/myinfo/instruction/instruction",
+    "pages/adoption/profile/profile",
+    "pages/adoption/myapplications/myapplications",
+    "pages/adoption/receivedapplications/receivedapplications"
   ],
   "window": {
     "backgroundColor": "#fff",

@@ -154,7 +154,7 @@ Component({
   
         //关闭并返回
         this.triggerEvent('resultEvent', {
-          nameArr: that.properties.nameArr
+          nameArr: that.data.nameArr
         })
       }
 
@@ -179,7 +179,7 @@ Component({
  
       //关闭并返回
       this.triggerEvent('resultEvent', {
-        nameArr: that.properties.nameArr
+        nameArr: that.data.nameArr
       })
       console.log(that.data.provinceArr[that.data.provinceIndex])
       console.log(that.data.cityArr[that.data.cityIndex])
