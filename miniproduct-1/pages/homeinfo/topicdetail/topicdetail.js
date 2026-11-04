@@ -357,16 +357,16 @@ Page({
   addViewHistoryNetworking(topic_id) {
     var token = wx.getStorageSync('token')
     if (token.length > 0) {
-      network({
-        url: api.addViewHistory,
-        data: {
-          'token': token,
-          'topic_id': topic_id
-        }
-      }).then(res=>{
-        console.log(res.data,'====')
-        console.log('addHistorySuccess')
-      })
+      // network({
+      //   url: api.addViewHistory,
+      //   data: {
+      //     'token': token,
+      //     'topic_id': topic_id
+      //   }
+      // }).then(res=>{
+      //   console.log(res.data,'====')
+      //   console.log('addHistorySuccess')
+      // })
     }
   },
   /** 图片点击 */

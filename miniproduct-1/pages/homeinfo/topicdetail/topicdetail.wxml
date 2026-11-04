@@ -12,6 +12,7 @@
         <text wx:if="{{topicInfo.userInfo.username.length>0}}">{{topicInfo.userInfo.username}}</text>
         <text wx:else>佚名</text>
         <text class='time-item'>{{common.getGap(topicInfo.create_time)}}</text>
+        <text class='tiem-item'>{{topicInfo.topic_id}}</text>
       </view>
       <!-- <view class='icon-view'>
         <mp-icon icon="more" color="#666666" size="{{20}}"></mp-icon>
