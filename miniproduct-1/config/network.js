@@ -1,3 +1,5 @@
+const analytics = require('../utils/analytics.js')
+
 export default function(options) {
   return new Promise((resolve, reject) => {
     wx.request({
@@ -12,6 +14,7 @@ export default function(options) {
           console.log('认证有误')
           wx.removeStorageSync('token')
           wx.removeStorageSync('userInfo')
+          analytics.setUser(null)
           wx.navigateBack({
             delta: 3,
           })

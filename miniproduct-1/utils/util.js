@@ -25,11 +25,18 @@ const randomStringFunction = function(len) {
   return pwd;
 }
 
-const checkIsNotLogin = function() {
+const analytics = require('./analytics.js')
+
+const checkIsNotLogin = function(silent) {
   var token = wx.getStorageSync('token')
-  if (token.length > 0) {
+  if (token && token.length > 0) {
     return false
   }else{
+    if (silent !== true) {
+      try {
+        analytics.loginClick()
+      } catch (e) {}
+    }
     wx.navigateTo({
       url: '/pages/login/login',
     })

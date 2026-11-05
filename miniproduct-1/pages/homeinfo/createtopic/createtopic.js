@@ -3,6 +3,7 @@ import api from '../../../config/api.js';
 import network from '../../../config/network.js'
 const qiniuUploader = require("../../../utils/qiniuUploader");
 const util = require('../../../utils/util.js')
+const analytics = require('../../../utils/analytics.js')
 
 var emptyData = {isAdd: true,progress: 0,complete: 0,photoKey: "",photoUrl: ""};
 Page({
@@ -41,7 +42,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    analytics.publishPageView('adoption')
   },
 
   /**
@@ -337,7 +338,7 @@ Page({
         {
           region: 'NCN',
           uptoken: token,
-          domain: 'http://img.rxswift.cn',
+          domain: 'https://img.rxswift.cn',
           key: photo.photoKey
         },
         (res) => {
@@ -366,6 +367,7 @@ Page({
       title: '正在加载',
     })
     var token = wx.getStorageSync('token')
+    var publishToken = token
     var imgs = this.imageString(this.data.photoModels);
     var tags = this.tagsString(this.data.tags);
 
@@ -393,6 +395,11 @@ Page({
       data: datas
     }).then((res) => {
       if (res.data.code == 200) {
+        var result = res.data.data || {}
+        var objectID = Number(result.topic_id || result.id || res.data.topic_id || 0)
+        if (objectID > 0 && wx.getStorageSync('token') === publishToken) {
+          analytics.publishSuccess('adoption', objectID)
+        }
         wx.showToast({
           title: '发布成功',
           icon: 'none'

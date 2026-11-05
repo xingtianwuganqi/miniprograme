@@ -1,6 +1,7 @@
 // pages/messageinfo/messageinfo/messageinfo.js
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
+const analytics = require('../../../utils/analytics.js')
 
 Page({
 
@@ -42,7 +43,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var type = analytics.messageType(this.data.msg_type)
+    if (type) {
+      analytics.pageView('message_list', { message_list_type: type })
+    }
   },
 
   /**
@@ -116,20 +120,31 @@ Page({
         success: (res) => {},
       })
       if (res.data.code == 200) {
-        var list = res.data.data
+        var list = Array.isArray(res.data.data) ? res.data.data : []
         var datas = list.map(model =>{
-          var newModel = model
+          var newModel = model || {}
           if (that.data.msg_type == 1) {
             newModel.msg_content = "赞了这条帖子"
           }else if (that.data.msg_type == 2) {
-            newModel.msg_content = "收藏了这条帖子" 
+            newModel.msg_content = "收藏了这条帖子"
           }else {
-            if (newModel.reply_type == 1) {
-              newModel.msg_content = '评论说：' + newModel.commentInfo.content
+            // 评论/回复对象可能缺失，和 iOS 一样使用空字符串兜底，避免整页数据映射中断
+            var commentInfo = newModel.commentInfo || newModel.comment_info || {}
+            var replyInfo = newModel.replyInfo || newModel.reply_info || {}
+            var replyType = newModel.reply_type != null ? newModel.reply_type : newModel.replyType
+            if (replyType == 1) {
+              newModel.msg_content = '评论说：' + (commentInfo.content || '')
             }else{
-              newModel.msg_content = '回复说：' + newModel.replyInfo.content
+              newModel.msg_content = '回复说：' + (replyInfo.content || '')
             }
           }
+          // 兼容接口字段，保证 WXML 读取时不会因对象缺失中断渲染
+          newModel.from_info = newModel.from_info || newModel.fromInfo || {}
+          newModel.from_info.username = newModel.from_info.username || ''
+          newModel.from_info.avator = newModel.from_info.avator || ''
+          newModel.topicInfo = newModel.topicInfo || newModel.topic_info || {}
+          newModel.topicInfo.imgs = newModel.topicInfo.imgs || []
+          newModel.topicInfo.tagInfos = newModel.topicInfo.tagInfos || []
           return newModel
         })
         if (page == 1) {
@@ -149,7 +164,19 @@ Page({
         }else{
           that.data.isLoadEnd = true
         }
+      }else{
+        that.setData({
+          loading: 2
+        })
       }
+    }).catch(() => {
+      wx.hideLoading()
+      wx.stopPullDownRefresh({
+        success: (res) => {},
+      })
+      that.setData({
+        loading: 2
+      })
     })
   },
   /**消息点击 跳转帖子详情 */

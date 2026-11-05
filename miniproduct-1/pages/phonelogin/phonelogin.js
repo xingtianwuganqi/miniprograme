@@ -1,6 +1,7 @@
 import api from "../../config/api";
 import network from "../../config/network";
 const md5 = require('../../utils/md5.js');
+const analytics = require('../../utils/analytics.js');
 
 // pages/phonelogin/phonelogin.js
 Page({
@@ -30,7 +31,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    analytics.pageView('login')
   },
 
   /**
@@ -115,6 +116,7 @@ Page({
       if (res.data.code == 200) {
         wx.setStorageSync('userInfo', res.data.data)
         wx.setStorageSync('token', res.data.data.token)
+        analytics.loginSuccess('password', res.data.data.id)
         wx.showToast({
           title: '登录成功',
           icon:'none'
@@ -125,11 +127,18 @@ Page({
           })
         },2000)
       }else{
+        analytics.loginFailed('password', 'unknown')
         wx.showToast({
           title: '登录失败',
           icon:'none'
         })
       }
+    }).catch(() => {
+      analytics.loginFailed('password', 'network_error')
+      wx.showToast({
+        title: '登录失败',
+        icon:'none'
+      })
     })
       
     

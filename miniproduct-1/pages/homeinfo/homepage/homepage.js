@@ -5,6 +5,7 @@
 */
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
+const analytics = require('../../../utils/analytics.js')
 const app = getApp().globalData;
 Page({
   /**
@@ -68,7 +69,9 @@ Page({
       data:{
         'page':that.data.page,
         'size': that.data.size,
-        'token': token
+        'token': token,
+        // 与 iOS HomePageApi.homePageList 保持一致，默认 order=0（随机排序）
+        'order': '0'
       }
     }).then(res=>{
       console.log('===----------=====')
@@ -128,7 +131,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    analytics.pageView('home')
   },
 
   /**

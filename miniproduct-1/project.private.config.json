@@ -1,96 +1,24 @@
 {
-  "setting": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/message/message",
-          "pathName": "pages/message/message",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/homepage/homepage",
-          "pathName": "pages/homepage/homepage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/my",
-          "pathName": "pages/my/my",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/homeinfo/createtopic/createtopic",
-          "pathName": "pages/homeinfo/createtopic/createtopic",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/homeinfo/selectedtags/selectedtags",
-          "pathName": "pages/homeinfo/selectedtags/selectedtags",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/login/login",
-          "pathName": "pages/login/login",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/homepage/homepage",
-          "pathName": "pages/homepage/homepage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/homeinfo/searchpage/searchpage",
-          "pathName": "pages/homeinfo/searchpage/searchpage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/comment/commentpage",
-          "pathName": "pages/comment/commentpage",
-          "query": "topic_id=11&topic_type=1",
-          "scene": null
-        },
-        {
-          "name": "pages/messageinfo/messageinfo/messageinfo",
-          "pathName": "pages/messageinfo/messageinfo/messageinfo",
-          "query": "msg_type=3",
-          "scene": null
-        },
-        {
-          "name": "pages/myinfo/userinfo/userinfo",
-          "pathName": "pages/myinfo/userinfo/userinfo",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/login/login",
-          "pathName": "pages/login/login",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/phonelogin/phonelogin",
-          "pathName": "pages/phonelogin/phonelogin",
-          "query": "",
-          "scene": null
-        }
-      ]
-    }
-  }
+  "setting": {
+    "urlCheck": false,
+    "coverView": true,
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": false,
+    "preloadBackgroundData": false,
+    "autoAudits": false,
+    "useApiHook": false,
+    "showShadowRootInWxmlPanel": true,
+    "useStaticServer": false,
+    "useLanDebug": false,
+    "showES6CompileOption": false,
+    "compileHotReLoad": true,
+    "useGlassEaselForWxml": false,
+    "checkInvalidKey": true,
+    "ignoreDevUnusedFiles": true,
+    "bigPackageSizeSupport": false,
+    "useIsolateContext": true
+  },
+  "condition": {},
+  "libVersion": "3.17.6",
+  "projectname": "miniprogram-1"
 }

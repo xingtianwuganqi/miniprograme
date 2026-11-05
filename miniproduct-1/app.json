@@ -25,6 +25,7 @@
     "components/emptypage/emptypage",
     "pages/myinfo/aboutus/aboutus",
     "pages/myinfo/instruction/instruction",
+    "pages/myinfo/adoptionflow/adoptionflow",
     "pages/adoption/profile/profile",
     "pages/adoption/myapplications/myapplications",
     "pages/adoption/receivedapplications/receivedapplications"

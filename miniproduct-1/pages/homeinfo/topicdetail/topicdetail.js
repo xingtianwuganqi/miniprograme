@@ -4,6 +4,7 @@ const util = require('../../../utils/util.js')
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
 const adoption = require('../../../config/adoption.js')
+const analytics = require('../../../utils/analytics.js')
 Page({
 
   /**
@@ -42,7 +43,6 @@ Page({
     var topic_id = options.topic_id;
     this.data.topic_id = topic_id
     this.topicDetailNetworking(topic_id);
-    this.addViewHistoryNetworking(topic_id);
   },
 
   topicDetailNetworking: function (topic_id) {
@@ -71,6 +71,8 @@ Page({
             topicInfo: res.data.data
           })
           that.renderAdoptionTitle()
+          // 与 iOS 一致：帖子详情加载成功后写入浏览记录
+          that.addViewHistoryNetworking(topic_id)
         }
       },fail(error){
         wx.hideLoading({
@@ -91,6 +93,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var topicId = Number(this.data.topic_id)
+    analytics.pageView('topic_detail', topicId > 0 ? { object_id: topicId } : {})
     // 从登录、领养资料页或后台返回时重新查询申请状态
     if (!this.data.adoptionBusy) {
       this.refreshAdoptionState().catch(function () {})
@@ -104,11 +108,13 @@ Page({
     // 离开页面时清理私人联系面板，避免再次进入时继续展示
     this.pendingProfile = null
     this.currentApplication = null
+    this.busyAt = 0
     this.setData({
       showApplyNotice: false,
       showApplicationPanel: false,
       applicationPanelContact: '',
-      applicationPanelCanReapply: false
+      applicationPanelCanReapply: false,
+      adoptionBusy: false
     })
   },
 
@@ -142,7 +148,7 @@ Page({
     console.log(path)
     var imgUrl = ''
     if (this.data.topicInfo.imgs.length > 0) {
-      imgUrl = 'http://img.rxswift.cn/' + this.data.topicInfo.imgs[0]
+      imgUrl = 'https://img.rxswift.cn/' + this.data.topicInfo.imgs[0]
     }
     return {
       title: this.data.topicInfo.content,
@@ -302,6 +308,10 @@ Page({
   refreshAdoptionState() {
     var that = this
     var token = wx.getStorageSync('token')
+    console.log('refreshAdoptionState', {
+      topicId: that.data.topic_id,
+      hasToken: !!token
+    })
     if (!token) {
       that.setData({
         adoptionState: null,
@@ -330,17 +340,34 @@ Page({
   /** 申请领养按钮点击 */
   adoptionButtonClick() {
     var that = this
-    if (this.data.adoptionBusy) {
-      return
-    }
+    // 未登录时必须先进入登录页，不能发起任何领养状态请求
     if (util.checkIsNotLogin()) {
       return
     }
-    if (this.data.topicInfo == null) {
-      return
+    console.log('adoptionButtonClick', {
+      busy: this.data.adoptionBusy,
+      topicId: this.data.topic_id,
+      hasTopicInfo: this.data.topicInfo != null
+    })
+    if (this.data.adoptionBusy) {
+      // 防止请求异常后按钮一直处于无法重试的状态
+      if (!this.busyAt || Date.now() - this.busyAt >= 15000) {
+        this.setData({ adoptionBusy: false })
+      } else {
+        this.showToast('正在查询，请稍候')
+        return
+      }
     }
-    this.setData({ adoptionBusy: true })
-    this.renderAdoptionTitle()
+    // 帖子详情加载失败时也允许通过领养按钮重试，不能直接静默返回
+    if (this.data.topicInfo == null) {
+      this.topicDetailNetworking(this.data.topic_id)
+    }
+    this.busyAt = Date.now()
+    this.setData({
+      adoptionBusy: true,
+      adoptionStateError: null,
+      adoptionTitle: '正在查询状态'
+    })
     this.refreshAdoptionState().then(function () {
       that.setData({ adoptionBusy: false })
       that.renderAdoptionTitle()
@@ -386,6 +413,7 @@ Page({
     if (this.data.adoptionBusy) {
       return
     }
+    this.busyAt = Date.now()
     this.setData({ adoptionBusy: true })
     this.renderAdoptionTitle()
     adoption.adoptionProfile().then(function (data) {
@@ -469,6 +497,7 @@ Page({
     }
     this.submittedBody = body
     this.submittedApplicationID = applicationID
+    this.busyAt = Date.now()
     this.setData({ adoptionBusy: true })
     this.renderAdoptionTitle()
     adoption.submitApplication(this.data.topic_id, body, this.idempotencyKey).then(function (data) {
@@ -631,6 +660,7 @@ Page({
     if (error.status === 401 || error.code === 'AUTH_REQUIRED' || error.code === 'SESSION_CHANGED') {
       wx.removeStorageSync('token')
       wx.removeStorageSync('userInfo')
+      analytics.setUser(null)
       wx.showToast({
         title: '请先登录',
         icon: 'none'
@@ -688,18 +718,22 @@ Page({
   },
   addViewHistoryNetworking(topic_id) {
     var token = wx.getStorageSync('token')
-    if (token.length > 0) {
-      // network({
-      //   url: api.addViewHistory,
-      //   data: {
-      //     'token': token,
-      //     'topic_id': topic_id
-      //   }
-      // }).then(res=>{
-      //   console.log(res.data,'====')
-      //   console.log('addHistorySuccess')
-      // })
+    if (!token || token.length === 0) {
+      return
     }
+    network({
+      url: api.addViewHistory,
+      data: {
+        'token': token,
+        'topic_id': topic_id
+      }
+    }).then(res => {
+      if (res.data.code == 200) {
+        console.log('addHistorySuccess')
+      }
+    }).catch(() => {
+      // 浏览记录写入失败不影响详情页展示
+    })
   },
   /** 图片点击 */
   imgClick(e) {

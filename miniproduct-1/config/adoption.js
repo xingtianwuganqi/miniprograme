@@ -85,7 +85,12 @@ function request(method, path, options) {
       reject({ status: 401, code: 'AUTH_REQUIRED', message: '请先登录', businessCode: 401 })
       return
     }
-    let url = api.baseUrl + path
+    let url = String(path || '')
+    // api 常量已经是完整地址，只有相对路径才需要再拼 baseUrl
+    if (!/^https?:\/\//i.test(url)) {
+      const base = String(api.baseUrl || '').replace(/\/$/, '')
+      url = base + (url.charAt(0) === '/' ? url : '/' + url)
+    }
     if (options.query) {
       const query = Object.keys(options.query).map(function (key) {
         return encodeURIComponent(key) + '=' + encodeURIComponent(options.query[key])
@@ -109,6 +114,7 @@ function request(method, path, options) {
       method: method,
       header: header,
       data: method === 'GET' ? undefined : (options.body || {}),
+      timeout: 15000,
       success: function (res) {
         const json = res.data && typeof res.data === 'object' ? res.data : {}
         if (res.statusCode >= 200 && res.statusCode < 300 && number(json.code) === 200) {
@@ -117,8 +123,19 @@ function request(method, path, options) {
           reject(parseError(res.statusCode, json))
         }
       },
-      fail: function () {
-        reject({ status: 0, code: 'NETWORK', message: '网络异常，请刷新后重试', businessCode: null })
+      fail: function (err) {
+        var errMsg = err && err.errMsg ? String(err.errMsg) : ''
+        console.error('adoption request fail', url, errMsg)
+        var message = errMsg.indexOf('domain') !== -1
+          ? '请求域名未配置，请检查小程序后台合法域名'
+          : '网络异常，请刷新后重试'
+        reject({
+          status: 0,
+          code: 'NETWORK',
+          message: message,
+          businessCode: null,
+          errMsg: errMsg
+        })
       }
     })
   })

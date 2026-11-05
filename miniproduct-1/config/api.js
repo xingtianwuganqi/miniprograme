@@ -1,7 +1,7 @@
 //测试地址
 const baseUrl_test = 'https://test.rxswift.cn'
 const baseUrl_formal = 'https://rescue.rxswift.cn'
-const baseUrl = baseUrl_formal;
+const baseUrl = baseUrl_test;
 module.exports = {
   baseUrl: baseUrl,
   TopicList: baseUrl + '/api/v1/topiclist/', //获取首页列表

@@ -6,7 +6,7 @@
       <view class='form-cell' bindtap='chooseAddress'>
         <text class='form-label'>城市/区县</text>
         <text class='form-value {{address ? "" : "placeholder"}}'>{{address ? address : "请选择"}}</text>
-        <image class='form-arrow' src='../../../icons/icon_center_allin.png'></image>
+        <view class='form-arrow'></view>
       </view>
 
       <view class='form-cell'>
@@ -18,7 +18,7 @@
         <view class='form-cell'>
           <text class='form-label'>住房情况</text>
           <text class='form-value {{housingIndex > 0 ? "" : "placeholder"}}'>{{housingOptions[housingIndex].label}}</text>
-          <image class='form-arrow' src='../../../icons/icon_center_allin.png'></image>
+          <view class='form-arrow'></view>
         </view>
       </picker>
 
@@ -26,7 +26,7 @@
         <view class='form-cell'>
           <text class='form-label'>工作状态</text>
           <text class='form-value {{employmentIndex > 0 ? "" : "placeholder"}}'>{{employmentOptions[employmentIndex].label}}</text>
-          <image class='form-arrow' src='../../../icons/icon_center_allin.png'></image>
+          <view class='form-arrow'></view>
         </view>
       </picker>
 

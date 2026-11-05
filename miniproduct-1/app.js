@@ -1,6 +1,13 @@
 //app.js
+const analytics = require('./utils/analytics.js')
+
 App({
   onLaunch: function () {
+    const storedToken = wx.getStorageSync('token')
+    const storedUser = wx.getStorageSync('userInfo')
+    analytics.setUser(storedToken && storedUser && storedUser.id ? storedUser.id : null)
+    this.globalData.coldStart = true
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -56,10 +63,19 @@ App({
       }
     })
   },
+  onShow: function () {
+    const cold = this.globalData.coldStart === true
+    this.globalData.coldStart = false
+    analytics.onForeground(cold)
+  },
+  onHide: function () {
+    analytics.onBackground()
+  },
   globalData: {
+    coldStart: true,
     userInfo: null,
     imgSuffix: '?imageView2/0/q/20',
-    imgBaseUrl: 'http://img.rxswift.cn/',
+    imgBaseUrl: 'https://img.rxswift.cn/',
     // navBarHeight: 0, // 导航栏高度
     // menuRight: 0, // 胶囊距右方间距（方保持左、右间距一致）
     // menuBotton: 0, // 胶囊距底部间距（保持底部间距一致）

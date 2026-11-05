@@ -3,6 +3,7 @@ const util = require('../../../utils/util.js')
 import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
 const adoption = require('../../../config/adoption.js')
+const analytics = require('../../../utils/analytics.js')
 
 function badgeText(value) {
   var count = Number(value) || 0
@@ -52,6 +53,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    analytics.pageView('messages')
     this.refreshUnread(false)
   },
 

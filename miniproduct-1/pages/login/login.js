@@ -1,6 +1,7 @@
 // pages/login/login.js
 const app = getApp().globalData;
 const api = require('../../config/api.js')
+const analytics = require('../../utils/analytics.js')
 Page({
 
   /**
@@ -42,7 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    analytics.pageView('login')
   },
 
   /**
@@ -95,6 +96,10 @@ Page({
         console.log(res)
         that.loginNetworking(res.userInfo)
       },fail:function(e) {
+        that.setData({
+          loading: false
+        })
+        analytics.loginFailed('wechat', 'cancelled')
         wx.showToast({
           title: '授权失败',
           icon:'none'
@@ -162,6 +167,7 @@ Page({
             if (userRes.data.code==200) { // 登录成功，保存用户信息
               wx.setStorageSync('userInfo', userRes.data.data)
               wx.setStorageSync('token', userRes.data.data.token)
+              analytics.loginSuccess('wechat', userRes.data.data.id)
               wx.navigateBack({
                 delta: 0,
               })
@@ -169,9 +175,15 @@ Page({
                 title: '登录成功',
                 icon:'none'
               })
+            }else{
+              analytics.loginFailed('wechat', 'unknown')
             }
           },fail(error){
             console.log(error);
+            analytics.loginFailed('wechat', 'network_error')
+            that.setData({
+              loading: false
+            })
           }
         })
 
@@ -179,6 +191,7 @@ Page({
         that.setData({
           loading: false
         })
+        analytics.loginFailed('wechat', 'provider_error')
       }
     })
   },

@@ -19,12 +19,6 @@
           <text class="more"> > </text>
         </view>
         <view class="card-item">
-          <image src='/icons/icon_mi_publish.png' class='img-item'>
-          </image>
-          <text class="title">我的发布</text>
-          <text class="more"> > </text>
-        </view>
-        <view class="card-item">
           <image src='/icons/icon_mi_collection.png' class='img-item'>
           </image>
           <text class="title">我的收藏</text>
@@ -40,12 +34,6 @@
           <image src='/icons/icon_pravicy.png' class='img-item'>
           </image>
           <text class="title">隐私政策</text>
-          <text class="more"> > </text>
-        </view>
-        <view class="card-item">
-          <image src='/icons/icon_mi_about.png' class='img-item'>
-          </image>
-          <text class="title">关于我们</text>
           <text class="more"> > </text>
         </view>
       </view>

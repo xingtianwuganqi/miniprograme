@@ -6,10 +6,10 @@
       <custom-empty bind:emptyDidClick='emptyPageClick'></custom-empty>
     </view>
     <view wx:elif='{{loading==2 && items.length > 0}}'>
-      <view wx:for="{{items}}" wx:for-item='item' wx:key='key'>
+      <view wx:for="{{items}}" wx:for-item='item' wx:key='id'>
         <view class='message-view' bindtap="messageClick" data-id="{{item.topicInfo.topic_id}}">
           <view class='user-info'>
-            <image class='img-avator' src='{{common.loadThumbImg(item.fromInfo.avator)}}'></image>
+            <image class='img-avator' src='{{common.loadThumbImg(item.from_info.avator)}}'></image>
             <view class='name-info'>
               <view class='name'>{{item.from_info.username.length>0 ? item.from_info.username : "佚名"}}</view>
               <view class='create-tiem'>{{common.getGap(item.create_time)}}</view>

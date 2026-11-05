@@ -1,0 +1,59 @@
+<!--pages/myinfo/adoptionflow/adoptionflow.wxml-->
+<view class='flow-page'>
+  <view class='flow-header'>
+    <view class='brand'>真命天喵 · 帮宠物找个家</view>
+    <view class='title'>领养流程说明</view>
+    <view class='lead'>先申请，再沟通；实际接宠后，由送养人确认完成送养。</view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'>从发布到接宠</view>
+    <view wx:for='{{flow}}' wx:for-item='item' wx:key='title'>
+      <view wx:if='{{index > 0}}' class='flow-arrow'>↓</view>
+      <view class='flow-item {{item.finish ? "finish" : ""}}'>
+        <view class='flow-title'>{{item.title}}</view>
+        <view class='flow-desc'>{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'>送养人怎么操作</view>
+    <view wx:for='{{senderSteps}}' wx:for-item='item' wx:key='title' class='step {{index == 0 ? "first" : ""}}'>
+      <view class='step-title'>{{item.title}}</view>
+      <view class='step-desc'>{{item.desc}}</view>
+    </view>
+    <view class='note'>获取联系方式只代表可以沟通，不表示已通过领养审核或完成领养。「结束沟通」只结束这一份申请，不表示整帖已送养。</view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'>领养人怎么操作</view>
+    <view wx:for='{{adopterSteps}}' wx:for-item='item' wx:key='title' class='step {{index == 0 ? "first" : ""}}'>
+      <view class='step-title'>{{item.title}}</view>
+      <view class='step-desc'>{{item.desc}}</view>
+    </view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'>怎样区分几种状态</view>
+    <view wx:for='{{statuses}}' wx:for-item='item' wx:key='title' class='status-item {{index == 0 ? "first" : ""}}'>
+      <view class='badge'>{{item.title}}</view>
+      <view class='status-desc'>{{item.desc}}</view>
+    </view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'>如果暂时不再送养</view>
+    <view class='paragraph'>送养人可从本人帖子详情右上角的管理菜单选择「关闭送养」。关闭会结束整帖的有效申请并停止显示联系方式，表示未完成送养，与选择实际接宠人后「完成送养」不同。</view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'>交接前的小提醒</view>
+    <view wx:for='{{tips}}' wx:for-item='tip' wx:key='*this' class='tip-item {{index == 0 ? "first" : ""}}'>
+      <view class='tip-dot'></view>
+      <view class='tip-text'>{{tip}}</view>
+    </view>
+  </view>
+
+  <view class='footer'>帮宠物找个家，让每一次申请都有清楚的进展。</view>
+</view>

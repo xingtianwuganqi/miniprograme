@@ -3,6 +3,7 @@ import network from '../../../config/network.js'
 const api = require('../../../config/api.js')
 const adoption = require('../../../config/adoption.js')
 const util = require('../../../utils/util.js')
+const analytics = require('../../../utils/analytics.js')
 
 const filters = [
   { label: '全部', status: '' },
@@ -28,7 +29,7 @@ Page({
   },
 
   onLoad: function () {
-    if (util.checkIsNotLogin()) {
+    if (util.checkIsNotLogin(true)) {
       return
     }
     this.loadNotifications()
@@ -36,6 +37,9 @@ Page({
   },
 
   onShow: function () {
+    if (wx.getStorageSync('token')) {
+      analytics.pageView('message_list', { message_list_type: 'my_applications' })
+    }
     if (this.hasShown) {
       this.loadNotifications()
       this.loadList(1)
@@ -346,6 +350,7 @@ Page({
     if (error.status === 401 || error.code === 'AUTH_REQUIRED' || error.code === 'SESSION_CHANGED') {
       wx.removeStorageSync('token')
       wx.removeStorageSync('userInfo')
+      analytics.setUser(null)
       wx.showToast({
         title: '请先登录',
         icon: 'none'

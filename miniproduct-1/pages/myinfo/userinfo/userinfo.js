@@ -1,5 +1,6 @@
 // pages/myinfo/userinfo/userinfo.js
 const util = require('../../../utils/util.js')
+const analytics = require('../../../utils/analytics.js')
 Page({
 
   /**
@@ -8,12 +9,11 @@ Page({
   data: {
     list: [
       {img:'../../../icons/icon_view_hist.png',title: '浏览记录',num: 0,id: 1},
-      {img:'../../../icons/icon_mi_publish.png',title: '我的发布',num: 0,id: 2},
       {img:'../../../icons/icon_mi_collection.png',title: '我的收藏',num: 0,id: 3},
       {img:'../../../icons/icon_mi_xy.png',title: '领养资料',num: 0,id: 7},
       {img:'../../../icons/icon_setting_fk.png',title: '意见反馈',num: 0, id: 4},
       {img:'../../../icons/icon_mi_xy.png',title: '领养说明',num: 0,id: 5},
-      {img:'../../../icons/icon_mi_about.png',title: '关于我们',num: 0,id: 6}
+      {img:'../../../icons/icon_adoption_flow.png',title: '领养流程',num: 0,id: 8}
       // {img:'../../../icons/icon_mi_xy.png',title: '用户协议',num: 0,id: 4},
       // {img:'../../../icons/icon_pravicy.png',title: '隐私政策',num: 0,id: 5},
       // {img:'../../../icons/icon_mi_about.png',title: '关于我们',num: 0,id: 6},
@@ -45,6 +45,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    analytics.pageView('profile')
     var userinfo = wx.getStorageSync('userInfo')
     if (userinfo != null) {
       this.setData({
@@ -104,13 +105,6 @@ Page({
       wx.navigateTo({
         url: '../history/history',
       })
-    }else if (id == 2) {
-      if (util.checkIsNotLogin()) {
-        return 
-      }
-      wx.navigateTo({
-        url: '../publish/publish',
-      })
     }else if (id == 3) {
       if (util.checkIsNotLogin()) {
         return 
@@ -138,9 +132,9 @@ Page({
       wx.navigateTo({
         url: '../instruction/instruction',
       })
-    }else if (id == 6) {
+    }else if (id == 8) {
       wx.navigateTo({
-        url: '../aboutus/aboutus',
+        url: '../adoptionflow/adoptionflow',
       })
     }
     

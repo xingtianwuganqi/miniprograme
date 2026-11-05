@@ -1,5 +1,6 @@
 // pages/adoption/profile/profile.js
 const adoption = require('../../../config/adoption.js')
+const analytics = require('../../../utils/analytics.js')
 
 const housingOptions = [{ value: '', label: '请选择' }].concat(adoption.HOUSING_OPTIONS)
 const employmentOptions = [{ value: '', label: '请选择' }].concat(adoption.EMPLOYMENT_OPTIONS)
@@ -24,6 +25,10 @@ Page({
 
   onLoad: function () {
     this.loadProfile()
+  },
+
+  onShow: function () {
+    analytics.pageView('adoption_profile')
   },
 
   /** 读取本人领养资料 */
@@ -178,6 +183,7 @@ Page({
     if (error.status === 401 || error.code === 'AUTH_REQUIRED' || error.code === 'SESSION_CHANGED') {
       wx.removeStorageSync('token')
       wx.removeStorageSync('userInfo')
+      analytics.setUser(null)
       wx.showToast({
         title: '请先登录',
         icon: 'none'

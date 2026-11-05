@@ -49,9 +49,13 @@ page {
 }
 
 .form-arrow {
-  width: 28rpx;
-  height: 28rpx;
-  margin-left: 10rpx;
+  width: 16rpx;
+  height: 16rpx;
+  margin-left: 12rpx;
+  border-top: 3rpx solid #c7c7cc;
+  border-right: 3rpx solid #c7c7cc;
+  transform: rotate(45deg);
+  flex-shrink: 0;
 }
 
 .form-input {
@@ -91,13 +95,16 @@ page {
 }
 
 .save-btn {
-  margin: 60rpx 30rpx 40rpx;
-  height: 88rpx;
-  line-height: 88rpx;
+  width: 690rpx;
+  height: 85rpx;
+  line-height: 85rpx;
+  margin: 60rpx auto 40rpx;
+  padding: 0;
   font-size: 32rpx;
   color: #ffffff;
   background-color: #ffa500;
-  border-radius: 44rpx;
+  border-radius: 10rpx;
+  box-sizing: border-box;
 }
 
 .save-btn[disabled] {
