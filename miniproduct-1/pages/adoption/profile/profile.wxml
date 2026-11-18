@@ -31,7 +31,7 @@
       </picker>
 
       <view class='form-cell form-cell-textarea'>
-        <text class='form-label'>养宠经验（选填）</text>
+        <text class='form-label'>我的经验（选填）</text>
         <textarea class='form-textarea' maxlength='200' value='{{experience}}' placeholder='最多200字' bindinput='experienceInput'></textarea>
         <view class='word-count'>{{experience.length}}/200</view>
       </view>

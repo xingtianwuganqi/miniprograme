@@ -10,10 +10,10 @@ Page({
     list: [
       {img:'../../../icons/icon_view_hist.png',title: '浏览记录',num: 0,id: 1},
       {img:'../../../icons/icon_mi_collection.png',title: '我的收藏',num: 0,id: 3},
-      {img:'../../../icons/icon_mi_xy.png',title: '领养资料',num: 0,id: 7},
+      {img:'../../../icons/icon_mi_xy.png',title: '我的资料',num: 0,id: 7},
       {img:'../../../icons/icon_setting_fk.png',title: '意见反馈',num: 0, id: 4},
-      {img:'../../../icons/icon_mi_xy.png',title: '领养说明',num: 0,id: 5},
-      {img:'../../../icons/icon_adoption_flow.png',title: '领养流程',num: 0,id: 8}
+      // {img:'../../../icons/icon_mi_xy.png',title: '领养说明',num: 0,id: 5},
+      // {img:'../../../icons/icon_adoption_flow.png',title: '领养流程',num: 0,id: 8},
       // {img:'../../../icons/icon_mi_xy.png',title: '用户协议',num: 0,id: 4},
       // {img:'../../../icons/icon_pravicy.png',title: '隐私政策',num: 0,id: 5},
       // {img:'../../../icons/icon_mi_about.png',title: '关于我们',num: 0,id: 6},
@@ -128,15 +128,16 @@ Page({
       wx.navigateTo({
         url: '../suggestion/suggestion',
       })
-    }else if (id == 5) {
-      wx.navigateTo({
-        url: '../instruction/instruction',
-      })
-    }else if (id == 8) {
-      wx.navigateTo({
-        url: '../adoptionflow/adoptionflow',
-      })
     }
+    // else if (id == 5) {
+    //   wx.navigateTo({
+    //     url: '../instruction/instruction',
+    //   })
+    // }else if (id == 8) {
+    //   wx.navigateTo({
+    //     url: '../adoptionflow/adoptionflow',
+    //   })
+    // }
     
   }
 })

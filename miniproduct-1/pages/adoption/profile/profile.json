@@ -1,6 +1,6 @@
 {
   "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "领养资料",
+  "navigationBarTitleText": "我的资料",
   "navigationBarTextStyle": "black",
   "usingComponents": {
     "getAddress": "../../../components/citypicker/citypicker"

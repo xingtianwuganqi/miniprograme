@@ -16,7 +16,7 @@ Page({
     bottomHeight: null,
     adoptionState: null,
     adoptionStateError: null,
-    adoptionTitle: '申请领养',
+    adoptionTitle: '查看详情',
     adoptionBusy: false,
     showApplyNotice: false,
     showApplicationPanel: false,
@@ -95,7 +95,7 @@ Page({
   onShow: function () {
     var topicId = Number(this.data.topic_id)
     analytics.pageView('topic_detail', topicId > 0 ? { object_id: topicId } : {})
-    // 从登录、领养资料页或后台返回时重新查询申请状态
+    // 从登录、我的资料页或后台返回时重新查询申请状态
     if (!this.data.adoptionBusy) {
       this.refreshAdoptionState().catch(function () {})
     }
@@ -291,7 +291,7 @@ Page({
     var complete = this.data.topicInfo != null && this.data.topicInfo.is_complete == true
     var title = ''
     if (!token) {
-      title = complete ? '送养已结束' : '申请领养'
+      title = complete ? '送养已结束' : '查看详情'
     } else if (this.data.adoptionStateError) {
       title = this.data.adoptionStateError.status === 404 ? '帖子不可用' : '状态加载失败 · 重试'
     } else if (this.data.adoptionState) {
@@ -337,7 +337,7 @@ Page({
     })
   },
 
-  /** 申请领养按钮点击 */
+  /** 查看详情按钮点击 */
   adoptionButtonClick() {
     var that = this
     // 未登录时必须先进入登录页，不能发起任何领养状态请求
@@ -403,7 +403,7 @@ Page({
     }).catch(function (error) {
       that.setData({ adoptionBusy: false })
       that.renderAdoptionTitle()
-      that.handleAdoptionError(error, '申请领养')
+      that.handleAdoptionError(error, '查看详情')
     })
   },
 
@@ -421,25 +421,27 @@ Page({
       that.renderAdoptionTitle()
       var profile = adoption.profileFrom(data)
       if (data.is_complete == true && adoption.profileValid(profile)) {
-        that.pendingProfile = profile
-        that.setData({ showApplyNotice: true })
+        // 恢复领养须知时，启用下方两行并取消直接提交。
+        // that.pendingProfile = profile
+        // that.setData({ showApplyNotice: true })
+        that.submitAdoptionApplication(profile)
       } else {
         that.requireAdoptionProfile()
       }
     }).catch(function (error) {
       that.setData({ adoptionBusy: false })
       that.renderAdoptionTitle()
-      that.handleAdoptionError(error, '申请领养')
+      that.handleAdoptionError(error, '查看详情')
     })
   },
 
   /** 没有资料或资料不完整时提示填写 */
   requireAdoptionProfile() {
     wx.showModal({
-      title: '领养资料',
-      content: '没有领养资料，需要填写后再申请。',
+      title: '我的资料',
+      content: '请先填写资料，再提交查看申请。',
       cancelText: '取消',
-      confirmText: '去申请',
+      confirmText: '去填写',
       success: function (res) {
         if (res.confirm) {
           wx.navigateTo({
@@ -533,10 +535,10 @@ Page({
   /** 申请成功后展示已授权联系方式 */
   showSubmittedContact(application) {
     var contact = adoption.applicationContact(application)
-    var message = contact ? '可联系送养人\n送养人联系方式：' + contact : '申请成功，联系方式暂不可用，请稍后在「我的申请」中查看。'
+    var message = contact ? '可查看对方联系方式：' + contact : '联系方式暂不可用，请稍后在「我的申请」中查看。'
     if (!contact) {
       wx.showModal({
-        title: '申请成功',
+        title: '查看成功',
         content: message,
         showCancel: false,
         confirmText: '知道了'
@@ -544,7 +546,7 @@ Page({
       return
     }
     wx.showModal({
-      title: '申请成功',
+      title: '查看成功',
       content: message,
       cancelText: '关闭',
       confirmText: '复制',
@@ -701,7 +703,7 @@ Page({
       this.submittedApplicationID = null
       wx.showModal({
         title: '资料已更新',
-        content: '领养资料已变化，请重新点击申请领养。',
+        content: '你的资料已更新，请重新点击「查看详情」。',
         showCancel: false,
         confirmText: '知道了'
       })

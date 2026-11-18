@@ -7,15 +7,16 @@ const IDLE_INTERVAL = 30 * 60 * 1000
 const MAX_SEQUENCE = 2147483647
 
 const PAGE_CODES = [
-  'home', 'login', 'publish_selector', 'publish_adoption', 'publish_find_pet',
-  'publish_show_pet', 'topic_detail', 'messages', 'profile', 'adoption_profile',
+  'home', 'login',
+  // 'publish_selector', 'publish_adoption', 'publish_find_pet', 'publish_show_pet',
+  'topic_detail', 'messages', 'profile', 'adoption_profile',
   'message_list'
 ]
-const PUBLISH_PAGES = {
-  adoption: 'publish_adoption',
-  find_pet: 'publish_find_pet',
-  show_pet: 'publish_show_pet'
-}
+// const PUBLISH_PAGES = {
+//   adoption: 'publish_adoption',
+//   find_pet: 'publish_find_pet',
+//   show_pet: 'publish_show_pet'
+// }
 const EVENT_PROPERTIES = {
   app_open: ['referrer_page'],
   app_quit: [],
@@ -23,9 +24,9 @@ const EVENT_PROPERTIES = {
   login_click: ['login_method', 'referrer_page'],
   login_success: ['login_method'],
   login_failed: ['login_method', 'reason_code'],
-  publish_click: ['publish_type', 'referrer_page'],
-  publish_page_view: ['publish_type', 'referrer_page'],
-  publish_success: ['publish_type', 'object_id'],
+  // publish_click: ['publish_type', 'referrer_page'],
+  // publish_page_view: ['publish_type', 'referrer_page'],
+  // publish_success: ['publish_type', 'object_id'],
   logout: [],
   logOff: [],
   export_image: ['publish_type', 'object_id'],
@@ -33,7 +34,7 @@ const EVENT_PROPERTIES = {
   click_video_ad: ['ad_placement', 'object_id'],
   video_ad_success: ['ad_placement', 'object_id', 'reward_attempt_id']
 }
-const TOKEN_REQUIRED = ['login_success', 'publish_success', 'logOff', 'click_video_ad', 'video_ad_success']
+const TOKEN_REQUIRED = ['login_success', /* 'publish_success', */ 'logOff', 'click_video_ad', 'video_ad_success']
 const ENUMS = {
   publish_type: ['adoption', 'find_pet', 'show_pet'],
   referrer_page: PAGE_CODES,
@@ -212,13 +213,13 @@ function schemaValid(eventName, page, properties, token) {
   if (eventName === 'login_failed' && !properties.reason_code) {
     return false
   }
-  if (eventName === 'publish_page_view' && properties.publish_type && page !== PUBLISH_PAGES[properties.publish_type]) {
-    return false
-  }
-  if (eventName === 'publish_page_view' && !properties.publish_type) {
-    return false
-  }
-  if (['publish_success', 'export_image', 'export_video'].indexOf(eventName) !== -1 &&
+//   if (eventName === 'publish_page_view' && properties.publish_type && page !== PUBLISH_PAGES[properties.publish_type]) {
+//     return false
+//   }
+//   if (eventName === 'publish_page_view' && !properties.publish_type) {
+//     return false
+//   }
+  if ([/* 'publish_success', */ 'export_image', 'export_video'].indexOf(eventName) !== -1 &&
       (!properties.publish_type || properties.object_id === undefined)) {
     return false
   }
@@ -340,27 +341,27 @@ function pageView(page, properties) {
   return false
 }
 
-function publishPageView(type) {
-  const page = PUBLISH_PAGES[type]
-  if (!page) {
-    return false
-  }
-  const route = currentRoute()
-  const key = route + '|' + page + '|publish'
-  if (key === lastPageKey) {
-    return false
-  }
-  const props = { publish_type: type }
-  if (lastPageCode) {
-    props.referrer_page = lastPageCode
-  }
-  if (track('publish_page_view', page, props, { touch: true })) {
-    lastPageKey = key
-    lastPageCode = page
-    return true
-  }
-  return false
-}
+// function publishPageView(type) {
+//   const page = PUBLISH_PAGES[type]
+//   if (!page) {
+//     return false
+//   }
+//   const route = currentRoute()
+//   const key = route + '|' + page + '|publish'
+//   if (key === lastPageKey) {
+//     return false
+//   }
+//   const props = { publish_type: type }
+//   if (lastPageCode) {
+//     props.referrer_page = lastPageCode
+//   }
+//   if (track('publish_page_view', page, props, { touch: true })) {
+//     lastPageKey = key
+//     lastPageCode = page
+//     return true
+//   }
+//   return false
+// }
 
 function loginClick() {
   const props = {}
@@ -384,23 +385,23 @@ function loginFailed(method, reason) {
   }, { touch: false })
 }
 
-function publishClick(type) {
-  const props = {}
-  if (type) {
-    props.publish_type = type
-  }
-  if (lastPageCode) {
-    props.referrer_page = lastPageCode
-  }
-  track('publish_click', null, props, { touch: true })
-}
+// function publishClick(type) {
+//   const props = {}
+//   if (type) {
+//     props.publish_type = type
+//   }
+//   if (lastPageCode) {
+//     props.referrer_page = lastPageCode
+//   }
+//   track('publish_click', null, props, { touch: true })
+// }
 
-function publishSuccess(type, objectID) {
-  track('publish_success', null, {
-    publish_type: type,
-    object_id: Number(objectID)
-  }, { touch: false })
-}
+// function publishSuccess(type, objectID) {
+//   track('publish_success', null, {
+//     publish_type: type,
+//     object_id: Number(objectID)
+//   }, { touch: false })
+// }
 
 function logout() {
   track('logout', null, {}, { touch: true })
@@ -475,12 +476,12 @@ module.exports = {
   onForeground: onForeground,
   onBackground: onBackground,
   pageView: pageView,
-  publishPageView: publishPageView,
+  // publishPageView: publishPageView,
   loginClick: loginClick,
   loginSuccess: loginSuccess,
   loginFailed: loginFailed,
-  publishClick: publishClick,
-  publishSuccess: publishSuccess,
+  // publishClick: publishClick,
+  // publishSuccess: publishSuccess,
   logout: logout,
   logOff: logOff,
   track: track,

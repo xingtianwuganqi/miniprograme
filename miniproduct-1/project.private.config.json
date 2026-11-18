@@ -1,6 +1,6 @@
 {
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "coverView": true,
     "lazyloadPlaceholderEnable": false,
     "skylineRenderEnable": false,
@@ -11,7 +11,7 @@
     "useStaticServer": false,
     "useLanDebug": false,
     "showES6CompileOption": false,
-    "compileHotReLoad": true,
+    "compileHotReLoad": false,
     "useGlassEaselForWxml": false,
     "checkInvalidKey": true,
     "ignoreDevUnusedFiles": true,

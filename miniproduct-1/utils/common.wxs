@@ -129,6 +129,7 @@ function formatTime(value) {
 
 
 module.exports = {
+  showTopicId: false, // 调试时可开启列表和详情页的帖子 ID 显示
   loadThumbImg: loadThumbImg,
   loadFourImg: loadFourImg,
   loadSevenImg: loadSevenImg,

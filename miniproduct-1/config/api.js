@@ -1,15 +1,15 @@
 //测试地址
 const baseUrl_test = 'https://test.rxswift.cn'
 const baseUrl_formal = 'https://rescue.rxswift.cn'
-const baseUrl = baseUrl_test;
+const baseUrl = baseUrl_formal;
 module.exports = {
   baseUrl: baseUrl,
   TopicList: baseUrl + '/api/v1/topiclist/', //获取首页列表
   topicDetail: baseUrl + '/api/v1/topicdetail/',
   LikeAction: baseUrl + '/api/v1/likeaction/', //首页数据接口
   collectionAction:  baseUrl + '/api/v1/collection/', // 点赞
-  getQiNiuToken: baseUrl + '/api/v1/qiniu/', // 获取七牛token
-  releaseTopic: baseUrl + '/api/v1/releasetopic/', // 发布帖子
+  // getQiNiuToken: baseUrl + '/api/v1/qiniu/', // 获取七牛token
+  // releaseTopic: baseUrl + '/api/v1/releasetopic/', // 发布帖子
   localTopicList: baseUrl + '/api/v2/addresstopiclist/', // 同城接口
   searchKeyWords: baseUrl + '/api/v1/searchkeywords/', // 搜索关键字
   searchAction: baseUrl + '/api/v1/search/', // 搜索
@@ -22,7 +22,7 @@ module.exports = {
   getContact: baseUrl + '/api/v1/getcontact/', // 获取联系方式
   authHistroy: baseUrl + '/api/v1/authhistorylist/', // 历史记录
   addViewHistory: baseUrl + '/api/v1/addviewhistory/', // 添加历史记录
-  authPublish: baseUrl + '/api/v1/authpublishlist/', // 我的发布
+  // authPublish: baseUrl + '/api/v1/authpublishlist/', // 我的发布
   authCollection: baseUrl + '/api/v1/authcollection/', // 我的收藏
 
   pravicy: baseUrl + "/api/pravicy/", // 隐私协议
@@ -33,12 +33,12 @@ module.exports = {
   violationList: baseUrl + '/api/v1/violations/', // 举报列表
   report: baseUrl + '/api/v1/report/', //举报
   suggestion: baseUrl + '/api/v1/suggestion/', // 意见反馈
-  complateRescue: baseUrl + '/api/v1/completetopic/', // 完成领养
+  // complateRescue: baseUrl + '/api/v1/completetopic/', // 完成领养
   login: baseUrl + '/api/v1/login/', // 登录
   wxLogin: baseUrl + '/api/v2/wxlogin/', // 微信登录
   location: baseUrl + '/api/location/', // 选取地址
   unreadMsgNum: baseUrl + '/api/v1/authunreadnum/', // 未读消息数
-  getTags: baseUrl + '/api/v1/gettaglist/', // 获取标签
+  // getTags: baseUrl + '/api/v1/gettaglist/', // 获取标签
 
   // 领养申请 V2
   adoptionApplicationState: baseUrl + '/api/v2/adoptions/', // + {topic_id}/application-state

@@ -133,6 +133,15 @@ page{
   width: 230rpx;
 }
 
+.interaction > .mini-btn {
+  flex: 1;
+  min-width: 0;
+}
+
+.interaction > .mini-btn > .mini-btn {
+  width: 100%;
+}
+
 .com-img{
   height: 120rpx;
   width: 120rpx;

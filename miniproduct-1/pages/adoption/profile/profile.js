@@ -139,7 +139,7 @@ Page({
       return
     }
     if ((this.data.experience || '').length > 200) {
-      this.showToast('养宠经验最多200字')
+      this.showToast('我的经验最多200字')
       return
     }
     var body = {

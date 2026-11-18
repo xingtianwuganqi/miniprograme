@@ -233,7 +233,7 @@ function stateTitle(state) {
     case 'ended':
       return state.canApply && state.result === 'not_completed' ? '查看结果 / 重新申请' : '申请已结束'
     default:
-      return state.canApply ? '申请领养' : '暂不可申请'
+      return state.canApply ? '查看详情' : '暂不可申请'
   }
 }
 

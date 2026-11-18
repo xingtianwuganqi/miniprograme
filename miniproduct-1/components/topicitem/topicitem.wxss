@@ -119,6 +119,14 @@
   color:#777777;
 }
 
+.interaction-two-buttons > .mini-btn {
+  width: 300rpx;
+}
+
+.interaction-two-buttons > .mini-btn > .mini-btn {
+  width: 100%;
+}
+
 /* .like-text{
   margin-top: -20rpx;
   margin-bottom: 20rpx;

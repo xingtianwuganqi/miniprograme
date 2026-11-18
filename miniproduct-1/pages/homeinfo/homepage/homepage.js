@@ -360,8 +360,8 @@ Page({
       if (res.data.code == 200) {
         var like_unread = res.data.data.like_unread
         var collec_unread = res.data.data.collec_unread
-        var com_unread = res.data.data.com_unread
-        var total_num = like_unread + collec_unread + com_unread
+        // var com_unread = res.data.data.com_unread
+        var total_num = like_unread + collec_unread // + com_unread
         if (total_num > 99) {
           wx.setTabBarBadge({
             index: 1,

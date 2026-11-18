@@ -37,7 +37,7 @@ Page({
         { img: '../../../icons/icon_rec_appli.png', title: '收到的申请', num: '', id: 5 },
         { img: '../../../icons/icon_message_like.png', title: '点赞', num: '', id: 1 },
         { img: '../../../icons/icon_message_collect.png', title: '收藏', num: '', id: 2 },
-        { img: '../../../icons/icon_message_com.png', title: '评论', num: '', id: 3 }
+        // { img: '../../../icons/icon_message_com.png', title: '评论', num: '', id: 3 }
       ]
     })
   },
@@ -212,7 +212,7 @@ Page({
     })
     var total = (Number(that.data.likeUnread) || 0) +
       (Number(that.data.collectUnread) || 0) +
-      (Number(that.data.commentUnread) || 0) +
+      // (Number(that.data.commentUnread) || 0) +
       (Number(that.data.adoptionMineUnread) || 0) +
       (Number(that.data.adoptionReceivedUnread) || 0)
     that.setData({

@@ -18,6 +18,10 @@ Component({
     fromType: { // 1 来自我的发布，
       type: String,
       value: null,
+    },
+    hideComment: {
+      type: Boolean,
+      value: true
     }
   },
 
